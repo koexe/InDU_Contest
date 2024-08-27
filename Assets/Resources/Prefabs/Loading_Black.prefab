@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8846927324471927174}
   - component: {fileID: 6695433518657902932}
   - component: {fileID: 1814497514378353771}
+  - component: {fileID: 5839561758837934047}
   m_Layer: 5
   m_Name: Loading_Black
   m_TagString: Untagged
@@ -88,3 +89,16 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortAtRoot: 0
+--- !u!114 &5839561758837934047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535060364185486282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74151385681431f4a867a99195bd04ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortingGroup: {fileID: 1814497514378353771}
