@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 
@@ -41,6 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: UIElements
+  - name: BackGrounds
     uniqueID: 1253613553
+    locked: 0
+  - name: Player
+    uniqueID: 516971535
+    locked: 0
+  - name: Objects
+    uniqueID: 3673491831
+    locked: 0
+  - name: UIElements
+    uniqueID: 3847001573
     locked: 0

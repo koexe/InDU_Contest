@@ -8,15 +8,14 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        IngameInputManager.instance.AddKeyboardAction(KeyCode.W, () => AddKey(KeyCode.W));
-        IngameInputManager.instance.AddKeyboardAction(KeyCode.A, () => AddKey(KeyCode.A));
-        IngameInputManager.instance.AddKeyboardAction(KeyCode.S, () => AddKey(KeyCode.S));
-        IngameInputManager.instance.AddKeyboardAction(KeyCode.D, () => AddKey(KeyCode.D));
+        SettingKeyboard();
+        return;
+    }
 
-        IngameInputManager.instance.AddKeyboardAction_Up(KeyCode.W, () => RemoveKey(KeyCode.W));
-        IngameInputManager.instance.AddKeyboardAction_Up(KeyCode.S, () => RemoveKey(KeyCode.S));
-        IngameInputManager.instance.AddKeyboardAction_Up(KeyCode.A, () => RemoveKey(KeyCode.A));
-        IngameInputManager.instance.AddKeyboardAction_Up(KeyCode.D, () => RemoveKey(KeyCode.D));
+    public void Initialization()
+    {
+        SettingKeyboard();
+        return;
     }
 
     private void Update()
@@ -26,15 +25,31 @@ public class PlayerController : MonoBehaviour
         {
             Move(GetDirectionFromKey(inputList[inputList.Count - 1]));
         }
+        return;
+    }
+
+    #region 움직임 설정
+    void SettingKeyboard()
+    {
+        IngameInputManager.instance.AddKeyboardAction(KeyCode.W, () => AddKey(KeyCode.W));
+        IngameInputManager.instance.AddKeyboardAction(KeyCode.A, () => AddKey(KeyCode.A));
+        IngameInputManager.instance.AddKeyboardAction(KeyCode.S, () => AddKey(KeyCode.S));
+        IngameInputManager.instance.AddKeyboardAction(KeyCode.D, () => AddKey(KeyCode.D));
+
+        IngameInputManager.instance.AddKeyboardAction_Up(KeyCode.W, () => RemoveKey(KeyCode.W));
+        IngameInputManager.instance.AddKeyboardAction_Up(KeyCode.S, () => RemoveKey(KeyCode.S));
+        IngameInputManager.instance.AddKeyboardAction_Up(KeyCode.A, () => RemoveKey(KeyCode.A));
+        IngameInputManager.instance.AddKeyboardAction_Up(KeyCode.D, () => RemoveKey(KeyCode.D));
+        return;
     }
 
     private void AddKey(KeyCode key)
     {
-
         if (!inputList.Contains(key))
         {
             inputList.Add(key);
         }
+        return;
     }
 
     private void RemoveKey(KeyCode key)
@@ -68,5 +83,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.position += direction * Time.deltaTime * 5f;
         }
+        return;
     }
+    #endregion
 }

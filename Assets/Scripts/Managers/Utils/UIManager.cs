@@ -10,14 +10,14 @@ using Unity.VisualScripting;
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
-    Dictionary<string, GameObject> currentUICompnents;
+    Dictionary<string, GameObject> currentUIObjects;
     [SerializeField] Canvas canvas;
 
 
     private void Awake()
     {
         instance = this;
-        this.currentUICompnents = new Dictionary<string, GameObject>();   
+        this.currentUIObjects = new Dictionary<string, GameObject>();   
         DontDestroyOnLoad(this);
         if(this.canvas == null)
         {
@@ -28,6 +28,15 @@ public class UIManager : MonoBehaviour
 
     public void ShowUI (GameObject _UiPrefab, string _Name, int _layerOrder = -1, string _custom = "")
     {
+        if(this.currentUIObjects.ContainsKey(_Name))
+        {
+            Debug.Log("Same UI Already Added In Screen");
+            Destroy(this.currentUIObjects[_Name].gameObject);
+            this.currentUIObjects.Remove(_Name);
+        }
+
+
+
         var t_UIObject = GameObject.Instantiate( _UiPrefab);
         t_UIObject.transform.SetParent(this.canvas.transform, false);
         var t_Ui = t_UIObject.transform.GetComponent<PopUpUI>();
@@ -48,14 +57,14 @@ public class UIManager : MonoBehaviour
             //지정한 오더에 두기
             t_Ui.sortingGroup.sortingOrder = _layerOrder;
         }
-        this.currentUICompnents.Add(_Name, t_UIObject);
+        this.currentUIObjects.Add(_Name, t_UIObject);
         return;
     }
 
     public void DeleteUI(string name)
     {
-        GameObject.Destroy(this.currentUICompnents[name]);
-        this.currentUICompnents.Remove(name);
+        GameObject.Destroy(this.currentUIObjects[name]);
+        this.currentUIObjects.Remove(name);
         return;
     }
 
@@ -65,7 +74,7 @@ public class UIManager : MonoBehaviour
         {
             Destroy(this.transform.GetChild(i).gameObject);
         }
-        this.currentUICompnents.Clear();
+        this.currentUIObjects.Clear();
         return;
     }
 }

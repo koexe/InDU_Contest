@@ -21,7 +21,7 @@ public class TextUIManager : PopUpUI
     public override void Initialization()
     {
         //DataManager에서 Dialog Dictionary 가져오기
-        this.currentDialogDictionary = TextManager.Instance.GetDialogList();
+        this.currentDialogDictionary = TextAssetManager.Instance.GetDialogList();
         this.textState = TextState.WAIT;
 
         this.dialogController.Initialization();
