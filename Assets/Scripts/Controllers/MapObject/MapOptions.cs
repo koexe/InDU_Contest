@@ -2,27 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum MapType
+{
+    TopView,
+    SideView
+}
+
 public class MapOptions : MonoBehaviour
 {
+    [Header("맵 타입")]
+    [SerializeField] MapType type;
     [Header("맵 이름")]
     [SerializeField] string mapName;
     [Header("맵 크기")]
     [SerializeField] Vector2 mapSize;
 
-    [Header("연결된 맵")]
-    [SerializeField] GameObject previousMap;
-    [SerializeField] GameObject nextMap;
-
     [Header("맵 안의 아이템들")]
     [SerializeField] GameObject mapItems;
 
-    [Header("맵 입구, 출구")]
+    [Header("맵 이동 포인트")]
 
-    [SerializeField] Transform startTransform;
-    [SerializeField] Transform exitTransform;
+    [SerializeField] List<MapMovePoint> movePoints;
+    public Transform GetMoveTransfrom(int index) => this.movePoints[index].transform;
 
-    public Transform GetStartTransform() => this.startTransform;
-    public Transform GetExitTransform() => this.exitTransform;
+
     public string GetMapName() => this.mapName;
 
     public void Initialization()
@@ -30,25 +34,24 @@ public class MapOptions : MonoBehaviour
         //아이템 초기화 코드 작성
 
         //맵 상호작용 초기화 코드 작성
+
     }
-    public void MoveMap(bool _isNext)
+    public void MoveMap(int index)
     {
-        if (_isNext)
+        if (this.movePoints[index].isOpen)
         {
-            if (this.nextMap != null)
-            {
-                InGameManager.instance.MoveMap(this.nextMap, _isNext);
-            }
+            Debug.Log("MoveMap");
+            InGameManager.instance.MoveMap(this.movePoints[index].linkedMap, this.movePoints[index].linkedPoint);
             return;
+
         }
         else
         {
-            if (this.previousMap != null)
-            {
-                InGameManager.instance.MoveMap(this.previousMap, _isNext);
-            }
+            Debug.Log("Movepoint not open");
             return;
         }
+
+
     }
 
 
@@ -58,4 +61,15 @@ public class MapOptions : MonoBehaviour
         Gizmos.DrawWireCube(this.transform.position, this.mapSize);
         return;
     }
+}
+
+[System.Serializable]
+public class MapMovePoint
+{
+    public Transform transform;
+    public int point;
+    public bool isOpen;
+    [Header("연결된 맵과 위치")]
+    public GameObject linkedMap;
+    public int linkedPoint;
 }

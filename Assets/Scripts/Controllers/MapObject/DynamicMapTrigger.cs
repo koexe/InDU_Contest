@@ -13,21 +13,34 @@ public class DynamicMapTrigger : MonoBehaviour
     //아직 작업 안함
     [Header("Stay 시간 설정")]
     [SerializeField] float maxWaitTime;
-    [SerializeField]float currentWaitTime;
+    [SerializeField] float currentWaitTime;
     [Header("여러번 사용 설정")]
     [SerializeField] bool isUseMultifle;
 
     [Header("충돌 마스크")]
     [SerializeField] LayerMask mask;
 
+    [SerializeField] bool isNowInteract;
+
     private void Start()
     {
         this.currentWaitTime = this.maxWaitTime;
+        this.isNowInteract = false;
+    }
+
+    private void FixedUpdate()
+    {
+        if (!this.isNowInteract)
+        {
+            this.currentWaitTime = Mathf.MoveTowards(this.currentWaitTime, this.maxWaitTime, Time.fixedDeltaTime);
+        }
+        return;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         this.enterAction?.Invoke();
+        this.isNowInteract = true;
         return;
     }
     private void OnTriggerStay2D(Collider2D collision)
@@ -49,6 +62,7 @@ public class DynamicMapTrigger : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         this.exitAction?.Invoke();
+        isNowInteract = false;
         return;
     }
 
@@ -57,6 +71,6 @@ public class DynamicMapTrigger : MonoBehaviour
         if (this.GetComponent<Collider2D>() == null) return;
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawCube(this.GetComponent<Collider2D>().bounds.center,this.GetComponent<Collider2D>().bounds.size); 
+        Gizmos.DrawCube(this.GetComponent<Collider2D>().bounds.center, this.GetComponent<Collider2D>().bounds.size);
     }
 }

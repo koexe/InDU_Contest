@@ -5,6 +5,10 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private List<KeyCode> inputList = new List<KeyCode>();
+    [Header("컴포넌트")]
+    [SerializeField] DynamicGravity gravity;
+    [Header("플레이어 스텟")]
+    [SerializeField] float moveSpeed;
 
     private void Start()
     {
@@ -17,14 +21,21 @@ public class PlayerController : MonoBehaviour
         SettingKeyboard();
         return;
     }
-
-    private void Update()
+    private void FixedUpdate()
     {
-        // 입력 리스트에 값이 있을 때만 이동 처리
+
+        Vector3 moveValue = Vector3.zero;
+        Vector3 moveDir;
+        // 움직임 처리
         if (this.inputList.Count > 0)
         {
-            Move(GetDirectionFromKey(inputList[inputList.Count - 1]));
+            moveDir = GetDirectionFromKey(this.inputList[inputList.Count - 1]);
+            // 밀림 처리 후 이동
+            moveValue += Move(moveDir);
         }
+        // 충돌 체크 후 먼저 밀림 처리
+
+        this.transform.position += moveValue;
         return;
     }
 
@@ -45,18 +56,18 @@ public class PlayerController : MonoBehaviour
 
     private void AddKey(KeyCode key)
     {
-        if (!inputList.Contains(key))
+        if (!this.inputList.Contains(key))
         {
-            inputList.Add(key);
+            this.inputList.Add(key);
         }
         return;
     }
 
     private void RemoveKey(KeyCode key)
     {
-        if (inputList.Contains(key))
+        if (this.inputList.Contains(key))
         {
-            inputList.Remove(key);
+            this.inputList.Remove(key);
         }
         return;
     }
@@ -74,16 +85,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Move(Vector3 direction)
+    private Vector3 Move(Vector3 direction)
     {
-        if (InGameManager.instance.state != InGameManager.GameState.InProgress) return;
+        if (InGameManager.instance.state != InGameManager.GameState.InProgress)  return Vector3.zero;
 
+        Vector3 t_moveValue = Vector3.zero;
         // direction에 따라 캐릭터 이동 처리
         if (direction != Vector3.zero)
         {
-            transform.position += direction * Time.deltaTime * 5f;
+            t_moveValue += direction * Time.deltaTime * 5f;
         }
-        return;
+
+        Vector3 t_push = this.gravity.UpdateCheckWall(t_moveValue);
+
+        t_moveValue -= t_push;
+
+        return t_moveValue;
     }
     #endregion
 }

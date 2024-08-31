@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -215,6 +216,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cd6923ae5f0209469f50c065cf7f54a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTransfrom: {fileID: 1840641988}
+  currentMoveRatio: 0.01
 --- !u!1 &648897939
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,6 +572,7 @@ GameObject:
   - component: {fileID: 1840641991}
   - component: {fileID: 1840641990}
   - component: {fileID: 1840641992}
+  - component: {fileID: 1840641993}
   m_Layer: 6
   m_Name: Player_Temp
   m_TagString: Untagged
@@ -643,6 +659,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0afc72cf8b23922469c3d6d69f17bbfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gravity: {fileID: 1840641993}
+  moveSpeed: 0
 --- !u!50 &1840641990
 Rigidbody2D:
   serializedVersion: 4
@@ -666,7 +684,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 2
+  m_Interpolate: 1
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 0
@@ -727,6 +745,22 @@ SortingGroup:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_SortAtRoot: 0
+--- !u!114 &1840641993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840641986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c8211febe51e474f8582d5f3d05369b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coll2D: {fileID: 1840641991}
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &1881169735
 GameObject:
   m_ObjectHideFlags: 0

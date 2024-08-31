@@ -35,11 +35,11 @@ public class InGameManager : MonoBehaviour
 
     public void Initialization()
     {
-        MoveMap(this.Map, false);
+        MoveMap(this.Map, 0);
         return;
     }
 
-    public void MoveMap(GameObject _prefab, bool _isNext)
+    public void MoveMap(GameObject _prefab, int _index)
     {
         if (this.currentMapObject != null)
             Destroy(this.currentMapObject.gameObject);
@@ -48,15 +48,6 @@ public class InGameManager : MonoBehaviour
         this.currentPlayer.transform.parent = this.mapParent;
         this.currentMapName = this.currentMapObject.GetMapName();
         Debug.Log(this.currentMapName);
-        if (_isNext)
-        {
-            this.currentPlayer.transform.position = this.currentMapObject.GetStartTransform().position;
-            return;
-        }
-        else
-        {
-            this.currentPlayer.transform.position = this.currentMapObject.GetExitTransform().position;
-            return;
-        }
+        this.currentPlayer.transform.position = this.currentMapObject.GetMoveTransfrom(_index).position;
     }
 }

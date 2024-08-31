@@ -22,6 +22,7 @@ public class SaveGameManager : MonoBehaviour
         //이후 작업 예정
         this.currentSaveData = new SaveData();
         currentSaveData.currentMap = "Map1";
+        return;
     }
 
 
@@ -64,4 +65,6 @@ public class SaveGameManager : MonoBehaviour
 public class SaveData
 {
     public string currentMap;
+    public List<SOItem> items;
+    
 }
