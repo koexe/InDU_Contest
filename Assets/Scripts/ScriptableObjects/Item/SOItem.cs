@@ -9,5 +9,11 @@ public abstract class SOItem : ScriptableObject
     [SerializeField] string itemName;
     [SerializeField] string itemDescription;
     [SerializeField] bool isUsable;
+    [SerializeField] Sprite itemImage;
     public abstract void UseItem();
+    public Sprite GetItemImage() => this.itemImage;
+    public string GetItemName() => this.itemName;
+    public string GetDescription() => this.itemDescription;
+    public int GetItemIndex() => this.itemIndex;
+    public bool IsUsable() => this.isUsable;
 }

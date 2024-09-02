@@ -17,11 +17,11 @@ public class DynamicGravity : MonoBehaviour
 
         foreach (var t in t_colls)
         {
-            Rect rect1 = new Rect(this.coll2D.bounds.min, this.coll2D.bounds.size);
-            Rect rect2 = new Rect(t.bounds.min, t.bounds.size);
-            rect1.center += (Vector2)_nextMovement;
+            Rect t_rect1 = new Rect(this.coll2D.bounds.min, this.coll2D.bounds.size);
+            Rect t_rect2 = new Rect(t.bounds.min, t.bounds.size);
+            t_rect1.center += (Vector2)_nextMovement;
 
-            Rect t_overlapArea = GetOverlapArea(rect1, rect2);
+            Rect t_overlapArea = GetOverlapArea(t_rect1, t_rect2);
 
             // 충돌 영역이 넓은 방향에 따라 상하 또는 좌우로 푸시
             if (t_overlapArea.height < t_overlapArea.width)

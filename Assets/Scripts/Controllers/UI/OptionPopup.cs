@@ -11,11 +11,6 @@ public class OptionPopup : PopUpUI
 
     }
 
-
-
-
-
-
     public void CloseTab()
     {
         UIManager.instance.DeleteUI(optionUI);

@@ -9,6 +9,8 @@ public class SaveGameManager : MonoBehaviour
     public static SaveGameManager instance;
     SaveData currentSaveData;
     public SaveData GetCurrentSaveData() => this.currentSaveData;
+
+    public void SetCurrentSaveData(SaveData _data) => this.currentSaveData = _data; 
     SaveData previousSaveData { get; set; }
 
     private void Awake()

@@ -11,6 +11,10 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
     Dictionary<string, GameObject> currentUIObjects;
+    // 직렬화 -> 굉장히 어려운 개념이다. 
+    // 그래서 직렬화가 뭐임?
+    // 에디터상에서 우리가 수정은 하는데, 실제 스크립트에서는 숨기고싶다.
+
     [SerializeField] Canvas canvas;
 
 
@@ -26,7 +30,7 @@ public class UIManager : MonoBehaviour
         return;
     }
 
-    public void ShowUI (GameObject _UiPrefab, string _Name, int _layerOrder = -1, string _custom = "")
+    public GameObject ShowUI (GameObject _UiPrefab, string _Name, int _layerOrder = -1, string _custom = "")
     {
         if(this.currentUIObjects.ContainsKey(_Name))
         {
@@ -34,8 +38,6 @@ public class UIManager : MonoBehaviour
             Destroy(this.currentUIObjects[_Name].gameObject);
             this.currentUIObjects.Remove(_Name);
         }
-
-
 
         var t_UIObject = GameObject.Instantiate( _UiPrefab);
         t_UIObject.transform.SetParent(this.canvas.transform, false);
@@ -58,7 +60,7 @@ public class UIManager : MonoBehaviour
             t_Ui.sortingGroup.sortingOrder = _layerOrder;
         }
         this.currentUIObjects.Add(_Name, t_UIObject);
-        return;
+        return t_UIObject;
     }
 
     public void DeleteUI(string name)
