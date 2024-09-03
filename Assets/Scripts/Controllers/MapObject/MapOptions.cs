@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -19,7 +20,7 @@ public class MapOptions : MonoBehaviour
     [SerializeField] Vector2 mapSize;
 
     [Header("맵 안의 아이템들")]
-    [SerializeField] GameObject mapItems;
+    [SerializeField] Transform mapItems;
 
     [Header("맵 이동 포인트")]
 
@@ -34,6 +35,11 @@ public class MapOptions : MonoBehaviour
         //아이템 초기화 코드 작성
 
         //맵 상호작용 초기화 코드 작성
+        foreach(var item in this.mapItems.GetComponentsInChildren<MapItem>())
+        {
+            
+            item.Initialization();
+        }
 
     }
     public void MoveMap(int index)

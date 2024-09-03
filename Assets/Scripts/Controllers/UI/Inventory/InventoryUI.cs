@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InventoryUI : PopUpUI
 {
-    List<SOItem> items;
+    List<SaveItem> items;
     [Header("슬롯 들어있는 트랜스폼")]
     [SerializeField] Transform slotTransform;
     [Header("설명 영역")]

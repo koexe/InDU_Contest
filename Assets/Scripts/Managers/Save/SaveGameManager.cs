@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 public class SaveGameManager : MonoBehaviour
 {
     public static SaveGameManager instance;
-    SaveData currentSaveData;
+    public SaveData currentSaveData;
     public SaveData GetCurrentSaveData() => this.currentSaveData;
 
     public void SetCurrentSaveData(SaveData _data) => this.currentSaveData = _data; 
@@ -17,6 +17,7 @@ public class SaveGameManager : MonoBehaviour
     {
         instance = this;
         this.Initialization();
+        DontDestroyOnLoad(this);
         return;
     }
     public void Initialization()
@@ -67,6 +68,26 @@ public class SaveGameManager : MonoBehaviour
 public class SaveData
 {
     public string currentMap;
-    public List<SOItem> items;
-    
+    public List<SaveItem> items;
+    public SaveData() 
+    {
+        this.items = new List<SaveItem>();
+    }
+}
+[System.Serializable]
+public class SaveItem
+{
+    SOItem item;
+    public int amount;
+
+    public int GetItemIndex() => item.GetItemIndex();
+    public Sprite GetItemImage() => item.GetItemImage();
+    public string GetItemName() => item.GetItemName();
+    public string GetDescription() => item.GetItemDescription();
+   
+    public SaveItem(SOItem item, int amount)
+    {
+        this.item = item;
+        this.amount = amount;
+    }
 }

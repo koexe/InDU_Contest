@@ -6,14 +6,14 @@ using UnityEngine.UI;
 
 public class InventoryItemSlot : MonoBehaviour
 {
-    SOItem item;
+    SaveItem item;
     public int amount;
     [SerializeField] Image image;
     [SerializeField] InventoryUI inventoryUI;
     [SerializeField] EventTrigger eventSystem;
     public void SetInventoryUI (InventoryUI _inventoryUI) => this.inventoryUI = _inventoryUI;
 
-    public void SetItem(SOItem item) => this.item = item;
+    public void SetItem(SaveItem item) => this.item = item;
 
     public void Initialization()
     {

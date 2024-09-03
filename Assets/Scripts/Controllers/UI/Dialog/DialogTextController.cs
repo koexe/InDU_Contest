@@ -80,18 +80,7 @@ public class DialogTextController : MonoBehaviour
     public void ChangeDialogOneByOne(int index)
     {
         var dialogTemp = this.currentDialogDictionary[index];
-        switch (dialogTemp.talkNameIdx)
-        {
-            case 1:
-                this.nameText.text = dialogTemp.CharacterL[0];
-                break;
-            case 2:
-                this.nameText.text = dialogTemp.CharacterC[0];
-                break;
-            case 3:
-                this.nameText.text = dialogTemp.CharacterR[0];
-                break;
-        }
+        this.nameText.text = this.currentDialogDictionary[index].talkName;
         this.printCoroutine = StartCoroutine(PrintRoutine(dialogTemp.comment, index, this.printSpeed));
     }
     //하나씩 출력하는 코루틴
@@ -143,18 +132,7 @@ public class DialogTextController : MonoBehaviour
         {
             this.textUIManager.currentDialogIndex = index;
             var dialogTemp = this.currentDialogDictionary[index];
-            switch (dialogTemp.talkNameIdx)
-            {
-                case 1:
-                    this.nameText.text = dialogTemp.CharacterL[0];
-                    break;
-                case 2:
-                    this.nameText.text = dialogTemp.CharacterC[0];
-                    break;
-                case 3:
-                    this.nameText.text = dialogTemp.CharacterR[0];
-                    break;
-            }
+            this.nameText.text = this.currentDialogDictionary[index].talkName;
             this.printCoroutine = StartCoroutine(PrintRoutine(dialogTemp.comment, index, this.printSpeed));
             this.textUIManager.choiceButtonController.gameObject.SetActive(false);
             this.textUIManager.textState = TextState.WAIT;

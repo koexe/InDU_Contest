@@ -4,10 +4,8 @@ using UnityEngine;
 public class Dialog
 {
     public int dialogNumber;
-    public string[] CharacterL;
-    public string[] CharacterC;
-    public string[] CharacterR;
-    public int talkNameIdx;
+    public string[] Character;
+    public string talkName;
     public string comment;
     public bool isChoose;
     public string[] linkCondition;

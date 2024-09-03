@@ -13,7 +13,7 @@ public class ExplainArea : MonoBehaviour
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] TextMeshProUGUI indexText;
 
-    public void ChageExplainArea(SOItem _Item)
+    public void ChageExplainArea(SaveItem _Item)
     {
         this.image.sprite = _Item.GetItemImage();
         this.descriptionText.text = _Item.GetDescription();

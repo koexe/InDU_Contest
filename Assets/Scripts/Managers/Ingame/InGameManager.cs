@@ -45,6 +45,7 @@ public class InGameManager : MonoBehaviour
             Destroy(this.currentMapObject.gameObject);
         var t_map = Instantiate(_prefab, this.mapParent);
         this.currentMapObject = t_map.GetComponent<MapOptions>();
+        this.currentMapObject.Initialization();
         this.currentPlayer.transform.parent = this.mapParent;
         this.currentMapName = this.currentMapObject.GetMapName();
         Debug.Log(this.currentMapName);

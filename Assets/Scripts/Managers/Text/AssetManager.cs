@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class TextAssetManager : MonoBehaviour
+public class AssetManager : MonoBehaviour
 {
-    private static TextAssetManager _instance;
-    public static TextAssetManager Instance
+    private static AssetManager _instance;
+    public static AssetManager Instance
     {
         get
         {
             // 인스턴스가 없는 경우에 접근하려 하면 인스턴스를 할당해준다.
             if (!_instance)
             {
-                _instance = FindObjectOfType(typeof(TextAssetManager)) as TextAssetManager;
+                _instance = FindObjectOfType(typeof(AssetManager)) as AssetManager;
 
                 if (_instance == null)
                     Debug.Log("no Singleton obj");
@@ -24,6 +24,8 @@ public class TextAssetManager : MonoBehaviour
 
     private DataManager _dataManager;
     public string _currentChapter;
+
+    public Dictionary<string, Sprite[]> CharacterImageDictionary = new Dictionary<string, Sprite[]>();
     // 인스턴스에 접근하기 위한 프로퍼티
 
     private void Awake()
@@ -42,10 +44,26 @@ public class TextAssetManager : MonoBehaviour
 
         _dataManager = new DataManager();
         _dataManager.Init();
+        SetImageDictionary();
         _currentChapter = "Chapter1";
     }
     public Dictionary<int,Dialog> GetDialogList()
     {
         return _dataManager._dialogDictionary[_currentChapter];
+    }
+
+    void SetImageDictionary()
+    {
+        string basePath = "Assets/Resources/";
+        string imagesFolderPath = "Sprites/Characters";
+
+        DirectoryInfo di = new DirectoryInfo(basePath + imagesFolderPath);
+        foreach (FileInfo file in di.GetFiles())
+        {
+            string name_Temp = Path.GetFileNameWithoutExtension(file.Name);
+            Sprite[] sprites = Resources.LoadAll<Sprite>(imagesFolderPath + "/" + name_Temp);
+
+            this.CharacterImageDictionary.Add(name_Temp, sprites);
+        }
     }
 }
