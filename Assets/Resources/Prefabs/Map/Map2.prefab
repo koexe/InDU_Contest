@@ -50,7 +50,8 @@ MonoBehaviour:
   type: 0
   mapName: Map2
   mapSize: {x: 20, y: 10}
-  mapItems: {fileID: 5479273825296803172}
+  mapItems: {fileID: 898290617770559718}
+  mapNPCs: {fileID: 122669757641379844}
   movePoints:
   - transform: {fileID: 2347964088945040865}
     point: 0
@@ -244,6 +245,37 @@ Transform:
   m_Children:
   - {fileID: 2347964088945040865}
   - {fileID: 2685551653867951030}
+  m_Father: {fileID: 7972402468142363380}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2093295731118670105
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 122669757641379844}
+  m_Layer: 0
+  m_Name: NPC
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &122669757641379844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093295731118670105}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 7972402468142363380}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2241814775291900015
@@ -971,6 +1003,7 @@ Transform:
   - {fileID: 898290617770559718}
   - {fileID: 8704311851322026287}
   - {fileID: 9039175937226971446}
+  - {fileID: 122669757641379844}
   m_Father: {fileID: 7043791247666777579}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6309355622257558157

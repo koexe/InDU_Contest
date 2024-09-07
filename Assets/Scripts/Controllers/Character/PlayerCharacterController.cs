@@ -10,9 +10,14 @@ public class PlayerController : MonoBehaviour
     [Header("컴포넌트")]
     [SerializeField] DynamicGravity gravity;
     [SerializeField] Collider2D coll2D;
-
+    [SerializeField] LineRenderer lineRenderer;
+    [SerializeField] Animator animator;
+    [SerializeField] SpriteRenderer spriteRenderer;
+ 
     [Header("플레이어 스텟")]
     [SerializeField] float moveSpeed;
+    [SerializeField] int maxHP;
+    [SerializeField] int currentHP;
 
     [Header("아이템 획득")]
     [SerializeField] LayerMask itemGetMask;
@@ -23,6 +28,7 @@ public class PlayerController : MonoBehaviour
     [Header("현재 상호작용중인 오브젝트")]
     List<NPCController> nowInteractNPC = new List<NPCController>();
     [SerializeField] float currentInteractTime;
+    [SerializeField] float currentMaxInteractTime;
     [SerializeField] bool isNowInteract;
 
     public void AddNowInteractNPC(NPCController npc)
@@ -53,6 +59,7 @@ public class PlayerController : MonoBehaviour
         UpdateMove();
         UpdateGetItemDelay();
         UpdateInteractTime();
+        UpdateGauge();
         return;
     }
     void SettingKeyboard()
@@ -143,6 +150,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 moveValue = Vector3.zero;
         Vector3 moveDir = Vector3.zero;
+
         // 움직임 처리
         if (this.inputListX.Count > 0)
         {
@@ -154,7 +162,21 @@ public class PlayerController : MonoBehaviour
 
         }
         moveValue += Move(moveDir);
+
+        if (moveDir == Vector3.zero)
+            this.animator.SetBool("IsWalk", false);
+        else
+            this.animator.SetBool("IsWalk", true);
         // 충돌 체크 후 먼저 밀림 처리
+
+        if(moveDir.x > 0)
+        {
+            this.spriteRenderer.flipX = true;
+        }
+        else if(moveDir.x < 0)
+        {
+            this.spriteRenderer.flipX = false;
+        }
 
         this.transform.position += moveValue;
         return;
@@ -192,6 +214,7 @@ public class PlayerController : MonoBehaviour
     #region 상호작용
     public bool HoldInteract(float _maxWaitTime)
     {
+        this.currentMaxInteractTime = _maxWaitTime;
         this.isNowInteract = true;
         if(this.currentInteractTime != _maxWaitTime)
         {
@@ -221,6 +244,30 @@ public class PlayerController : MonoBehaviour
             this.nowInteractNPC[0].InteractWait();
         }
     }
+    // 게이지 업데이트 메서드
+    public void UpdateGauge()
+    {
+        if (this.currentInteractTime == 0 && !this.isNowInteract)
+        {
+            this.lineRenderer.gameObject.SetActive(false);
+            return;
+        }
+        else
+            this.lineRenderer.gameObject.SetActive(true);
 
+
+        // 현재 값 비율 계산
+        float gaugeLength = Mathf.Clamp(this.currentInteractTime / this.currentMaxInteractTime, 0, 1);
+
+        // 시작점과 끝점 설정 (게이지의 크기 조절)
+        lineRenderer.SetPosition(0, this.lineRenderer.transform.position);
+        lineRenderer.SetPosition(1, this.lineRenderer.transform.position + new Vector3(gaugeLength, 0, 0));
+
+
+
+ 
+    }
+
+    // 게이지 값 변경 예시
     #endregion
 }

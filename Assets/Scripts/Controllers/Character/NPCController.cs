@@ -15,24 +15,35 @@ public class NPCController : MonoBehaviour
     [SerializeField] string npcName;
     [SerializeField] Dialog currentDialog;
     [SerializeField] int currentDialogIndex;
+    [SerializeField] int[] allDialogIndex;
 
     [Header("상호작용 옵션들")]
     [SerializeField] NPCInteractButton button;
     [SerializeField] Vector2 interactArea;
     [SerializeField] InteractType interactType;
     [SerializeField] bool isNowInInteractArea;
+    [SerializeField] bool isCanInteract;
     [SerializeField] LayerMask interactLayerMask;
     [SerializeField] GameObject interactButton;
     [SerializeField] float interactTime;
 
 
-
+    public void Initialization()
+    {
+        this.button.action -= InteractWait;
+        this.button.action += InteractWait;
+        foreach(var dialog in SaveGameManager.instance.currentSaveData.chatacterDialogs[this.name])
+        {
+            
+        }
+    }
+#if UNITY_EDITOR
     public void Start()
     {
         this.button.action -= InteractWait;
         this.button.action += InteractWait;
     }
-
+#endif
     private void FixedUpdate()
     {
         CheckInteractPlayer();

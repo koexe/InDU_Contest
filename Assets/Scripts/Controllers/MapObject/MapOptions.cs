@@ -22,6 +22,9 @@ public class MapOptions : MonoBehaviour
     [Header("맵 안의 아이템들")]
     [SerializeField] Transform mapItems;
 
+    [Header("맵 안의 Npc들")]
+    [SerializeField] Transform mapNPCs;
+
     [Header("맵 이동 포인트")]
 
     [SerializeField] List<MapMovePoint> movePoints;
@@ -35,10 +38,13 @@ public class MapOptions : MonoBehaviour
         //아이템 초기화 코드 작성
 
         //맵 상호작용 초기화 코드 작성
-        foreach(var item in this.mapItems.GetComponentsInChildren<MapItem>())
+        foreach(var t_item in this.mapItems.GetComponentsInChildren<MapItem>())
         {
-            
-            item.Initialization();
+            t_item.Initialization();
+        }
+        foreach(var t_Npcs in this.mapNPCs.GetComponentsInChildren<NPCController>())
+        { 
+            //t_Npcs.Initial
         }
 
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Item_",menuName ="Item/item")]
+[CreateAssetMenu(fileName = "Item_",menuName ="Item/item") , System.Serializable]
 public class SOItem : ScriptableObject
 {
     [Header("아이템 정보")]

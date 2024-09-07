@@ -7,10 +7,17 @@ using Newtonsoft.Json;
 public class SaveGameManager : MonoBehaviour
 {
     public static SaveGameManager instance;
+    const string fialeName = "SaveData";
+
+    [Header("저장되어있던 세이브")]
+    SaveData saveInFile;
+    [Header("현재 세이브")]
     public SaveData currentSaveData;
     public SaveData GetCurrentSaveData() => this.currentSaveData;
+    public void SetCurrentSaveData(SaveData _data) => this.currentSaveData = _data;
 
-    public void SetCurrentSaveData(SaveData _data) => this.currentSaveData = _data; 
+    [SerializeField] DialogTable dialogTable;
+
     SaveData previousSaveData { get; set; }
 
     private void Awake()
@@ -18,13 +25,28 @@ public class SaveGameManager : MonoBehaviour
         instance = this;
         this.Initialization();
         DontDestroyOnLoad(this);
+        Debug.Log("세이브 초기화 완료");
         return;
     }
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.F1))
+        {
+            SaveToJsonFile<SaveData>(this.currentSaveData, fialeName);
+        }
+    }
+#endif
+
     public void Initialization()
     {
         //이후 작업 예정
-        this.currentSaveData = new SaveData();
-        currentSaveData.currentMap = "Map1";
+        this.saveInFile = new SaveData();
+        this.saveInFile.currentMap = "Map1";
+        this.saveInFile.chatacterDialogs = this.dialogTable.GetDialogTable();
+
+        this.currentSaveData = this.saveInFile;
+
         return;
     }
 
@@ -69,7 +91,8 @@ public class SaveData
 {
     public string currentMap;
     public List<SaveItem> items;
-    public SaveData() 
+    public Dictionary<string, Dictionary<int, bool>> chatacterDialogs;
+    public SaveData()
     {
         this.items = new List<SaveItem>();
     }
@@ -79,15 +102,17 @@ public class SaveItem
 {
     SOItem item;
     public int amount;
+    public string name;
 
     public int GetItemIndex() => item.GetItemIndex();
     public Sprite GetItemImage() => item.GetItemImage();
     public string GetItemName() => item.GetItemName();
     public string GetDescription() => item.GetItemDescription();
-   
+
     public SaveItem(SOItem item, int amount)
     {
         this.item = item;
         this.amount = amount;
+        this.name = item.GetItemName();
     }
 }
