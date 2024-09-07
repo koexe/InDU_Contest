@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DataManager
+public class DataManager 
 {
     private string _chapter1;
     public Dictionary<string, Dictionary<int,Dialog>> _dialogDictionary = new Dictionary<string, Dictionary<int, Dialog>>();
