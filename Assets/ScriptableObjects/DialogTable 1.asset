@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: DialogTable 1
   m_EditorClassIdentifier: 
   table:
-  - name: sdfg
+  - chatacterName: 123
     indexs: 7900000049080000237a0800
-  - name: 44
+  - chatacterName: 444
     indexs: 430100000c000000
-  - name: 444
+  - chatacterName: 555
     indexs: cf040000740d000016c45400

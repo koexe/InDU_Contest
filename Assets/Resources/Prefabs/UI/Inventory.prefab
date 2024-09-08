@@ -1054,8 +1054,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sortingGroup: {fileID: 167162122573364757}
-  uiName: 
+  uiName: Inventory
   slotTransform: {fileID: 73746037527299669}
+  explainArea: {fileID: 5467241984711024090}
 --- !u!210 &167162122573364757
 SortingGroup:
   m_ObjectHideFlags: 0

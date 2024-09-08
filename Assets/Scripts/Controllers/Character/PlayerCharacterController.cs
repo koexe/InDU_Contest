@@ -31,6 +31,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float currentMaxInteractTime;
     [SerializeField] bool isNowInteract;
 
+
+    [Header("인벤토리 프리팹")]
+    [SerializeField] GameObject inventoryPrefab;
+    const string inventoryUIName = "Inventory";
+
     public void AddNowInteractNPC(NPCController npc)
     {
         if (!this.nowInteractNPC.Contains(npc))
@@ -76,7 +81,13 @@ public class PlayerController : MonoBehaviour
 
         IngameInputManager.instance.AddKeyboardAction(KeyCode.Space, () => GetItem());
         IngameInputManager.instance.AddKeyboardAction(KeyCode.Space, () => UpdateInteract());
+        IngameInputManager.instance.AddKeyboardAction_Down(KeyCode.I, () => ShowInventroy());
         return;
+    }
+
+    void ShowInventroy()
+    {
+        UIManager.instance.ShowUI(this.inventoryPrefab, inventoryUIName);
     }
     #region 이동 설정
 
@@ -210,7 +221,6 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
-
     #region 상호작용
     public bool HoldInteract(float _maxWaitTime)
     {

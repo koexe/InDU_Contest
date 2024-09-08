@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InventoryUI : PopUpUI
 {
-    List<SaveItem> items;
+    [SerializeField]List<SaveItem> items;
     [Header("슬롯 들어있는 트랜스폼")]
     [SerializeField] Transform slotTransform;
     [Header("설명 영역")]
@@ -33,10 +33,10 @@ public class InventoryUI : PopUpUI
         int index = 0;
         foreach (InventoryItemSlot slot in this.slotTransform.GetComponentsInChildren<InventoryItemSlot>())
         {
-            if (this.items.Count < index)
+            if (this.items.Count <= index)
                 break;
             else
-                slot.SetItem(items[index]);
+                slot.SetItem(this.items[index]);
             index++;
         }
         foreach (InventoryItemSlot slot in this.slotTransform.GetComponentsInChildren<InventoryItemSlot>())

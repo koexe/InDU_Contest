@@ -24,6 +24,7 @@ public class InventoryItemSlot : MonoBehaviour
 
     public void OnPointerEnter()
     {
+        if(this.item == null) return;
         this.inventoryUI.GetExplainArea().ChageExplainArea(this.item);
         return;
     }

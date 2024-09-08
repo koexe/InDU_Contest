@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
             Debug.Log("Same UI Already Added In Screen");
             Destroy(this.currentUIObjects[_Name].gameObject);
             this.currentUIObjects.Remove(_Name);
+            return null;
         }
 
         var t_UIObject = GameObject.Instantiate( _UiPrefab);
@@ -60,6 +61,7 @@ public class UIManager : MonoBehaviour
             t_Ui.sortingGroup.sortingOrder = _layerOrder;
         }
         this.currentUIObjects.Add(_Name, t_UIObject);
+        t_Ui.Initialization();
         return t_UIObject;
     }
 

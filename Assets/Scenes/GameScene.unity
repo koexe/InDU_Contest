@@ -890,6 +890,7 @@ MonoBehaviour:
   currentInteractTime: 0
   currentMaxInteractTime: 0
   isNowInteract: 0
+  inventoryPrefab: {fileID: 9154274061367053231, guid: 966201023b71abd4090013d5ea0df4f7, type: 3}
 --- !u!50 &1840641990
 Rigidbody2D:
   serializedVersion: 4
