@@ -10,7 +10,7 @@ public class PopUpUI : MonoBehaviour
     public SortingGroup sortingGroup;
     [Header("UI ¿Ã∏ß")]
     [SerializeField] string uiName;
-    public virtual void Initialization()
+    public virtual void Initialization(string _custom = "")
     {
         return;
     }

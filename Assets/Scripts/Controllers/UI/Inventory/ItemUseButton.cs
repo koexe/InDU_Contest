@@ -10,8 +10,8 @@ public class ItemUseButton : PopUpUI
 
     public Button GetUseButton() => this.useButton;
     public Button GetTrashButton() => this.trashButton;
-    public override void Initialization()
-    {
-        base.Initialization();
+    public override void Initialization(string _custom)
+    {   
+        base.Initialization(_custom);
     }
 }

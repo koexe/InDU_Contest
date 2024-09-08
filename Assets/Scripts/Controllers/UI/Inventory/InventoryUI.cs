@@ -12,9 +12,9 @@ public class InventoryUI : PopUpUI
     [SerializeField] ExplainArea explainArea;
     
     public ExplainArea GetExplainArea() => this.explainArea;
-    public override void Initialization()
+    public override void Initialization(string _custom)
     {
-        base.Initialization();
+        base.Initialization(_custom);
         this.items = SaveGameManager.instance.GetCurrentSaveData().items;
         Refresh();
 

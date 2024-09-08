@@ -13,20 +13,17 @@ public class TextUIManager : PopUpUI
     public Dictionary<int, Dialog> currentDialogDictionary;
     public TextState textState;
     public int currentDialogIndex = 0;
-    private void Awake()
-    {
-        Initialization();
-    }
 
-    public override void Initialization()
+    public override void Initialization(string _custom)
     {
         //DataManager에서 Dialog Dictionary 가져오기
         this.currentDialogDictionary = AssetManager.Instance.GetDialogList();
+        this.currentDialogIndex = int.Parse(_custom);
         this.textState = TextState.WAIT;
 
         this.dialogController.Initialization();
         this.imageController.Initialization();
-        this.DialogClickAction.Invoke();
+        //this.DialogClickAction.Invoke();
     }
 
     public void OnClickDialog()
@@ -47,4 +44,6 @@ public class TextUIManager : PopUpUI
 
         this.choiceButtonController.gameObject.SetActive(true);
     }
+    
+
 }

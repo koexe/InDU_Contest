@@ -25,14 +25,13 @@ public class CSVReader
             Dialog dialog_temp = new Dialog();
             dialog_temp.dialogNumber = int.Parse(values[0]);
             dialog_temp.Character = Regex.Split(values[1], "/");
-            dialog_temp.talkName = values[2];
-            dialog_temp.comment =values[3];
-            dialog_temp.isChoose = bool.Parse(values[4]);
-            dialog_temp.linkCondition = Regex.Split(values[5], "/");
-            dialog_temp.linkDilog = values[6];
-            dialog_temp.Choice1 = Regex.Split(values[7], "/");
-            dialog_temp.Choice2 = Regex.Split(values[8], "/");
-            dialog_temp.Choice3 = Regex.Split(values[9], "/");
+            dialog_temp.comment =values[2];
+            dialog_temp.isChoose = bool.Parse(values[3]);
+            dialog_temp.linkCondition = Regex.Split(values[4], "/");
+            dialog_temp.linkDilog = values[5];
+            dialog_temp.Choice1 = Regex.Split(values[6], "/");
+            dialog_temp.Choice2 = Regex.Split(values[7], "/");
+            dialog_temp.Choice3 = Regex.Split(values[8], "/");
             list.Add(dialog_temp.dialogNumber, dialog_temp);
         }
         return list;

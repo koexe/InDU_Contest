@@ -91,7 +91,7 @@ public class SaveData
 {
     public string currentMap;
     public List<SaveItem> items;
-    public Dictionary<string, Dictionary<int, bool>> chatacterDialogs;
+    public Dictionary<int, bool> chatacterDialogs;
     public SaveData()
     {
         this.items = new List<SaveItem>();

@@ -32,10 +32,6 @@ public class NPCController : MonoBehaviour
     {
         this.button.action -= InteractWait;
         this.button.action += InteractWait;
-        foreach(var dialog in SaveGameManager.instance.currentSaveData.chatacterDialogs[this.name])
-        {
-            
-        }
     }
 #if UNITY_EDITOR
     public void Start()

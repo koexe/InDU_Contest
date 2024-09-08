@@ -37,11 +37,24 @@ public class DialogTextController : MonoBehaviour
             case TextState.WAIT:
                 int nextDialog = 0;
                 int currentIndex = this.textUIManager.currentDialogIndex;
+  
                 //연결된 텍스트가 있다면 해당 인덱스로 넘어감
                 if (currentIndex != 0)
                 {
-                    if (!string.IsNullOrEmpty(this.currentDialogDictionary[currentIndex].linkDilog))
-                        nextDialog = int.Parse(this.currentDialogDictionary[currentIndex].linkDilog);
+                    if (!string.IsNullOrEmpty(this.currentDialogDictionary[currentIndex].linkDilog) &&
+                         !string.IsNullOrEmpty(this.currentDialogDictionary[currentIndex].linkCondition[0]))
+                    {
+                        if (SaveGameManager.instance.currentSaveData.chatacterDialogs
+                            [int.Parse(this.currentDialogDictionary[currentIndex].linkCondition[0])] == 
+                            bool.Parse(this.currentDialogDictionary[currentIndex].linkCondition[1]))
+                        {
+                            nextDialog = int.Parse(this.currentDialogDictionary[currentIndex].linkDilog);
+                        }
+                        else
+                        {
+                            this.textUIManager.DeleteUI();
+                        }
+                    }
                     //없다면 바로 다음 인덱스로 넘어감
                     else
                         nextDialog = currentIndex + 1;
@@ -55,7 +68,10 @@ public class DialogTextController : MonoBehaviour
                     ChangeDialogOneByOne(nextDialog);
                 }
                 else
+                {
                     Debug.Log("Next Dialog Missing in Dialog id: " + this.textUIManager.currentDialogIndex);
+                    this.textUIManager.DeleteUI();
+                }
                 break;
             case TextState.INPRINT:
                 StopCoroutine(this.printCoroutine);
@@ -107,14 +123,16 @@ public class DialogTextController : MonoBehaviour
                     }
                 }
             }
-
-
             this.dialogText.text += _dialog[dialogIndex];
             yield return new WaitForSeconds(_printSpeed);
             dialogIndex++;
             if (dialogIndex >= _dialog.Length) break;
         }
         this.textUIManager.textState = TextState.WAIT;
+
+        //if (this.currentDialogDictionary[this.textUIManager.currentDialogIndex].linkCondition)
+
+
         if (this.currentDialogDictionary[this.textUIManager.currentDialogIndex].isChoose)
         {
             int choiceDialog1 = int.Parse(currentDialogDictionary[_index].Choice1[1]);

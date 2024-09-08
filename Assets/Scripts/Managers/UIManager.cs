@@ -61,7 +61,7 @@ public class UIManager : MonoBehaviour
             t_Ui.sortingGroup.sortingOrder = _layerOrder;
         }
         this.currentUIObjects.Add(_Name, t_UIObject);
-        t_Ui.Initialization();
+        t_Ui.Initialization(_custom);
         return t_UIObject;
     }
 

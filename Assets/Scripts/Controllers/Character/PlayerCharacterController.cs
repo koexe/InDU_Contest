@@ -84,14 +84,11 @@ public class PlayerController : MonoBehaviour
         IngameInputManager.instance.AddKeyboardAction_Down(KeyCode.I, () => ShowInventroy());
         return;
     }
-
     void ShowInventroy()
     {
         UIManager.instance.ShowUI(this.inventoryPrefab, inventoryUIName);
     }
     #region 이동 설정
-
-
     private void AddKeyX(KeyCode key)
     {
         if (!this.inputListX.Contains(key))
@@ -125,7 +122,6 @@ public class PlayerController : MonoBehaviour
         }
         return;
     }
-
     private Vector3 GetDirectionFromKey(KeyCode key)
     {
         // KeyCode에 따라 방향 반환
@@ -138,7 +134,6 @@ public class PlayerController : MonoBehaviour
             default: return Vector3.zero;
         }
     }
-
     private Vector3 Move(Vector3 direction)
     {
         if (InGameManager.instance.state != InGameManager.GameState.InProgress) return Vector3.zero;
@@ -156,7 +151,6 @@ public class PlayerController : MonoBehaviour
 
         return t_moveValue;
     }
-
     void UpdateMove()
     {
         Vector3 moveValue = Vector3.zero;
@@ -218,6 +212,11 @@ public class PlayerController : MonoBehaviour
         {
             this.currentItemGetDelay = Mathf.MoveTowards(this.currentItemGetDelay, 0f, Time.fixedDeltaTime);
         }
+    }
+
+    public void AddHp(int hp)
+    {
+        return;
     }
 
     #endregion

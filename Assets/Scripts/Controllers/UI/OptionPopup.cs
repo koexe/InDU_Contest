@@ -5,9 +5,9 @@ using UnityEngine;
 public class OptionPopup : PopUpUI
 {
     const string optionUI = "Option";
-    public override void Initialization()
+    public override void Initialization(string _custom)
     {
-        base.Initialization();
+        base.Initialization(_custom);
 
     }
 

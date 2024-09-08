@@ -67,7 +67,7 @@ public class ImageController : MonoBehaviour
         {
             string name = this.textUIManager.currentDialogDictionary[index].Character[0];
             int t_characterIndex = int.Parse(this.textUIManager.currentDialogDictionary[index].Character[1]);
-            ChangeImage(name, index);
+            ChangeImage(name, t_characterIndex);
         }
         //int index = this.textUIManager.currentDialogIndex;
         //string name_L = "";

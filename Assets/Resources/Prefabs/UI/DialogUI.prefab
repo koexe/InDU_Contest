@@ -642,7 +642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sortingGroup: {fileID: -1432203408651232693}
-  uiName: 
+  uiName: DialogUI
   dialogController: {fileID: 5780735509512258337}
   imageController: {fileID: 4285547985941383628}
   choiceButtonController: {fileID: 142435491465403495}
