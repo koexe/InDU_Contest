@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviour
         SettingKeyboard();
         return;
     }
-
     public void Initialization()
     {
         SettingKeyboard();
@@ -213,12 +212,14 @@ public class PlayerController : MonoBehaviour
             this.currentItemGetDelay = Mathf.MoveTowards(this.currentItemGetDelay, 0f, Time.fixedDeltaTime);
         }
     }
-
     public void AddHp(int hp)
     {
         return;
     }
+    public void UpdateHpItemUseCoolTime()
+    {
 
+    }
     #endregion
     #region 상호작용
     public bool HoldInteract(float _maxWaitTime)

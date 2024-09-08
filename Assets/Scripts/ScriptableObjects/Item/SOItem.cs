@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Item_",menuName ="Item/item") , System.Serializable]
+[CreateAssetMenu(fileName = "Item_",menuName ="Item/item")]
 public class SOItem : ScriptableObject
 {
     [Header("아이템 정보")]
-    [SerializeField] int itemIndex;
-    [SerializeField] string itemName;
-    [SerializeField] string itemDescription;
-    [SerializeField] bool isUsable;
-    [SerializeField] Sprite itemImage;
+    [SerializeField] protected int itemIndex;
+    [SerializeField] protected string itemName;
+    [SerializeField] protected string itemDescription;
+    [SerializeField] protected bool isUsable;
+    [SerializeField] protected Sprite itemImage;
+
+
     public virtual void UseItem()
     {
         return;

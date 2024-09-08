@@ -11,6 +11,9 @@ public class InGameManager : MonoBehaviour
         InEvent = 2,
 
     }
+    /// <summary>
+    /// 생성하기 전에 사용할수 있는 static 변수에다가 하나만 만들 클론을 집어너놓는다. 이게 싱글턴임.
+    /// </summary>
     public static InGameManager instance;
 
     public GameState state;
