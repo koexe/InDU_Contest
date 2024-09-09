@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -124,7 +125,10 @@ public class DialogTextController : MonoBehaviour
                     }
                 }
             }
-            this.dialogText.text += _dialog[dialogIndex];
+
+            StringBuilder sb = new StringBuilder(this.dialogText.text);
+            sb.Append(_dialog[dialogIndex]);
+            this.dialogText.text = sb.ToString();
             yield return new WaitForSeconds(_printSpeed);
             dialogIndex++;
             if (dialogIndex >= _dialog.Length) break;
