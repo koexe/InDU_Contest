@@ -10,8 +10,12 @@ public class InventoryUI : PopUpUI
     [SerializeField] Transform slotTransform;
     [Header("설명 영역")]
     [SerializeField] ExplainArea explainArea;
-    
+    [Header("사용 버튼")]
+    [SerializeField] GameObject button;
+
     public ExplainArea GetExplainArea() => this.explainArea;
+    public GameObject GetButton() => this.button;
+
     public override void Initialization(string _custom)
     {
         base.Initialization(_custom);

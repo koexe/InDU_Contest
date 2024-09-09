@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -10,6 +11,8 @@ public class PopUpUI : MonoBehaviour
     public SortingGroup sortingGroup;
     [Header("UI ÀÌ¸§")]
     [SerializeField] string uiName;
+
+    public string GetUiName() => this.uiName;
     public virtual void Initialization(string _custom = "")
     {
         return;

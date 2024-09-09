@@ -28,5 +28,17 @@ public class InventoryItemSlot : MonoBehaviour
         this.inventoryUI.GetExplainArea().ChageExplainArea(this.item);
         return;
     }
+
+    public void OnClick()
+    {
+        if (this.item == null) return;
+        var t_button = this.inventoryUI.GetButton();
+
+        t_button.transform.position = this.transform.position;
+        
+        t_button.transform.GetComponent<Button>().onClick.AddListener(() => this.item.GetSOItem().UseItem());
+
+        return;
+    }
 }
  

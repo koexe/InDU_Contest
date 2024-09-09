@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b37ae16d39e4484eb81ea228cbe7d2d, type: 3}
   m_Name: Item_ 1
   m_EditorClassIdentifier: 
-  itemIndex: 0
-  itemName: 
-  itemDescription: 
+  itemIndex: 1
+  itemName: "\uD790\uD15C1 "
+  itemDescription: "\uD790\uD15C 1\uC785\uB2C8\uB2E4"
   isUsable: 0
   itemImage: {fileID: 0}

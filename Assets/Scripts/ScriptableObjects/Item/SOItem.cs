@@ -16,6 +16,8 @@ public class SOItem : ScriptableObject
 
     public virtual void UseItem()
     {
+        Debug.Log("»ç¿ë");
+        CheckItemAmount();
         return;
     }
 
@@ -33,6 +35,14 @@ public class SOItem : ScriptableObject
         }
         return;
     }
+
+    protected void CheckItemAmount()
+    {
+
+        return;
+    }
+
+
     public Sprite GetItemImage() => this.itemImage;
     public string GetItemName() => this.itemName;
     public string GetItemDescription() => this.itemDescription;

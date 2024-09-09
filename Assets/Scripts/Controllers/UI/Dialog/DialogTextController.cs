@@ -137,6 +137,7 @@ public class DialogTextController : MonoBehaviour
         {
             int choiceDialog1 = int.Parse(currentDialogDictionary[_index].Choice1[1]);
             int choiceDialog2 = int.Parse(currentDialogDictionary[_index].Choice2[1]);
+            if (currentDialogDictionary[_index].Choice3 )
             int choiceDialog3 = int.Parse(currentDialogDictionary[_index].Choice3[1]);
             this.textUIManager.EnableButtons(choiceDialog1, choiceDialog2, choiceDialog3);
         }

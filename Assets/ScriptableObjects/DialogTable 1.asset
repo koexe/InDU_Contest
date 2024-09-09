@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: DialogTable 1
   m_EditorClassIdentifier: 
   table:
-  - chatacterName: 123
-    indexs: 7900000049080000237a0800
+  - chatacterName: RedHood001
+    indexs: 0100000049080000237a0800
   - chatacterName: 444
     indexs: 430100000c000000
   - chatacterName: 555

@@ -81,6 +81,8 @@ public class SaveGameManager : MonoBehaviour
         {
             Debug.LogWarning("File not found!");
             return null;
+
+            
         }
     }
 
@@ -108,6 +110,8 @@ public class SaveItem
     public Sprite GetItemImage() => item.GetItemImage();
     public string GetItemName() => item.GetItemName();
     public string GetDescription() => item.GetItemDescription();
+
+    public SOItem GetSOItem() => item;
 
     public SaveItem(SOItem item, int amount)
     {

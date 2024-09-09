@@ -27,6 +27,9 @@ public class NPCController : MonoBehaviour
     [SerializeField] GameObject interactButton;
     [SerializeField] float interactTime;
 
+    [Header("UI")]
+    [SerializeField] GameObject dialogUI;
+
 
     public void Initialization()
     {
@@ -87,7 +90,7 @@ public class NPCController : MonoBehaviour
     public virtual void InteractAction()
     {
         Debug.Log($"상호작용 오브젝트 이름:{this.name}");
-
+        UIManager.instance.ShowUI(this.dialogUI,dialogUI.GetComponent<PopUpUI>().GetUiName() , -1, this.currentDialogIndex.ToString());
     }
 
 
