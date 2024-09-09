@@ -43,7 +43,7 @@ public class SaveGameManager : MonoBehaviour
         //이후 작업 예정
         this.saveInFile = new SaveData();
         this.saveInFile.currentMap = "Map1";
-        this.saveInFile.chatacterDialogs = this.dialogTable.GetDialogTable();
+        this.saveInFile.chatacterDialogs = new Dictionary<int, bool>();
 
         this.currentSaveData = this.saveInFile;
 

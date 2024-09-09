@@ -583,7 +583,7 @@ GameObject:
   - component: {fileID: 763059730}
   - component: {fileID: 763059729}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: AssetManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

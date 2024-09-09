@@ -15,19 +15,18 @@ public class ChoiceButtonController : MonoBehaviour
     public TextMeshProUGUI button2Text;
     public TextMeshProUGUI button3Text;
 
-    [SerializeField]TextUIManager textUIManager;
-
-    void Initialization()
-    {
-       
-    }
+    [SerializeField] TextUIManager textUIManager;
 
     public void ChangeChoiceText(Dialog dialog)
     {
-      
-        this.button1Text.text = dialog.Choice1[0];
-        this.button2Text.text = dialog.Choice2[0];
-        this.button3Text.text = dialog.Choice3[0];
+        if (!string.IsNullOrEmpty(dialog.Choice1[0]))
+            this.button1Text.text = dialog.Choice1[0];
+
+        if (!string.IsNullOrEmpty(dialog.Choice2[0]))
+            this.button2Text.text = dialog.Choice2[0];
+
+        if (!string.IsNullOrEmpty(dialog.Choice3[0]))
+            this.button3Text.text = dialog.Choice3[0];
         return;
     }
 }

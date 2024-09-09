@@ -67,8 +67,16 @@ public class UIManager : MonoBehaviour
 
     public void DeleteUI(string name)
     {
-        GameObject.Destroy(this.currentUIObjects[name]);
-        this.currentUIObjects.Remove(name);
+        if (this.currentUIObjects.ContainsKey(name))
+        {
+            GameObject.Destroy(this.currentUIObjects[name]);
+            this.currentUIObjects.Remove(name);
+        }
+        else
+        {
+            Debug.Log("Already Deleted UI");
+        }
+
         return;
     }
 

@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcName: RedHood001
-  currentDialogIndex: 0
+  currentDialogIndex: 1
   allDialogIndex: 01000000
   button: {fileID: 2424536920736282669}
   interactArea: {x: 3, y: 3}

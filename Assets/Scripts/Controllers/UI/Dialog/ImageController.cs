@@ -24,9 +24,9 @@ public class ImageController : MonoBehaviour
     }
     void ChangeImage(string name, int imageIndex)
     {
-        if (!string.IsNullOrEmpty(name)) 
+        if (!string.IsNullOrEmpty(name))
         {
-            this.characterImage.sprite = AssetManager.Instance.CharacterImageDictionary[name][imageIndex];
+            this.characterImage.sprite = AssetManager.Instance.CharacterImageDictionary[name][imageIndex -1];
         }
         //if (!string.IsNullOrEmpty(name))
         //{
