@@ -21,6 +21,7 @@ public class InGameManager : MonoBehaviour
     [SerializeField] string currentMapName;
     [SerializeField] MapOptions currentMapObject;
     [SerializeField] Transform mapParent;
+    public MapOptions GetMapOptions() => this.currentMapObject;
 
     [Header("플레이어")]
     [SerializeField] PlayerController currentPlayer;
@@ -54,5 +55,6 @@ public class InGameManager : MonoBehaviour
         this.currentMapName = this.currentMapObject.GetMapName();
         Debug.Log(this.currentMapName);
         this.currentPlayer.transform.position = this.currentMapObject.GetMoveTransfrom(_index).position;
+        CameraController.instance.SetMapBoundary(this.currentMapObject.GetMapSize());
     }
 }

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd546b4317d49946bffde8b235f2908, type: 3}
+  m_Name: Bosspattern_Hide
+  m_EditorClassIdentifier: 
+  beforeAttackTime: 0
+  attackTime: 0
+  afterAttackTime: 2.5
+  animationPlayTime: 0
+  patternState: 0
+  animation: {fileID: 0}
+  animator: {fileID: 0}
+  currentPatternTime: 0
+  bossController: {fileID: 0}
+  isBasicAttack: 0
+  lastTimeStamp: 0
+  isAutoNextPattern: 1
+  targetBushPosition: {x: 0, y: 0, z: 0}
+  speed: 4.5

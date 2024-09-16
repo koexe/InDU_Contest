@@ -30,7 +30,7 @@ public class MapOptions : MonoBehaviour
     [SerializeField] List<MapMovePoint> movePoints;
     public Transform GetMoveTransfrom(int index) => this.movePoints[index].transform;
 
-
+    public Vector2 GetMapSize() => this.mapSize;
     public string GetMapName() => this.mapName;
 
     public void Initialization()

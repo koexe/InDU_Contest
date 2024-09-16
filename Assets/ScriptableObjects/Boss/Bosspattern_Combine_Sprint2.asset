@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25031d64e342d48458653c33397be705, type: 3}
+  m_Name: Bosspattern_Combine_Sprint2
+  m_EditorClassIdentifier: 
+  beforeAttackTime: 0
+  attackTime: 0
+  afterAttackTime: 0
+  animationPlayTime: 0
+  patternState: 0
+  animation: {fileID: 0}
+  animator: {fileID: 0}
+  currentPatternTime: 0
+  bossController: {fileID: 0}
+  isBasicAttack: 0
+  lastTimeStamp: 0
+  isAutoNextPattern: 1
+  bossPatternsSetting:
+  - {fileID: 11400000, guid: 58ae5f66450e9864383b7015ba4d7aef, type: 2}
+  - {fileID: 11400000, guid: 58ae5f66450e9864383b7015ba4d7aef, type: 2}
+  bossPatterns: []
+  currentIndex: 0

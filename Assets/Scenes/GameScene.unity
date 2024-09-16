@@ -229,7 +229,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTransfrom: {fileID: 1840641988}
-  currentMoveRatio: 0.01
+  currentMoveRatio: 1
+  shakeDuration: 0.5
+  shakeMagnitude: 1
+  dampingSpeed: 1
+  minBounds: {x: 0, y: 0}
+  maxBounds: {x: 0, y: 0}
+  cameraHalfHeight: 0
+  cameraHalfWidth: 0
 --- !u!1 &648897939
 GameObject:
   m_ObjectHideFlags: 0

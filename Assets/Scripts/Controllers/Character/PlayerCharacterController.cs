@@ -214,6 +214,7 @@ public class PlayerController : MonoBehaviour
     }
     public void AddHp(int hp)
     {
+        this.currentHP += hp;
         return;
     }
     public void UpdateHpItemUseCoolTime()

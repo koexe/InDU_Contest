@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392d0e0972b51b04f8e2c074e595e5cc, type: 3}
+  m_Name: Bosspattern_Basic
+  m_EditorClassIdentifier: 
+  beforeAttackTime: 1
+  attackTime: 2
+  afterAttackTime: 0.5
+  animationPlayTime: 0
+  patternState: 0
+  animation: {fileID: 0}
+  animator: {fileID: 0}
+  currentPatternTime: 0
+  bossController: {fileID: 0}
+  isBasicAttack: 1
+  lastTimeStamp: 0
+  isAutoNextPattern: 1
+  playerDetectionSize: {x: 3, y: 3}
+  mask:
+    serializedVersion: 2
+    m_Bits: 64
