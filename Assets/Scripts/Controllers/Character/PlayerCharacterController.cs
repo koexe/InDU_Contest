@@ -215,6 +215,8 @@ public class PlayerController : MonoBehaviour
     public void AddHp(int hp)
     {
         this.currentHP += hp;
+        CameraController.instance.TriggerShake(0.5f);
+        InGameManager.instance.ShowRedFilter(0.5f);
         return;
     }
     public void UpdateHpItemUseCoolTime()
