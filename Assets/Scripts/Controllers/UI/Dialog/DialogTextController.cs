@@ -52,6 +52,19 @@ public class DialogTextController : MonoBehaviour
                             bool.Parse(this.currentDialogDictionary[currentIndex].linkCondition[1]))
                         {
                             nextDialog = int.Parse(this.currentDialogDictionary[currentIndex].linkDilog);
+
+                            if (SaveGameManager.instance.currentSaveData.chatacterDialogs[nextDialog] == true)
+                            {
+                                int index = nextDialog;
+                                while (true)
+                                {
+                                    if (this.currentDialogDictionary.ContainsKey(index))
+                                        index++;
+                                    else
+                                        break;
+                                }
+                                nextDialog = index - 1;
+                            }
                         }
                         else
                         {
@@ -64,6 +77,9 @@ public class DialogTextController : MonoBehaviour
                 }
                 else
                     nextDialog = 1;
+
+
+
                 //현재 다이얼로그 목록에 해당 인덱스가 있는지 검사
                 if (this.currentDialogDictionary.ContainsKey(nextDialog))
                 {
@@ -79,7 +95,6 @@ public class DialogTextController : MonoBehaviour
             case TextState.INPRINT:
                 StopCoroutine(this.printCoroutine);
                 ChangeDialog(this.textUIManager.currentDialogIndex);
-                this.textUIManager.textState = TextState.WAIT;
                 break;
             case TextState.CHOOSE:
                 break;
@@ -91,16 +106,78 @@ public class DialogTextController : MonoBehaviour
     public void ChangeDialog(int index)
     {
         var dialogTemp = this.currentDialogDictionary[index];
-        this.printCoroutine = StartCoroutine(PrintRoutine(dialogTemp.comment, index, 0f));
+        this.nameText.text = CodeToName(dialogTemp.Character[0]);
+
+        PrintAll(dialogTemp.comment, index, 0f);
         return;
     }
     //다이얼로그 하나씩 출력하기
     public void ChangeDialogOneByOne(int index)
     {
         var dialogTemp = this.currentDialogDictionary[index];
-        this.nameText.text = this.currentDialogDictionary[index].talkName;
+        this.nameText.text = CodeToName(dialogTemp.Character[0]);
         this.printCoroutine = StartCoroutine(PrintRoutine(dialogTemp.comment, index, this.printSpeed));
     }
+
+    public void PrintAll(string _dialog, int _index, float _printSpeed)
+    {
+        int dialogIndex = 0;
+        this.dialogText.text = "";
+        this.textUIManager.textState = TextState.INPRINT;
+        Debug.Log(_dialog);
+
+        while (true)
+        {
+            if (_dialog[dialogIndex] == '$')
+            {
+                string t_methodName = "";
+                dialogIndex++;
+                while (true)
+                {
+                    t_methodName += _dialog[dialogIndex];
+                    dialogIndex++;
+                    if (_dialog[dialogIndex] == '$')
+                    {
+                        DialogMethodManager.instance.InvokeMethod(t_methodName);
+                        dialogIndex++;
+                        break;
+                    }
+                }
+                if (dialogIndex >= _dialog.Length) break;
+            }
+
+            StringBuilder sb = new StringBuilder(this.dialogText.text);
+            sb.Append(_dialog[dialogIndex]);
+            this.dialogText.text = sb.ToString();
+            dialogIndex++;
+            if (dialogIndex >= _dialog.Length) break;
+        }
+        this.textUIManager.textState = TextState.WAIT;
+
+
+
+
+        if (this.currentDialogDictionary[this.textUIManager.currentDialogIndex].isChoose)
+        {
+            int choiceDialog1 = int.Parse(currentDialogDictionary[_index].Choice1[1]);
+            int choiceDialog2 = -1;
+            int choiceDialog3 = -1;
+
+            if (string.IsNullOrEmpty(currentDialogDictionary[_index].Choice2[0]) != true)
+                choiceDialog2 = int.Parse(currentDialogDictionary[_index].Choice2[1]);
+
+            if (string.IsNullOrEmpty(currentDialogDictionary[_index].Choice3[0]) != true)
+                choiceDialog3 = int.Parse(currentDialogDictionary[_index].Choice3[1]);
+
+            this.textUIManager.EnableButtons(choiceDialog1, choiceDialog2, choiceDialog3);
+            this.textUIManager.textState = TextState.CHOOSE;
+            return;
+        }
+    }
+
+
+
+
     //하나씩 출력하는 코루틴
     private IEnumerator PrintRoutine(string _dialog, int _index, float _printSpeed)
     {
@@ -124,6 +201,7 @@ public class DialogTextController : MonoBehaviour
                         break;
                     }
                 }
+                if (dialogIndex >= _dialog.Length) break;
             }
 
             StringBuilder sb = new StringBuilder(this.dialogText.text);
@@ -135,22 +213,21 @@ public class DialogTextController : MonoBehaviour
         }
         this.textUIManager.textState = TextState.WAIT;
 
-        //if (this.currentDialogDictionary[this.textUIManager.currentDialogIndex].linkCondition)
-
-
         if (this.currentDialogDictionary[this.textUIManager.currentDialogIndex].isChoose)
         {
             int choiceDialog1 = int.Parse(currentDialogDictionary[_index].Choice1[1]);
             int choiceDialog2 = -1;
             int choiceDialog3 = -1;
 
-            if (string.IsNullOrEmpty(currentDialogDictionary[_index].Choice2[1]) != true)
+            if (!string.IsNullOrEmpty(currentDialogDictionary[_index].Choice2[1]))
                 choiceDialog2 = int.Parse(currentDialogDictionary[_index].Choice2[1]);
 
-            if (string.IsNullOrEmpty(currentDialogDictionary[_index].Choice3[0]) != true)
+            if (!string.IsNullOrEmpty(currentDialogDictionary[_index].Choice3[0]))
                 choiceDialog3 = int.Parse(currentDialogDictionary[_index].Choice3[1]);
 
             this.textUIManager.EnableButtons(choiceDialog1, choiceDialog2, choiceDialog3);
+            this.textUIManager.textState = TextState.CHOOSE;
+            yield break;
         }
     }
     #endregion
@@ -162,10 +239,10 @@ public class DialogTextController : MonoBehaviour
         {
             this.textUIManager.currentDialogIndex = index;
             var dialogTemp = this.currentDialogDictionary[index];
-            this.nameText.text = this.currentDialogDictionary[index].talkName;
+            this.nameText.text = CodeToName(this.currentDialogDictionary[index].Character[0]);
             this.printCoroutine = StartCoroutine(PrintRoutine(dialogTemp.comment, index, this.printSpeed));
             this.textUIManager.choiceButtonController.gameObject.SetActive(false);
-            this.textUIManager.textState = TextState.WAIT;
+
         }
         else
         {
@@ -173,4 +250,24 @@ public class DialogTextController : MonoBehaviour
         }
     }
     #endregion
+
+
+    string CodeToName(string _code)
+    {
+        switch (_code)
+        {
+            case "RedHood001":
+                return "빨간모자";
+            case "Mom001":
+                return "엄마";
+            case "Hunter001":
+                return "사냥꾼";
+            case "Wolf 001":
+                return "늑대";
+            default:
+                return "";
+        }
+    }
+
+
 }

@@ -35,5 +35,27 @@ public class DialogMethodManager : MonoBehaviour
         Debug.Log("TEST");
         return;
     }
+    void ShakeScreen()
+    {
+        CameraController.instance.TriggerShake(0.5f);
+    }
+
+    void GetItemBerry()
+    {
+        Debug.Log("∫£∏Æ æ∆¿Ã≈€ »πµÊ");
+    }
+
+    void BackGroundToBlack()
+    {
+        var UI = UIManager.instance.GetUI("DialogUI");
+        UI.GetComponent<TextUIManager>().BackGroundChange(true);
+    }
+
+    void BackGroundToNomal()
+    {
+        var UI = UIManager.instance.GetUI("DialogUI");
+        UI.GetComponent<TextUIManager>().BackGroundChange(false);
+    }
+
     #endregion
 }

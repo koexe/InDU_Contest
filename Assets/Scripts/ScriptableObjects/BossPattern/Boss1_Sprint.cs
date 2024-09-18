@@ -10,7 +10,7 @@ public class Boss1_Sprint : BossPattern
     public override void Initialization(BossController _bossController)
     {
         base.Initialization(_bossController);
-        this.targetPosition = InGameManager.instance.GetPlayerController().transform.position;
+
         return;
     }
 
@@ -24,6 +24,7 @@ public class Boss1_Sprint : BossPattern
             this.patternState = PatternState.InAttack;
             this.lastTimeStamp = this.currentPatternTime;
             this.targetPosition = InGameManager.instance.GetPlayerController().transform.position;
+            this.bossController.SetWalkArrow();
         }
 
         if (this.bossController.transform.position == this.targetPosition && this.patternState == PatternState.InAttack)
@@ -37,6 +38,7 @@ public class Boss1_Sprint : BossPattern
         {
             this.patternState = PatternState.EndAttack;
             this.lastTimeStamp = this.currentPatternTime;
+            this.bossController.isCollisionEnabled = false;
         }
         if (this.patternState == PatternState.InAttack)
             AttackAction();
@@ -50,6 +52,7 @@ public class Boss1_Sprint : BossPattern
     protected override void AttackAction()
     {
         base.AttackAction();
+        this.bossController.isCollisionEnabled = true;
         this.bossController.MoveToPosition(this.targetPosition, this.speed);
     }
 }

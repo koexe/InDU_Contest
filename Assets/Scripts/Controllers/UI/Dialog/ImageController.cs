@@ -69,32 +69,6 @@ public class ImageController : MonoBehaviour
             int t_characterIndex = int.Parse(this.textUIManager.currentDialogDictionary[index].Character[1]);
             ChangeImage(name, t_characterIndex);
         }
-        //int index = this.textUIManager.currentDialogIndex;
-        //string name_L = "";
-        //string name_C = "";
-        //string name_R = "";
-        //int index_L = -1;
-        //int index_C = -1;
-        //int index_R = -1;
-
-        //if (!string.IsNullOrEmpty(this.textUIManager.currentDialogDictionary[index].CharacterL[0]))
-        //{
-        //    name_L = this.textUIManager.currentDialogDictionary[index].CharacterL[0];
-        //    index_L = int.Parse(this.textUIManager.currentDialogDictionary[index].CharacterL[1]);
-        //}
-        //if (!string.IsNullOrEmpty(this.textUIManager.currentDialogDictionary[index].CharacterC[0]))
-        //{
-        //    name_C = this.textUIManager.currentDialogDictionary[index].CharacterC[0];
-        //    index_C = int.Parse(this.textUIManager.currentDialogDictionary[index].CharacterC[1]);
-        //}
-        //if (!string.IsNullOrEmpty(this.textUIManager.currentDialogDictionary[index].CharacterR[0]))
-        //{
-        //    name_R = this.textUIManager.currentDialogDictionary[index].CharacterR[0];
-        //    index_R = int.Parse(this.textUIManager.currentDialogDictionary[index].CharacterR[1]);
-        //}
-        //ChangeImage(name_L, index_L, Position.LEFT);
-        //ChangeImage(name_C, index_C, Position.CENTER);
-        //ChangeImage(name_R, index_R, Position.RIGHT);
     }
 
 

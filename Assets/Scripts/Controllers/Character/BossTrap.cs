@@ -35,7 +35,7 @@ public class BossTrap : NPCController
     {
         if (this.currentInterval == 0f)
         {
-            //Destroy(this.gameObject);
+            Destroy(this.gameObject);
         }
         else
         {

@@ -15,7 +15,7 @@ public class NPCDialogController : NPCController
     public override void InteractAction()
     {
         base.InteractAction();
-        UIManager.instance.ShowUI(this.dialogUI, dialogUI.GetComponent<PopUpUI>().GetUiName(), -1, this.currentDialogIndex.ToString());
+        UIManager.instance.ShowUI("DialogUI", -1, this.currentDialogIndex.ToString());
     }
 
 }

@@ -51,6 +51,9 @@ TagManager:
   - name: Objects
     uniqueID: 3673491831
     locked: 0
+  - name: Effect
+    uniqueID: 2959954433
+    locked: 0
   - name: UIElements
     uniqueID: 3847001573
     locked: 0

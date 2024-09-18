@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] int maxHP;
     [SerializeField] int currentHP;
+    [SerializeField] float currentGodTime;
+    [SerializeField] float maxGodTime;
 
     [Header("아이템 획득")]
     [SerializeField] LayerMask itemGetMask;
@@ -50,12 +52,14 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        SettingKeyboard();
+        Initialization();
         return;
     }
     public void Initialization()
     {
         SettingKeyboard();
+        this.currentHP = this.maxHP;
+        this.currentGodTime = this.maxGodTime;
         return;
     }
     private void FixedUpdate()
@@ -64,6 +68,7 @@ public class PlayerController : MonoBehaviour
         UpdateGetItemDelay();
         UpdateInteractTime();
         UpdateGauge();
+        UpdateGodTime();
         return;
     }
     void SettingKeyboard()
@@ -212,13 +217,37 @@ public class PlayerController : MonoBehaviour
             this.currentItemGetDelay = Mathf.MoveTowards(this.currentItemGetDelay, 0f, Time.fixedDeltaTime);
         }
     }
+
+    void UpdateGodTime()
+    {
+        if(this.currentGodTime != 0f)
+        {
+            this.currentGodTime = Mathf.MoveTowards(this.currentGodTime, 0f, Time.fixedDeltaTime);
+        }
+    }
+
+
     public void AddHp(int hp)
+    {
+        if (hp < 0 && this.currentGodTime != 0) return;
+
+        this.currentHP += hp;
+        InGameManager.instance.ChangeHP(this.currentHP);
+        CameraController.instance.TriggerShake(0.5f);
+        InGameManager.instance.ShowRedFilter(0.5f);
+
+        this.currentGodTime = this.maxGodTime;
+        return;
+    }
+
+    public void SubHp(int hp)
     {
         this.currentHP += hp;
         CameraController.instance.TriggerShake(0.5f);
         InGameManager.instance.ShowRedFilter(0.5f);
         return;
     }
+
     public void UpdateHpItemUseCoolTime()
     {
 
@@ -254,7 +283,8 @@ public class PlayerController : MonoBehaviour
     {
         if(this.nowInteractNPC.Count != 0)
         {
-            this.nowInteractNPC[0].InteractWait();
+            foreach(var npc in this.nowInteractNPC)
+                npc.InteractWait();
         }
     }
     // 게이지 업데이트 메서드

@@ -31,6 +31,8 @@ public class InGameManager : MonoBehaviour
 
     [SerializeField] GameObject redFilter;
 
+    [SerializeField] GameObject[] Hp;
+
 
     private void Awake()
     {
@@ -87,4 +89,31 @@ public class InGameManager : MonoBehaviour
         // 깜빡거림이 끝나면 오브젝트를 활성 상태로 복구 (필요에 따라 수정 가능)
         redFilter.SetActive(false);
     }
+
+
+    public void PlayEffect(string _name, Vector3 _postion)
+    {
+        var t_obj = Resources.Load<GameObject>($"Prefabs/Effect/{_name}");
+        if (t_obj != null)
+        {
+            var t_instance = Instantiate(t_obj);
+            t_instance.transform.position = _postion;
+            return;
+        }
+        else
+        {
+            Debug.Log("Obj Not Found");
+        }
+    }
+
+    public void ChangeHP(int _index)
+    {
+        this.Hp[_index].SetActive(true);
+        foreach (var Hp in this.Hp)
+            Hp.SetActive(false);
+        for (int i = 0; i < _index; i++)
+            this.Hp[i].SetActive(true);
+
+    }
+
 }

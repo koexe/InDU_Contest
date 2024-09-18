@@ -30,3 +30,6 @@ MonoBehaviour:
   jumpDuration: 0
   targetPos: {x: 0, y: 0, z: 0}
   startPos: {x: 0, y: 0, z: 0}
+  layer:
+    serializedVersion: 2
+    m_Bits: 64

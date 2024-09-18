@@ -11,6 +11,7 @@ public class Boss1_Jump : BossPattern
     [SerializeField] float jumpDuration;
     [SerializeField] Vector3 targetPos;
     [SerializeField] Vector3 startPos;
+    [SerializeField] LayerMask layer;
 
     public override void Initialization(BossController _bossController)
     {
@@ -30,6 +31,14 @@ public class Boss1_Jump : BossPattern
 
             this.startPos = this.bossController.transform.position;
             this.targetPos = InGameManager.instance.GetPlayerController().transform.position;
+            if (this.startPos.x > this.targetPos.x)
+                this.targetPos.x -= 2;
+            else
+                this.targetPos.x += 2;
+
+
+
+
             this.elapsedTime = 0f;
             this.jumpDuration = Vector3.Distance(this.startPos, this.targetPos) / this.speed;
         }
@@ -39,6 +48,16 @@ public class Boss1_Jump : BossPattern
             this.patternState = PatternState.AfterAttack;
             this.lastTimeStamp = this.currentPatternTime;
             CameraController.instance.TriggerShake(3f);
+
+            var t_player = Physics2D.OverlapCircle(
+                                  this.bossController.transform.position,
+                                  2f,
+                                  this.layer);
+            if (t_player != null)
+            {
+                t_player.transform.GetComponent<PlayerController>().AddHp(-1);
+            }
+
         }
 
 

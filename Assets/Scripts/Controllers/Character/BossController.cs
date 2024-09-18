@@ -12,7 +12,6 @@ public class BossController : NPCController
         Die
     }
 
-
     [Header("컴포넌트")]
     [SerializeField] Animator animator;
     [SerializeField] SpriteRenderer spriteRenderer;
@@ -44,6 +43,15 @@ public class BossController : NPCController
     [SerializeField] GameObject trapPrefab;
     [SerializeField] GameObject currentTrapObj;
 
+    [SerializeField] Vector2 basicAttackSize;
+    [SerializeField] Vector2 basicAttackOffset;
+    [SerializeField] LayerMask layerMask;
+
+    [SerializeField] bool currentMoveArrow;
+
+
+
+
     public override void Start()
     {
         base.Start();
@@ -69,8 +77,34 @@ public class BossController : NPCController
                                                       this.transform.position,
                                                       InGameManager.instance.GetPlayerController().transform.position,
                                                       this.speed * Time.fixedDeltaTime);
+
+        SetWalkArrow();
         return;
     }
+
+    public void SetWalkArrow()
+    {
+        if (this.transform.position.x > InGameManager.instance.GetPlayerController().transform.position.x)
+        {
+            if (this.currentMoveArrow)
+            {
+                this.currentMoveArrow = false;
+                this.spriteRenderer.flipX = false;
+                this.basicAttackOffset = -this.basicAttackOffset;
+            }
+        }
+        else
+        {
+            if (!this.currentMoveArrow)
+            {
+                this.currentMoveArrow = true;
+                this.spriteRenderer.flipX = true;
+                this.basicAttackOffset = -this.basicAttackOffset;
+            }
+        }
+    }
+
+
     public void MoveToPosition(Vector3 _position, float _speed)
     {
         this.transform.position = Vector2.MoveTowards(
@@ -96,15 +130,33 @@ public class BossController : NPCController
     }
     public void BasicAttack()
     {
-        Debug.Log("기본공격");
         if (this.basicAttackCr == null)
-            this.basicAttackCr = StartCoroutine(StopMove(3f));
+            this.basicAttackCr = StartCoroutine(BasicAttackCr());
     }
-    IEnumerator StopMove(float _time)
+    IEnumerator BasicAttackCr()
     {
         float t_speed = this.speed;
         this.speed = 0f;
-        yield return new WaitForSeconds(_time);
+        float t_time = 0f;
+        yield return new WaitForSeconds(0.2f);
+        InGameManager.instance.PlayEffect("Scratch", this.transform.position + (Vector3)this.basicAttackOffset);
+
+        while (t_time < 0.3f)
+        {
+            t_time += Time.fixedDeltaTime;
+
+            var t_player = Physics2D.OverlapBoxAll(
+                this.transform.position,
+                this.basicAttackSize,
+                0f,
+                this.layerMask);
+            if (t_player.Length > 0)
+            {
+                t_player[0].transform.GetComponent<PlayerController>().AddHp(-1);
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
         this.speed = t_speed;
         this.basicAttackCr = null;
     }
@@ -117,7 +169,6 @@ public class BossController : NPCController
         }
         if (collision.tag == "BossTrap")
         {
-            Debug.Log("asdf");
             this.state = BossState.Stun;
             StartCoroutine(Stun());
             Destroy(currentTrapObj);
@@ -142,6 +193,8 @@ public class BossController : NPCController
         this.Hp -= 1;
         if (this.Hp == 2)
             this.bossPatterns = this.bossPatternSetting2;
+
+        CameraController.instance.TriggerShake(0.5f);
 
         Destroy(this.currentPattern);
         this.currentPattern = Instantiate(this.BasicBossPattern);
@@ -191,8 +244,8 @@ public class BossController : NPCController
         {
             this.currentTrapTime = this.spawnTrapTime;
             var obj = Instantiate(this.trapPrefab);
-            float randomX = Random.Range(-InGameManager.instance.GetMapOptions().GetMapSize().x / 2, InGameManager.instance.GetMapOptions().GetMapSize().x / 2);
-            float randomY = Random.Range(-InGameManager.instance.GetMapOptions().GetMapSize().y / 2, InGameManager.instance.GetMapOptions().GetMapSize().y / 2);
+            float randomX = Random.Range(-InGameManager.instance.GetMapOptions().GetMapSize().x / 2 + 2, InGameManager.instance.GetMapOptions().GetMapSize().x / 2 - 2);
+            float randomY = Random.Range(-InGameManager.instance.GetMapOptions().GetMapSize().y / 2 + 2, InGameManager.instance.GetMapOptions().GetMapSize().y / 2 - 2);
             obj.transform.position = new Vector3(randomX, randomY, 0);
             this.currentTrapObj = obj;
         }
@@ -203,5 +256,8 @@ public class BossController : NPCController
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(this.transform.position, Vector3.one);
+
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireCube(this.transform.position + (Vector3)basicAttackOffset, this.basicAttackSize);
     }
 }
