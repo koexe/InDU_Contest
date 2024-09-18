@@ -8,6 +8,9 @@ using UnityEngine;
 public class DialogMethodManager : MonoBehaviour
 {
     public static DialogMethodManager instance;
+    [SerializeField] SOItem item_Berry;
+
+
 
     private void Awake()
     {
@@ -43,6 +46,7 @@ public class DialogMethodManager : MonoBehaviour
     void GetItemBerry()
     {
         Debug.Log("∫£∏Æ æ∆¿Ã≈€ »πµÊ");
+        this.item_Berry.GetItem();
     }
 
     void BackGroundToBlack()
@@ -56,6 +60,11 @@ public class DialogMethodManager : MonoBehaviour
         var UI = UIManager.instance.GetUI("DialogUI");
         UI.GetComponent<TextUIManager>().BackGroundChange(false);
     }
+    void GetItemAxe()
+    {
+
+    }
+
 
     #endregion
 }

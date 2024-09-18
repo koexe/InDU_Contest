@@ -24,8 +24,8 @@ public class InGameManager : MonoBehaviour
     public MapOptions GetMapOptions() => this.currentMapObject;
 
     [Header("플레이어")]
-    [SerializeField] PlayerController currentPlayer;
-    public PlayerController GetPlayerController() => this.currentPlayer;
+    [SerializeField] PlayerCharacterController currentPlayer;
+    public PlayerCharacterController GetPlayerController() => this.currentPlayer;
 
     [SerializeField] GameObject Map;
 

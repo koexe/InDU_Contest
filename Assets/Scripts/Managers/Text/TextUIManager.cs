@@ -19,6 +19,8 @@ public class TextUIManager : PopUpUI
 
     public override void Initialization(string _custom)
     {
+        InGameManager.instance.state = InGameManager.GameState.Pause;
+        base.Initialization(_custom);
         //DataManager에서 Dialog Dictionary 가져오기
         this.currentDialogDictionary = AssetManager.Instance.GetDialogList();
         this.currentDialogIndex = int.Parse(_custom);
@@ -47,8 +49,15 @@ public class TextUIManager : PopUpUI
         }
         this.dialogController.ChangeDialog(this.currentDialogIndex);
         this.imageController.OnDialogTextDown();
+
+
     }
 
+    public override void DeleteUI()
+    {
+        base.DeleteUI();
+        InGameManager.instance.state = InGameManager.GameState.InProgress;
+    }
 
     public void CheckLink()
     {
@@ -86,6 +95,10 @@ public class TextUIManager : PopUpUI
     public void EnableButtons(int _index1, int _index2 = -1, int _index3 = -1)
     {
         this.textState = TextState.CHOOSE;
+        this.choiceButtonController.button1.onClick.RemoveAllListeners();
+        this.choiceButtonController.button2.onClick.RemoveAllListeners();
+        this.choiceButtonController.button3.onClick.RemoveAllListeners();
+
         this.choiceButtonController.button1.onClick.AddListener(() => this.dialogController.ChangeDialogButton(_index1));
         this.choiceButtonController.button1.onClick.AddListener(() => this.imageController.OnDialogTextDown());
 

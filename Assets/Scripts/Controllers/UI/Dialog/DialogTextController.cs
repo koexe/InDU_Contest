@@ -52,19 +52,6 @@ public class DialogTextController : MonoBehaviour
                             bool.Parse(this.currentDialogDictionary[currentIndex].linkCondition[1]))
                         {
                             nextDialog = int.Parse(this.currentDialogDictionary[currentIndex].linkDilog);
-
-                            if (SaveGameManager.instance.currentSaveData.chatacterDialogs[nextDialog] == true)
-                            {
-                                int index = nextDialog;
-                                while (true)
-                                {
-                                    if (this.currentDialogDictionary.ContainsKey(index))
-                                        index++;
-                                    else
-                                        break;
-                                }
-                                nextDialog = index - 1;
-                            }
                         }
                         else
                         {
@@ -83,8 +70,9 @@ public class DialogTextController : MonoBehaviour
                 //현재 다이얼로그 목록에 해당 인덱스가 있는지 검사
                 if (this.currentDialogDictionary.ContainsKey(nextDialog))
                 {
-                    textUIManager.currentDialogIndex = nextDialog;
+                    this.textUIManager.currentDialogIndex = nextDialog;
                     ChangeDialogOneByOne(nextDialog);
+                    Debug.Log(nextDialog);
                 }
                 else
                 {
@@ -155,10 +143,13 @@ public class DialogTextController : MonoBehaviour
         this.textUIManager.textState = TextState.WAIT;
 
 
+      //  Debug.Log(this.textUIManager.currentDialogIndex);
 
 
         if (this.currentDialogDictionary[this.textUIManager.currentDialogIndex].isChoose)
         {
+           // Debug.Log(currentDialogDictionary[_index].Choice1[0] + " " + currentDialogDictionary[_index].Choice1[1]);
+
             int choiceDialog1 = int.Parse(currentDialogDictionary[_index].Choice1[1]);
             int choiceDialog2 = -1;
             int choiceDialog3 = -1;
@@ -212,9 +203,11 @@ public class DialogTextController : MonoBehaviour
             if (dialogIndex >= _dialog.Length) break;
         }
         this.textUIManager.textState = TextState.WAIT;
+        //Debug.Log(this.textUIManager.currentDialogIndex);
 
         if (this.currentDialogDictionary[this.textUIManager.currentDialogIndex].isChoose)
         {
+            //Debug.Log(currentDialogDictionary[_index].Choice1[0] + " " + currentDialogDictionary[_index].Choice1[1]);
             int choiceDialog1 = int.Parse(currentDialogDictionary[_index].Choice1[1]);
             int choiceDialog2 = -1;
             int choiceDialog3 = -1;
@@ -235,6 +228,7 @@ public class DialogTextController : MonoBehaviour
     //선택지 인덱스에 따른 버튼 동작
     public void ChangeDialogButton(int index)
     {
+        Debug.Log(index);
         if (this.currentDialogDictionary.ContainsKey(index))
         {
             this.textUIManager.currentDialogIndex = index;

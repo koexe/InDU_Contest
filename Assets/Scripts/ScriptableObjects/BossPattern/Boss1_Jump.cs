@@ -55,7 +55,7 @@ public class Boss1_Jump : BossPattern
                                   this.layer);
             if (t_player != null)
             {
-                t_player.transform.GetComponent<PlayerController>().AddHp(-1);
+                t_player.transform.GetComponent<PlayerCharacterController>().AddHp(-1);
             }
 
         }

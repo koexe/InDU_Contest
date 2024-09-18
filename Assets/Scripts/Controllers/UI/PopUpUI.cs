@@ -20,6 +20,7 @@ public class PopUpUI : MonoBehaviour
     public virtual void DeleteUI()
     {
         UIManager.instance.DeleteUI(this.uiName);
+        InGameManager.instance.state = InGameManager.GameState.InProgress;
         return;
     }
 

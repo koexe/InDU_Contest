@@ -11,20 +11,29 @@ public class InventoryItemSlot : MonoBehaviour
     [SerializeField] Image image;
     [SerializeField] InventoryUI inventoryUI;
     [SerializeField] EventTrigger eventSystem;
-    public void SetInventoryUI (InventoryUI _inventoryUI) => this.inventoryUI = _inventoryUI;
+    public void SetInventoryUI(InventoryUI _inventoryUI) => this.inventoryUI = _inventoryUI;
 
     public void SetItem(SaveItem item) => this.item = item;
 
     public void Initialization()
     {
-        if (this.item == null) return;
-        this.image.sprite = this.item.GetItemImage();
-        return;
+        if (this.item == null)
+        {
+            this.image.color = new Color(1, 1, 1, 0);
+            return;
+        }
+        else
+        {
+            this.image.color = new Color(1, 1, 1, 1);
+            this.image.sprite = this.item.GetItemImage();
+            return;
+        }
+
     }
 
     public void OnPointerEnter()
     {
-        if(this.item == null) return;
+        if (this.item == null) return;
         this.inventoryUI.GetExplainArea().ChageExplainArea(this.item);
         return;
     }
@@ -35,10 +44,9 @@ public class InventoryItemSlot : MonoBehaviour
         var t_button = this.inventoryUI.GetButton();
 
         t_button.transform.position = this.transform.position;
-        
+
         t_button.transform.GetComponent<Button>().onClick.AddListener(() => this.item.GetSOItem().UseItem());
 
         return;
     }
 }
- 

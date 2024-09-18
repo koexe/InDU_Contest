@@ -63,6 +63,8 @@ public class BossController : NPCController
     }
     protected override void FixedUpdate()
     {
+        if (InGameManager.instance.state != InGameManager.GameState.InProgress) return;
+
         base.FixedUpdate();
         if (this.state == BossState.Running)
         {
@@ -152,7 +154,7 @@ public class BossController : NPCController
                 this.layerMask);
             if (t_player.Length > 0)
             {
-                t_player[0].transform.GetComponent<PlayerController>().AddHp(-1);
+                t_player[0].transform.GetComponent<PlayerCharacterController>().AddHp(-1);
             }
 
             yield return new WaitForFixedUpdate();

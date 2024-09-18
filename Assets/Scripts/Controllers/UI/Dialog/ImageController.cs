@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 enum Position
@@ -26,49 +27,28 @@ public class ImageController : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(name))
         {
+            this.characterImage.color = new Color(1, 1, 1, 1);
             this.characterImage.sprite = AssetManager.Instance.CharacterImageDictionary[name][imageIndex -1];
         }
-        //if (!string.IsNullOrEmpty(name))
-        //{
-        //    switch (position)
-        //    {
-        //        case Position.LEFT:
-        //            Character_L.sprite = CharacterImageDictionary[name][imageIndex];
-        //            break;
-        //        case Position.CENTER:
-        //            Character_C.sprite = CharacterImageDictionary[name][imageIndex];
-        //            break;
-        //        case Position.RIGHT:
-        //            Character_R.sprite = CharacterImageDictionary[name][imageIndex];
-        //            break;
-        //    }
-        //}
-        //else
-        //{
-        //    switch (position)
-        //    {
-        //        case Position.LEFT:
-        //            Character_L.sprite = null;
-        //            break;
-        //        case Position.CENTER:
-        //            Character_C.sprite = null;
-        //            break;
-        //        case Position.RIGHT:
-        //            Character_R.sprite = null;
-        //            break;
-        //    }
-        //}
+        else
+        {
+            this.characterImage.color = new Color(1, 1, 1, 0);
+            this.characterImage.sprite = null;
+        }
+
     }
 
     public void OnDialogTextDown()
     {
         int index = this.textUIManager.currentDialogIndex;
+        int t_characterIndex = -1;
+        string t_name = null;
         if (!string.IsNullOrEmpty(this.textUIManager.currentDialogDictionary[index].Character[0]))
         {
-            string name = this.textUIManager.currentDialogDictionary[index].Character[0];
-            int t_characterIndex = int.Parse(this.textUIManager.currentDialogDictionary[index].Character[1]);
-            ChangeImage(name, t_characterIndex);
+            t_name = this.textUIManager.currentDialogDictionary[index].Character[0];
+            t_characterIndex = int.Parse(this.textUIManager.currentDialogDictionary[index].Character[1]);
         }
+        ChangeImage(t_name, t_characterIndex);
     }
 
 

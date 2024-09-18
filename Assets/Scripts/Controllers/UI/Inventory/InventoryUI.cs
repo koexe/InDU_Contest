@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InventoryUI : PopUpUI
 {
-    [SerializeField]List<SaveItem> items;
+    [SerializeField] List<SaveItem> items;
     [Header("슬롯 들어있는 트랜스폼")]
     [SerializeField] Transform slotTransform;
     [Header("설명 영역")]
@@ -21,13 +21,14 @@ public class InventoryUI : PopUpUI
         base.Initialization(_custom);
         this.items = SaveGameManager.instance.GetCurrentSaveData().items;
         Refresh();
+        InGameManager.instance.state = InGameManager.GameState.Pause;
 
         return;
     }
 
     public void Sort()
     {
-        this.items.Sort((x,y) =>x.GetItemIndex().CompareTo(y.GetItemIndex()) );
+        this.items.Sort((x, y) => x.GetItemIndex().CompareTo(y.GetItemIndex()));
         Refresh();
         return;
     }
@@ -57,6 +58,7 @@ public class InventoryUI : PopUpUI
         t_currentSaveData.items = null;
         t_currentSaveData.items = this.items;
         SaveGameManager.instance.SetCurrentSaveData(t_currentSaveData);
+        InGameManager.instance.state = InGameManager.GameState.InProgress;
         return;
     }
 }

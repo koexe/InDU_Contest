@@ -33,6 +33,12 @@ public class MapOptions : MonoBehaviour
     public Vector2 GetMapSize() => this.mapSize;
     public string GetMapName() => this.mapName;
 
+
+    public MapItem[] GetMapItems()
+    {
+        return this.mapItems.transform.GetComponentsInChildren<MapItem>();
+    }
+
     public void Initialization()
     {
         //아이템 초기화 코드 작성

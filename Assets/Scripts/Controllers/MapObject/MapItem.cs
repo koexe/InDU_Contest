@@ -10,7 +10,7 @@ public class MapItem : MonoBehaviour
     [Header("아이템 SO")]
     [SerializeField] SOItem item;
     [Header("이전에 먹었는지")]
-    [SerializeField] bool isGeted;
+    [SerializeField] public bool isGeted;
 
 
     public SOItem GetSOItem() => this.item;

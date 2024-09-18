@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Newtonsoft.Json;
+using Unity.VisualScripting;
 
 public class SaveGameManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class SaveGameManager : MonoBehaviour
     public void SetCurrentSaveData(SaveData _data) => this.currentSaveData = _data;
 
     [SerializeField] DialogTable dialogTable;
+    [SerializeField] List<GameObject> MapPrefab;
 
     SaveData previousSaveData { get; set; }
 
@@ -44,11 +46,26 @@ public class SaveGameManager : MonoBehaviour
         this.saveInFile = new SaveData();
         this.saveInFile.currentMap = "Map1";
         this.saveInFile.chatacterDialogs = new Dictionary<int, bool>();
+        this.saveInFile.mapItems = new Dictionary<string, List<bool>>();
 
         this.currentSaveData = this.saveInFile;
 
         return;
     }
+
+    public void CheckMapItem()
+    {
+        foreach (var map in MapPrefab)
+        {
+            var Items = map.transform.GetComponent<MapOptions>().GetMapItems();
+            this.currentSaveData.mapItems.Add(map.name, new List<bool>());
+            foreach (var item in Items) 
+            {
+                this.currentSaveData.mapItems[map.name].Add(item.isGeted);
+            }
+        }
+    }
+
 
 
 
@@ -94,6 +111,8 @@ public class SaveData
     public string currentMap;
     public List<SaveItem> items;
     public Dictionary<int, bool> chatacterDialogs;
+
+    public Dictionary<string, List<bool>> mapItems;
     public SaveData()
     {
         this.items = new List<SaveItem>();

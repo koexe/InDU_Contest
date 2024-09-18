@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerCharacterController : MonoBehaviour
 {
     private List<KeyCode> inputListX = new List<KeyCode>();
     private List<KeyCode> inputListY = new List<KeyCode>();
@@ -171,6 +171,9 @@ public class PlayerController : MonoBehaviour
 
         }
         moveValue += Move(moveDir);
+        if(InGameManager.instance.state != InGameManager.GameState.InProgress) 
+            moveDir = Vector3.zero;
+
 
         if (moveDir == Vector3.zero)
             this.animator.SetBool("IsWalk", false);
@@ -233,8 +236,17 @@ public class PlayerController : MonoBehaviour
 
         this.currentHP += hp;
         InGameManager.instance.ChangeHP(this.currentHP);
-        CameraController.instance.TriggerShake(0.5f);
-        InGameManager.instance.ShowRedFilter(0.5f);
+
+        if(hp > 0)
+        {
+            CameraController.instance.TriggerShake(0.5f);
+            InGameManager.instance.ShowRedFilter(0.5f);
+        }
+        if (hp > 0)
+        {
+
+        }
+
 
         this.currentGodTime = this.maxGodTime;
         return;
