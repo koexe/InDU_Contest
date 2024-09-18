@@ -13,5 +13,11 @@ MonoBehaviour:
   m_Name: ItemTable
   m_EditorClassIdentifier: 
   itemTable:
-  - itemName: 
-    item: {fileID: 0}
+  - itemIndex: 1
+    item: {fileID: 11400000, guid: d685131745dbd8e4ab42dba4f55739a7, type: 2}
+  - itemIndex: 4
+    item: {fileID: 11400000, guid: 83e8dab502e457948bbfd33ce6c3c3ec, type: 2}
+  - itemIndex: 5
+    item: {fileID: 11400000, guid: dabe73bc0df172b438c172226c95b69e, type: 2}
+  - itemIndex: 6
+    item: {fileID: 11400000, guid: 39ff03eccf0599d42bd0a2493346290f, type: 2}

@@ -155,10 +155,13 @@ MonoBehaviour:
   currentSaveData:
     currentMap: 
     items: []
+    itemNames: []
   dialogTable: {fileID: 11400000, guid: c72436cd926913c478de5cd891b1d422, type: 2}
   MapPrefab:
   - {fileID: 452884149348485831, guid: 89ca8bed98be8654fad1e9bb93f54d22, type: 3}
   - {fileID: 452884149348485831, guid: 283a6e643511c074aa40ab4ce6cb59ef, type: 3}
+  itemTable: {fileID: 11400000, guid: 9cd71a2d877be4949a73460e73d6910b, type: 2}
+  isSaveDebug: 0
 --- !u!4 &123825834
 Transform:
   m_ObjectHideFlags: 0

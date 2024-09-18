@@ -30,7 +30,8 @@ public class SOItem : ScriptableObject
         }
         else
         {
-            SaveItem t_saveItem = new SaveItem(this, 1);
+            SaveItem t_saveItem = new SaveItem(this,1);
+
             SaveGameManager.instance.currentSaveData.items.Add(t_saveItem);
         }
         return;

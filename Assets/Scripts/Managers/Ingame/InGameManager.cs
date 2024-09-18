@@ -22,6 +22,7 @@ public class InGameManager : MonoBehaviour
     [SerializeField] MapOptions currentMapObject;
     [SerializeField] Transform mapParent;
     public MapOptions GetMapOptions() => this.currentMapObject;
+    public string GetCurrentMapName() =>this.currentMapName;
 
     [Header("플레이어")]
     [SerializeField] PlayerCharacterController currentPlayer;
@@ -54,9 +55,9 @@ public class InGameManager : MonoBehaviour
             Destroy(this.currentMapObject.gameObject);
         var t_map = Instantiate(_prefab, this.mapParent);
         this.currentMapObject = t_map.GetComponent<MapOptions>();
+        this.currentMapName = this.currentMapObject.GetMapName();
         this.currentMapObject.Initialization();
         this.currentPlayer.transform.parent = this.mapParent;
-        this.currentMapName = this.currentMapObject.GetMapName();
         Debug.Log(this.currentMapName);
         this.currentPlayer.transform.position = this.currentMapObject.GetMoveTransfrom(_index).position;
         CameraController.instance.SetMapBoundary(this.currentMapObject.GetMapSize());

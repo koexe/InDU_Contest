@@ -23,7 +23,7 @@ public class DataManager
             }
             else
             {
-                Debug.Log(t_dialog.Key);
+
             }
 
         }

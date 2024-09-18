@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 
 public enum MapType
@@ -41,13 +42,16 @@ public class MapOptions : MonoBehaviour
 
     public void Initialization()
     {
-        //아이템 초기화 코드 작성
+        MapItem[] item = this.mapItems.GetComponentsInChildren<MapItem>();
 
-        //맵 상호작용 초기화 코드 작성
-        foreach(var t_item in this.mapItems.GetComponentsInChildren<MapItem>())
+        for (int i = 0; i < item.Length; i++) 
         {
+            MapItem t_item = item[i];
+            t_item.isGeted = SaveGameManager.instance.currentSaveData.mapItems[InGameManager.instance.GetCurrentMapName()][i];
             t_item.Initialization();
         }
+
+
         foreach(var t_Npcs in this.mapNPCs.GetComponentsInChildren<NPCController>())
         { 
             //t_Npcs.Initial
