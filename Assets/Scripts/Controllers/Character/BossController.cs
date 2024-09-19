@@ -13,7 +13,7 @@ public class BossController : NPCController
     }
 
     [Header("컴포넌트")]
-    [SerializeField] Animator animator;
+    [SerializeField] public Animator animator;
     [SerializeField] SpriteRenderer spriteRenderer;
 
     [Header("보스 패턴 목록")]
@@ -140,6 +140,8 @@ public class BossController : NPCController
         float t_speed = this.speed;
         this.speed = 0f;
         float t_time = 0f;
+        this.animator.SetTrigger("Swing");
+
         yield return new WaitForSeconds(0.2f);
         InGameManager.instance.PlayEffect("Scratch", this.transform.position + (Vector3)this.basicAttackOffset);
 

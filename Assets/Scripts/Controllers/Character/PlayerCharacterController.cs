@@ -237,7 +237,7 @@ public class PlayerCharacterController : MonoBehaviour
         this.currentHP += hp;
         InGameManager.instance.ChangeHP(this.currentHP);
 
-        if(hp > 0)
+        if(hp < 0)
         {
             CameraController.instance.TriggerShake(0.5f);
             InGameManager.instance.ShowRedFilter(0.5f);
@@ -246,7 +246,12 @@ public class PlayerCharacterController : MonoBehaviour
         {
 
         }
-
+        if(this.currentHP == 0)
+        {
+            InGameManager.instance.DeadReturn();
+            this.currentHP = 3;
+            InGameManager.instance.ChangeHP(this.currentHP);
+        }
 
         this.currentGodTime = this.maxGodTime;
         return;
@@ -293,6 +298,8 @@ public class PlayerCharacterController : MonoBehaviour
 
     void UpdateInteract()
     {
+        if (InGameManager.instance.state != InGameManager.GameState.InProgress) return;
+
         if(this.nowInteractNPC.Count != 0)
         {
             foreach(var npc in this.nowInteractNPC)

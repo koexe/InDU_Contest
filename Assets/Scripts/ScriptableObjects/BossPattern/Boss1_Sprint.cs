@@ -24,6 +24,8 @@ public class Boss1_Sprint : BossPattern
             this.patternState = PatternState.InAttack;
             this.lastTimeStamp = this.currentPatternTime;
             this.targetPosition = InGameManager.instance.GetPlayerController().transform.position;
+            this.bossController.animator.Play("Run");
+            this.bossController.animator.SetBool("IsInRun", true);
             this.bossController.SetWalkArrow();
         }
 
@@ -31,6 +33,8 @@ public class Boss1_Sprint : BossPattern
         {
             this.patternState = PatternState.AfterAttack;
             this.lastTimeStamp = this.currentPatternTime;
+            this.bossController.animator.SetBool("IsInRun", false);
+            this.bossController.isCollisionEnabled = false;
         }
 
 
@@ -38,7 +42,6 @@ public class Boss1_Sprint : BossPattern
         {
             this.patternState = PatternState.EndAttack;
             this.lastTimeStamp = this.currentPatternTime;
-            this.bossController.isCollisionEnabled = false;
         }
         if (this.patternState == PatternState.InAttack)
             AttackAction();

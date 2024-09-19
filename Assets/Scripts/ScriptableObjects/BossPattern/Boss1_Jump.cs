@@ -16,7 +16,7 @@ public class Boss1_Jump : BossPattern
     public override void Initialization(BossController _bossController)
     {
         base.Initialization(_bossController);
-
+        this.bossController.animator.Play("JumpReady");
 
     }
     public override void PatternProcess()
@@ -37,10 +37,11 @@ public class Boss1_Jump : BossPattern
                 this.targetPos.x += 2;
 
 
-
+            this.bossController.animator.SetTrigger("Jump");
 
             this.elapsedTime = 0f;
             this.jumpDuration = Vector3.Distance(this.startPos, this.targetPos) / this.speed;
+            this.bossController.SetWalkArrow();
         }
 
         if (Vector3.Distance(this.bossController.transform.position, this.targetPos) < 0.2f && this.patternState == PatternState.InAttack)
@@ -58,6 +59,7 @@ public class Boss1_Jump : BossPattern
                 t_player.transform.GetComponent<PlayerCharacterController>().AddHp(-1);
             }
 
+            this.bossController.animator.Play("Idle");
         }
 
 

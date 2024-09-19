@@ -60,7 +60,7 @@ MonoBehaviour:
     m_Bits: 64
   interactButton: {fileID: 6313701694418014048}
   interactTime: 1
-  animator: {fileID: 0}
+  animator: {fileID: 1510201958850926823}
   spriteRenderer: {fileID: 4805426958223295236}
   bossPatterns:
   - {fileID: 11400000, guid: 58ae5f66450e9864383b7015ba4d7aef, type: 2}

@@ -27,13 +27,14 @@ public class MapOptions : MonoBehaviour
     [SerializeField] Transform mapNPCs;
 
     [Header("맵 이동 포인트")]
-
     [SerializeField] List<MapMovePoint> movePoints;
     public Transform GetMoveTransfrom(int index) => this.movePoints[index].transform;
 
     public Vector2 GetMapSize() => this.mapSize;
     public string GetMapName() => this.mapName;
 
+    [Header("맵 세이브포인트")]
+    [SerializeField] public Transform mapSaveTr;
 
     public MapItem[] GetMapItems()
     {

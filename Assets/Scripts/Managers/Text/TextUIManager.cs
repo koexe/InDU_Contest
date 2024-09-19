@@ -44,7 +44,8 @@ public class TextUIManager : PopUpUI
             }
             this.currentDialogIndex = index - 1;
 
-            CheckLink();
+            if (!string.IsNullOrEmpty(currentDialogDictionary[currentDialogIndex].linkCondition[0]))
+                CheckLink();
 
         }
         this.dialogController.ChangeDialog(this.currentDialogIndex);
@@ -61,9 +62,9 @@ public class TextUIManager : PopUpUI
 
     public void CheckLink()
     {
-        if (SaveGameManager.instance.currentSaveData.chatacterDialogs
-     [int.Parse(this.currentDialogDictionary[currentDialogIndex].linkCondition[0])] ==
-     bool.Parse(this.currentDialogDictionary[currentDialogIndex].linkCondition[1]))
+
+
+        if (SaveGameManager.instance.currentSaveData.chatacterDialogs[int.Parse(this.currentDialogDictionary[currentDialogIndex].linkCondition[0])] == bool.Parse(this.currentDialogDictionary[currentDialogIndex].linkCondition[1]))
         {
             int nextDialog = int.Parse(this.currentDialogDictionary[currentDialogIndex].linkDilog);
 
