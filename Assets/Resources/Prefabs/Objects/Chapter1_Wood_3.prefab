@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4087176432637064156}
   - component: {fileID: 5603186585555982938}
   - component: {fileID: 2490843424339540816}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chapter1_Wood_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
