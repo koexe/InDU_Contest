@@ -75,7 +75,7 @@ public class SaveGameManager : MonoBehaviour
         if (isSaveDebug == true)
         {
             this.saveInFile = new SaveData();
-            this.saveInFile.currentMap = "Map1";
+            this.saveInFile.currentMap = "Map10";
             this.saveInFile.chatacterDialogs = new Dictionary<int, bool>();
             this.saveInFile.mapItems = new Dictionary<string, List<bool>>();
             this.currentSaveData = this.saveInFile;
@@ -142,6 +142,18 @@ public class SaveGameManager : MonoBehaviour
             return null;
         }
     }
+
+    public void DeleteItem(int item)
+    {
+        int index = this.currentSaveData.items.FindIndex(x => x.GetItemIndex() == item);
+        if (index == -1)
+            return;
+        else
+        {
+            this.currentSaveData.items.RemoveAt(index);
+        }
+    }
+
     
     public void ResetSave()
     {

@@ -34,11 +34,13 @@ public class InGameManager : MonoBehaviour
 
     [SerializeField] GameObject[] Hp;
 
+    [SerializeField] AudioClip bgm;
 
     private void Awake()
     {
         instance = this;
         Initialization();
+        AudioManager.instance.PlayBGM(bgm);
         return;
     }
 
@@ -68,7 +70,7 @@ public class InGameManager : MonoBehaviour
         this.currentMapObject.Initialization();
         this.currentPlayer.transform.parent = this.mapParent;
         Debug.Log(this.currentMapName);
-        if (_isInitial)
+        if (_isInitial && this.currentMapObject.mapSaveTr != null)
         {
             this.currentPlayer.transform.position = this.currentMapObject.mapSaveTr.position;
         }

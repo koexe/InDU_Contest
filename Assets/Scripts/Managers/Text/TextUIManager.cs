@@ -112,7 +112,6 @@ public class TextUIManager : PopUpUI
             this.choiceButtonController.button2.onClick.AddListener(() => this.dialogController.ChangeDialogButton(_index2));
             this.choiceButtonController.button2.onClick.AddListener(() => this.imageController.OnDialogTextDown());
             this.choiceButtonController.button2.gameObject.SetActive(true);
-
         }
 
         if (_index3 == -1)

@@ -11,6 +11,7 @@ public class PlayerCharacterController : MonoBehaviour
     [SerializeField] DynamicGravity gravity;
     [SerializeField] Collider2D coll2D;
     [SerializeField] LineRenderer lineRenderer;
+    [SerializeField] SpriteRenderer lindRendererBg;
     [SerializeField] Animator animator;
     [SerializeField] SpriteRenderer spriteRenderer;
  
@@ -37,6 +38,10 @@ public class PlayerCharacterController : MonoBehaviour
     [Header("인벤토리 프리팹")]
     [SerializeField] GameObject inventoryPrefab;
     const string inventoryUIName = "Inventory";
+
+
+    [Header("피격 소리")]
+    [SerializeField] AudioClip hitAudio;
 
     public void AddNowInteractNPC(NPCController npc)
     {
@@ -241,6 +246,7 @@ public class PlayerCharacterController : MonoBehaviour
         {
             CameraController.instance.TriggerShake(0.5f);
             InGameManager.instance.ShowRedFilter(0.5f);
+            AudioManager.instance.PlaySE(this.hitAudio);
         }
         if (hp > 0)
         {
@@ -275,9 +281,14 @@ public class PlayerCharacterController : MonoBehaviour
     {
         this.currentMaxInteractTime = _maxWaitTime;
         this.isNowInteract = true;
-        if(this.currentInteractTime != _maxWaitTime)
+
+        if (this.currentInteractTime != 0 && this.lindRendererBg.enabled == false)
+            this.lindRendererBg.enabled = true;
+
+        if (this.currentInteractTime != _maxWaitTime)
         {
             this.currentInteractTime = Mathf.MoveTowards(this.currentInteractTime, _maxWaitTime, Time.fixedDeltaTime);
+            
             return false;
         }
         else
@@ -293,6 +304,8 @@ public class PlayerCharacterController : MonoBehaviour
         {
             this.currentInteractTime = Mathf.MoveTowards(this.currentInteractTime,0,Time.fixedDeltaTime);
         }
+        if(this.currentInteractTime == 0 && this.lindRendererBg.enabled == true)
+            this.lindRendererBg.enabled = false;
         this.isNowInteract = false;
     }
 

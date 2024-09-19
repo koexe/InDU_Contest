@@ -10,8 +10,8 @@ public class Item_StoneAndBranch : SOItem
     public override void GetItem()
     {
         base.GetItem();
-        int index1 = SaveGameManager.instance.currentSaveData.items.FindIndex(x => x.GetItemIndex() == 4);
-        int index2 = SaveGameManager.instance.currentSaveData.items.FindIndex(x => x.GetItemIndex() == 5);
+        int index1 = SaveGameManager.instance.currentSaveData.items.FindIndex(x => x.GetItemIndex() == 5);
+        int index2 = SaveGameManager.instance.currentSaveData.items.FindIndex(x => x.GetItemIndex() == 6);
 
         bool t_isCompleted_1 = false;
         bool t_isCompleted_2 = false;

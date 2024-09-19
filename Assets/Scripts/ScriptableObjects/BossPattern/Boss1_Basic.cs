@@ -23,6 +23,7 @@ public class Boss1_Basic : BossPattern
         }
         else
         {
+            this.bossController.animator.Play("Walk");
             this.bossController.MoveToPlayer();
         }
     }

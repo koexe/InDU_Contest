@@ -5,16 +5,10 @@ using UnityEngine;
 using static UnityEditor.Progress;
 
 
-public enum MapType
-{
-    TopView,
-    SideView
-}
+
 
 public class MapOptions : MonoBehaviour
 {
-    [Header("¸Ê Å¸ÀÔ")]
-    [SerializeField] MapType type;
     [Header("¸Ê ÀÌ¸§")]
     [SerializeField] string mapName;
     [Header("¸Ê Å©±â")]
@@ -90,7 +84,6 @@ public class MapOptions : MonoBehaviour
 public class MapMovePoint
 {
     public Transform transform;
-    public int point;
     public bool isOpen;
     [Header("¿¬°áµÈ ¸Ê°ú À§Ä¡")]
     public GameObject linkedMap;

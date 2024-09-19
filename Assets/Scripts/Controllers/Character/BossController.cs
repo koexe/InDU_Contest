@@ -175,6 +175,7 @@ public class BossController : NPCController
         {
             this.state = BossState.Stun;
             StartCoroutine(Stun());
+            this.animator.Play("Stun");
             Destroy(currentTrapObj);
         }
         return;
@@ -194,6 +195,8 @@ public class BossController : NPCController
     public override void InteractAction()
     {
         base.InteractAction();
+
+        this.animator.Play("Hit");
         this.Hp -= 1;
         if (this.Hp == 2)
             this.bossPatterns = this.bossPatternSetting2;

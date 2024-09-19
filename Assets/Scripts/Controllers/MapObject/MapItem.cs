@@ -11,7 +11,7 @@ public class MapItem : MonoBehaviour
     [SerializeField] SOItem item;
     [Header("이전에 먹었는지")]
     [SerializeField] public bool isGeted;
-
+    [SerializeField] AudioClip getAudio;
 
     public SOItem GetSOItem() => this.item;
 
@@ -38,6 +38,8 @@ public class MapItem : MonoBehaviour
         this.item.GetItem();
 
         SaveGameManager.instance.currentSaveData.mapItems[InGameManager.instance.GetCurrentMapName()][this.transform.GetSiblingIndex()] = true;
+
+        AudioManager.instance.PlaySE(this.getAudio);
         return;
     }
 
