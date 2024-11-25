@@ -75,7 +75,7 @@ public class SaveGameManager : MonoBehaviour
         if (isSaveDebug == true)
         {
             this.saveInFile = new SaveData();
-            this.saveInFile.currentMap = "Map10";
+            this.saveInFile.currentMap = "Map1";
             this.saveInFile.chatacterDialogs = new Dictionary<int, bool>();
             this.saveInFile.mapItems = new Dictionary<string, List<bool>>();
             this.currentSaveData = this.saveInFile;

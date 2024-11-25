@@ -49,6 +49,8 @@ public class BossController : NPCController
 
     [SerializeField] bool currentMoveArrow;
 
+    [SerializeField] public Collider2D coll2d;
+
 
 
 
@@ -60,6 +62,18 @@ public class BossController : NPCController
         this.currentPattern.Initialization(this);
         this.currentTrapTime = this.spawnTrapTime;
         this.state = BossState.Running;
+
+        Invoke("ShowHunterDialog", 3f);
+    }
+
+    void ShowHunterDialog()
+    {
+        UIManager.instance.ShowUI("DialogUI", -1, "1020");
+    }
+
+    void ShowDieDialog()
+    {
+        UIManager.instance.ShowUI("DialogUI", -1, "1010");
     }
     protected override void FixedUpdate()
     {
@@ -196,20 +210,41 @@ public class BossController : NPCController
     {
         base.InteractAction();
 
-        this.animator.Play("Hit");
-        this.Hp -= 1;
-        if (this.Hp == 2)
-            this.bossPatterns = this.bossPatternSetting2;
+        if(this.state != BossState.Die)
+        {
+            this.animator.Play("Hit");
+            this.Hp -= 1;
+            if (this.Hp == 2)
+                this.bossPatterns = this.bossPatternSetting2;
 
-        CameraController.instance.TriggerShake(0.5f);
+            CameraController.instance.TriggerShake(0.5f);
 
+            if (this.Hp == 0)
+            {
+                this.state = BossState.Die;
+                this.animator.Play("Die");
+            }
+            else
+            {
+                this.isCanInteract = false;
+                Invoke("WaitSec", 1f);
+            }
+            return;
+        }
+        else
+        {
+            ShowDieDialog();
+        }
+    }
+
+    void WaitSec()
+    {
         Destroy(this.currentPattern);
         this.currentPattern = Instantiate(this.BasicBossPattern);
         this.currentPattern.Initialization(this);
         this.state = BossState.Running;
-        this.isCanInteract = false;
-        return;
     }
+
     public void StartHide()
     {
         StartCoroutine(SmoothHide());

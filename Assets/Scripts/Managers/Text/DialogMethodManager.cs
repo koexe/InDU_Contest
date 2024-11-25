@@ -72,6 +72,19 @@ public class DialogMethodManager : MonoBehaviour
         SaveGameManager.instance.DeleteItem(6);
     }
 
+    void DeleteStoryChracter()
+    {
+        var objs = GameObject.FindGameObjectsWithTag("Stroy");
+        foreach (var obj in objs)
+        {
+            Destroy(obj);
+        }
+    }
+
+    void EndGame()
+    {
+        Application.Quit();
+    }
 
     #endregion
 }

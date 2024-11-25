@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 287178696657598403}
   - component: {fileID: 3596483655153518214}
   - component: {fileID: 3936348281031204342}
+  - component: {fileID: -7961874102806176554}
   m_Layer: 7
   m_Name: Chapter1_Wood_2
   m_TagString: Untagged
@@ -158,3 +159,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.289697, y: 2.1169271}
   m_EdgeRadius: 0
+--- !u!210 &-7961874102806176554
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5512870033405749817}
+  m_Enabled: 1
+  m_SortingLayerID: -621475465
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_SortAtRoot: 0

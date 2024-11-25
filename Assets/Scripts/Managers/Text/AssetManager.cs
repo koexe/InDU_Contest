@@ -44,7 +44,10 @@ public class AssetManager : MonoBehaviour
 
         _dataManager = new DataManager();
         _dataManager.Init();
-        SetImageDictionary();
+        SetImageDictionary("Hunter001");
+        SetImageDictionary("Mom001");
+        SetImageDictionary("RedHood001");
+        SetImageDictionary("Wolf 001");
         _currentChapter = "Chapter1";
     }
     public Dictionary<int,Dialog> GetDialogList()
@@ -52,18 +55,29 @@ public class AssetManager : MonoBehaviour
         return _dataManager._dialogDictionary[_currentChapter];
     }
 
-    void SetImageDictionary()
+    void SetImageDictionary(string folderPath)
     {
-        string basePath = "Assets/Resources/";
-        string imagesFolderPath = "Sprites/Characters";
+        string imagesFolderPath = "Sprites/Characters/" + folderPath;
 
-        DirectoryInfo di = new DirectoryInfo(basePath + imagesFolderPath);
-        foreach (FileInfo file in di.GetFiles())
+        // Resources 폴더에서 모든 스프라이트를 불러옵니다.
+        Sprite[] sprites = Resources.LoadAll<Sprite>(imagesFolderPath);
+        
+
+        // 스프라이트 배열을 순회하면서 이름을 키로 사용하여 딕셔너리에 추가합니다.
+        foreach (Sprite sprite in sprites)
         {
-            string name_Temp = Path.GetFileNameWithoutExtension(file.Name);
-            Sprite[] sprites = Resources.LoadAll<Sprite>(imagesFolderPath + "/" + name_Temp);
-
-            this.CharacterImageDictionary.Add(name_Temp, sprites);
+            string name_Temp = sprite.name;
+            if (!this.CharacterImageDictionary.ContainsKey(folderPath))
+            {
+                this.CharacterImageDictionary.Add(folderPath, new Sprite[] { sprite });
+            }
+            else
+            {
+                // 같은 이름을 가진 스프라이트가 있으면 배열에 추가
+                List<Sprite> spriteList = new List<Sprite>(this.CharacterImageDictionary[folderPath]);
+                spriteList.Add(sprite);
+                this.CharacterImageDictionary[folderPath] = spriteList.ToArray();
+            }
         }
     }
 }

@@ -100,6 +100,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   currentMoveArrow: 0
+  coll2d: {fileID: 3762986628565475355}
 --- !u!212 &4805426958223295236
 SpriteRenderer:
   m_ObjectHideFlags: 0

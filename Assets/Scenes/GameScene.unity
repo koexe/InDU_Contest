@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 381103910}
   - component: {fileID: 381103912}
   - component: {fileID: 381103911}
+  - component: {fileID: 381103913}
   m_Layer: 5
   m_Name: Image (1)
   m_TagString: Untagged
@@ -198,6 +199,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381103909}
   m_CullTransparentMesh: 1
+--- !u!210 &381103913
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 381103909}
+  m_Enabled: 1
+  m_SortingLayerID: -447965723
+  m_SortingLayer: 5
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,6 +403,7 @@ GameObject:
   - component: {fileID: 703346004}
   - component: {fileID: 703346006}
   - component: {fileID: 703346005}
+  - component: {fileID: 703346007}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -454,6 +468,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 703346003}
   m_CullTransparentMesh: 1
+--- !u!210 &703346007
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703346003}
+  m_Enabled: 1
+  m_SortingLayerID: -447965723
+  m_SortingLayer: 5
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &790051001
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,6 +658,7 @@ GameObject:
   - component: {fileID: 958897637}
   - component: {fileID: 958897639}
   - component: {fileID: 958897638}
+  - component: {fileID: 958897640}
   m_Layer: 5
   m_Name: Image (2)
   m_TagString: Untagged
@@ -696,6 +723,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 958897636}
   m_CullTransparentMesh: 1
+--- !u!210 &958897640
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958897636}
+  m_Enabled: 1
+  m_SortingLayerID: -447965723
+  m_SortingLayer: 5
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &1144958634
 GameObject:
   m_ObjectHideFlags: 0
@@ -1407,7 +1446,7 @@ Animator:
   m_GameObject: {fileID: 1840641986}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 992adb061d3275d4094356a6ec5fc9ae, type: 2}
+  m_Controller: {fileID: 9100000, guid: 993cc263152ebef4a96ba7c19b935679, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

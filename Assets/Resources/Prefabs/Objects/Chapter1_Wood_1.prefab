@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6560663854715146880}
   - component: {fileID: 2650255239985987340}
   - component: {fileID: 3773870659050374189}
+  - component: {fileID: 8178388607635312085}
   m_Layer: 7
   m_Name: Chapter1_Wood_1
   m_TagString: Untagged
@@ -158,3 +159,15 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!210 &8178388607635312085
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2631220146001581667}
+  m_Enabled: 1
+  m_SortingLayerID: -621475465
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_SortAtRoot: 0

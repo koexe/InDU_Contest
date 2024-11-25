@@ -24,11 +24,11 @@ public class Boss1_Hide : BossPattern
             this.patternState = PatternState.InAttack;
         }
 
-        if (this.bossController.transform.position == this.targetBushPosition && this.patternState == PatternState.InAttack)
+        if (Vector2.Distance(this.bossController.transform.position, this.targetBushPosition) < 1 && this.patternState == PatternState.InAttack)
         {
             this.patternState = PatternState.AfterAttack;
             this.lastTimeStamp = this.currentPatternTime;
-            
+
             this.bossController.StartHide();
         }
 
@@ -45,10 +45,10 @@ public class Boss1_Hide : BossPattern
 
         if (this.patternState == PatternState.EndAttack && this.isAutoNextPattern)
         {
-            this.bossController.StartShow();    
+            this.bossController.StartShow();
             this.bossController.SelectNewPattern(this.isBasicAttack);
         }
-        else if(this.patternState == PatternState.EndAttack)
+        else if (this.patternState == PatternState.EndAttack)
         {
             this.bossController.StartShow();
         }

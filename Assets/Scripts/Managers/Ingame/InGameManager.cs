@@ -113,13 +113,18 @@ public class InGameManager : MonoBehaviour
     }
 
 
-    public void PlayEffect(string _name, Vector3 _postion)
+    public void PlayEffect(string _name, Vector3 _postion , Transform _parent = null)
     {
         var t_obj = Resources.Load<GameObject>($"Prefabs/Effect/{_name}");
         if (t_obj != null)
         {
             var t_instance = Instantiate(t_obj);
             t_instance.transform.position = _postion;
+
+            if(_parent != null)
+            {
+                t_instance.transform.SetParent(_parent, false);
+            }
             return;
         }
         else

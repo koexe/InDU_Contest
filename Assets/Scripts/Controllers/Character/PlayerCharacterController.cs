@@ -247,6 +247,7 @@ public class PlayerCharacterController : MonoBehaviour
             CameraController.instance.TriggerShake(0.5f);
             InGameManager.instance.ShowRedFilter(0.5f);
             AudioManager.instance.PlaySE(this.hitAudio);
+            InGameManager.instance.PlayEffect("Hit", this.transform.position, this.transform);
         }
         if (hp > 0)
         {

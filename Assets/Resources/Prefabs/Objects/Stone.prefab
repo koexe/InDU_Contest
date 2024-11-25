@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7594348783776006192}
   - component: {fileID: 35079804760808262}
   - component: {fileID: 7436609412781272729}
+  - component: {fileID: 1021947535174164770}
   m_Layer: 7
   m_Name: Stone
   m_TagString: Untagged
@@ -158,3 +159,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!210 &1021947535174164770
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644365457019763895}
+  m_Enabled: 1
+  m_SortingLayerID: -621475465
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_SortAtRoot: 0

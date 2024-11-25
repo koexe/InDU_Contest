@@ -77,4 +77,18 @@ public class AudioManager : MonoBehaviour
             seSource.Stop();
         }
     }
+
+    public void SetVolume(float volume)
+    {
+        // BGM과 SE의 볼륨을 슬라이더 값으로 설정
+        if (bgmSource != null)
+        {
+            bgmSource.volume = volume;
+        }
+
+        if (seSource != null)
+        {
+            seSource.volume = volume;
+        }
+    }
 }
