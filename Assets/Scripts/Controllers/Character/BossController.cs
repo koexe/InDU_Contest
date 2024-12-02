@@ -17,11 +17,8 @@ public class BossController : NPCController
     [SerializeField] SpriteRenderer spriteRenderer;
 
     [Header("보스 패턴 목록")]
-    [SerializeField] List<BossPattern> bossPatterns = new List<BossPattern>();
-
-    [SerializeField] List<BossPattern> bossPatternSetting1 = new List<BossPattern>();
-    [SerializeField] List<BossPattern> bossPatternSetting2 = new List<BossPattern>();
-
+    [SerializeField] BossPattern[] bossPatterns;
+    [SerializeField] BossPattern[] bossPatternSetting;
 
     [SerializeField] BossPattern BasicBossPattern;
     [SerializeField] BossPattern currentPattern = null;
@@ -39,7 +36,8 @@ public class BossController : NPCController
 
     public bool isCollisionEnabled;
 
-    [SerializeField] public List<GameObject> bushs;
+    [SerializeField] public GameObject[] bushs_1;
+    [SerializeField] public GameObject[] bushs_2;
     [SerializeField] GameObject trapPrefab;
     [SerializeField] GameObject currentTrapObj;
 
@@ -57,7 +55,8 @@ public class BossController : NPCController
     public override void Start()
     {
         base.Start();
-        this.bossPatterns = this.bossPatternSetting1;
+        //this.bossPatterns = this.bossPatternSetting1;
+        this.bossPatterns = this.bossPatternSetting;
         this.currentPattern = Instantiate(BasicBossPattern);
         this.currentPattern.Initialization(this);
         this.currentTrapTime = this.spawnTrapTime;
@@ -132,7 +131,7 @@ public class BossController : NPCController
     {
         if (_isBasicAttack)
         {
-            int index = Random.Range(0, this.bossPatterns.Count);
+            int index = Random.Range(0, this.bossPatterns.Length);
             this.currentPattern = Instantiate(this.bossPatterns[index]);
             this.currentPattern.Initialization(this);
             return;
@@ -214,8 +213,8 @@ public class BossController : NPCController
         {
             this.animator.Play("Hit");
             this.Hp -= 1;
-            if (this.Hp == 2)
-                this.bossPatterns = this.bossPatternSetting2;
+            //if (this.Hp == 2)
+            //    this.bossPatterns = this.bossPatternSetting2;
 
             CameraController.instance.TriggerShake(0.5f);
 

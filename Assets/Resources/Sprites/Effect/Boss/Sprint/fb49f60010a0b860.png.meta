@@ -117,8 +117,8 @@ TextureImporter:
         y: 4096
         width: 2048
         height: 2048
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -138,8 +138,8 @@ TextureImporter:
         y: 4096
         width: 2048
         height: 2048
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -152,15 +152,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fb49f60010a0b860_2
+      name: fb49f60010a0b860_10
       rect:
         serializedVersion: 2
         x: 4096
-        y: 4096
+        y: 0
         width: 2048
         height: 2048
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,15 +173,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fb49f60010a0b860_3
+      name: fb49f60010a0b860_11
       rect:
         serializedVersion: 2
         x: 6144
-        y: 4096
+        y: 0
         width: 2048
         height: 2048
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -194,15 +194,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fb49f60010a0b860_4
+      name: fb49f60010a0b860_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2048
+        x: 4096
+        y: 4096
         width: 2048
         height: 2048
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -215,15 +215,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fb49f60010a0b860_5
+      name: fb49f60010a0b860_3
       rect:
         serializedVersion: 2
-        x: 2048
-        y: 2048
+        x: 6144
+        y: 4096
         width: 2048
         height: 2048
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -236,15 +236,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fb49f60010a0b860_6
+      name: fb49f60010a0b860_4
       rect:
         serializedVersion: 2
-        x: 4096
+        x: 0
         y: 2048
         width: 2048
         height: 2048
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -257,15 +257,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fb49f60010a0b860_7
+      name: fb49f60010a0b860_5
       rect:
         serializedVersion: 2
-        x: 6144
+        x: 2048
         y: 2048
         width: 2048
         height: 2048
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -278,15 +278,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fb49f60010a0b860_8
+      name: fb49f60010a0b860_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 4096
+        y: 2048
         width: 2048
         height: 2048
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -299,15 +299,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fb49f60010a0b860_9
+      name: fb49f60010a0b860_7
       rect:
         serializedVersion: 2
-        x: 2048
-        y: 0
+        x: 6144
+        y: 2048
         width: 2048
         height: 2048
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -320,15 +320,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fb49f60010a0b860_10
+      name: fb49f60010a0b860_8
       rect:
         serializedVersion: 2
-        x: 4096
+        x: 0
         y: 0
         width: 2048
         height: 2048
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -341,15 +341,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fb49f60010a0b860_11
+      name: fb49f60010a0b860_9
       rect:
         serializedVersion: 2
-        x: 6144
+        x: 2048
         y: 0
         width: 2048
         height: 2048
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -374,16 +374,16 @@ TextureImporter:
     nameFileIdTable:
       fb49f60010a0b860_0: -1246170951
       fb49f60010a0b860_1: 1499498757
-      fb49f60010a0b860_10: -1928564874
-      fb49f60010a0b860_11: -1431396102
-      fb49f60010a0b860_2: -1416143874
-      fb49f60010a0b860_3: -20636440
-      fb49f60010a0b860_4: -788801262
-      fb49f60010a0b860_5: 706985078
-      fb49f60010a0b860_6: -2133326740
-      fb49f60010a0b860_7: 863232225
-      fb49f60010a0b860_8: -2101332029
-      fb49f60010a0b860_9: 820772157
+      fb49f60010a0b860_10: -1416143874
+      fb49f60010a0b860_11: -20636440
+      fb49f60010a0b860_2: -788801262
+      fb49f60010a0b860_3: 706985078
+      fb49f60010a0b860_4: -2133326740
+      fb49f60010a0b860_5: 863232225
+      fb49f60010a0b860_6: -2101332029
+      fb49f60010a0b860_7: 820772157
+      fb49f60010a0b860_8: -1928564874
+      fb49f60010a0b860_9: -1431396102
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
