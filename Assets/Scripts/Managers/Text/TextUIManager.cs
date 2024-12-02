@@ -20,10 +20,14 @@ public class TextUIManager : PopUpUI
     public override void Initialization(string _custom)
     {
         InGameManager.instance.state = InGameManager.GameState.Pause;
+        Debug.Log("ㅁㄴㅇㄹ");
         base.Initialization(_custom);
+        Debug.Log("ㅁㄴㅇㄹ");
         //DataManager에서 Dialog Dictionary 가져오기
         this.currentDialogDictionary = AssetManager.Instance.GetDialogList();
+        Debug.Log("ㅁㄴㅇㄹ");
         this.currentDialogIndex = int.Parse(_custom);
+        Debug.Log("ㅁㄴㅇㄹ");
 
         this.dialogController.Initialization();
         this.imageController.Initialization();
@@ -44,7 +48,8 @@ public class TextUIManager : PopUpUI
             }
             this.currentDialogIndex = index - 1;
 
-            CheckLink();
+            if (!string.IsNullOrEmpty(currentDialogDictionary[currentDialogIndex].linkCondition[0]))
+                CheckLink();
 
         }
         this.dialogController.ChangeDialog(this.currentDialogIndex);
@@ -61,9 +66,9 @@ public class TextUIManager : PopUpUI
 
     public void CheckLink()
     {
-        if (SaveGameManager.instance.currentSaveData.chatacterDialogs
-     [int.Parse(this.currentDialogDictionary[currentDialogIndex].linkCondition[0])] ==
-     bool.Parse(this.currentDialogDictionary[currentDialogIndex].linkCondition[1]))
+
+
+        if (SaveGameManager.instance.currentSaveData.chatacterDialogs[int.Parse(this.currentDialogDictionary[currentDialogIndex].linkCondition[0])] == bool.Parse(this.currentDialogDictionary[currentDialogIndex].linkCondition[1]))
         {
             int nextDialog = int.Parse(this.currentDialogDictionary[currentDialogIndex].linkDilog);
 
@@ -111,7 +116,6 @@ public class TextUIManager : PopUpUI
             this.choiceButtonController.button2.onClick.AddListener(() => this.dialogController.ChangeDialogButton(_index2));
             this.choiceButtonController.button2.onClick.AddListener(() => this.imageController.OnDialogTextDown());
             this.choiceButtonController.button2.gameObject.SetActive(true);
-
         }
 
         if (_index3 == -1)
