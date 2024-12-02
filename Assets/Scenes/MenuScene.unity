@@ -155,7 +155,13 @@ MonoBehaviour:
   currentSaveData:
     currentMap: 
     items: []
+    itemNames: []
   dialogTable: {fileID: 11400000, guid: c72436cd926913c478de5cd891b1d422, type: 2}
+  MapPrefab:
+  - {fileID: 452884149348485831, guid: 89ca8bed98be8654fad1e9bb93f54d22, type: 3}
+  - {fileID: 452884149348485831, guid: 283a6e643511c074aa40ab4ce6cb59ef, type: 3}
+  itemTable: {fileID: 11400000, guid: 9cd71a2d877be4949a73460e73d6910b, type: 2}
+  isSaveDebug: 0
 --- !u!4 &123825834
 Transform:
   m_ObjectHideFlags: 0
@@ -899,12 +905,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'ToGameScene
-
-'
+  m_text: "\uAC00\uB098\uB2E4\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d39c0dccb467ea0499dac1fbb0af6520, type: 2}
+  m_sharedMaterial: {fileID: -1463025929292899526, guid: d39c0dccb467ea0499dac1fbb0af6520, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

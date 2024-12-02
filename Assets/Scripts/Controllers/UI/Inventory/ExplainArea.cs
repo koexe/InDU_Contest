@@ -18,7 +18,7 @@ public class ExplainArea : MonoBehaviour
         this.image.sprite = _Item.GetItemImage();
         this.descriptionText.text = _Item.GetDescription();
         this.nameText.text = _Item.GetItemName();
-        this.indexText.text = _Item.GetItemIndex().ToString();
+        this.indexText.text = _Item.amount.ToString();
         return;
     }
 }

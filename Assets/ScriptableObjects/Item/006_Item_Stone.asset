@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eb340fac07eeb34b8870fa87659d820, type: 3}
+  m_Name: 006_Item_Stone
+  m_EditorClassIdentifier: 
+  itemIndex: 5
+  itemName: "\uB0A0\uCE74\uB85C\uC6B4 \uB3CC"
+  itemDescription: "\uBA74\uC774 \uB0A0\uCE74\uB85C\uC6B4 \uB3CC. \uC774\uAC78\uB85C
+    \uB3C4\uB07C\uB97C \uB9CC\uB4E4\uC218\uC788\uC744\uAC83\uAC19\uC544."
+  isUsable: 0
+  itemImage: {fileID: 21300000, guid: 6ca9b9b489380f94e89b01acb7029337, type: 3}
+  triggerAmount: 1
+  triggerIndex: 200

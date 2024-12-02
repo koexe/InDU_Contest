@@ -10,7 +10,7 @@ public class MapItem : MonoBehaviour
     [Header("아이템 SO")]
     [SerializeField] SOItem item;
     [Header("이전에 먹었는지")]
-    [SerializeField] bool isGeted;
+    [SerializeField] public bool isGeted;
 
 
     public SOItem GetSOItem() => this.item;
@@ -20,11 +20,13 @@ public class MapItem : MonoBehaviour
         if(this.isGeted == true)
         {
             this.spriteRenderer.sprite = null;
+            this.spriteRenderer.color = new Color(1, 1, 1, 0);
             this.coll2D.enabled = false;
         }
         else
         {
             this.spriteRenderer.sprite = this.item.GetItemImage();
+            this.spriteRenderer.color = new Color(1, 1, 1, 1);
             this.coll2D.enabled = true;
         }
     }
@@ -34,6 +36,8 @@ public class MapItem : MonoBehaviour
         this.spriteRenderer.sprite = null;
         this.coll2D.enabled = false;
         this.item.GetItem();
+
+        SaveGameManager.instance.currentSaveData.mapItems[InGameManager.instance.GetCurrentMapName()][this.transform.GetSiblingIndex()] = true;
         return;
     }
 

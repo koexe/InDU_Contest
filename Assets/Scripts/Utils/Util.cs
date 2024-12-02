@@ -5,7 +5,6 @@ public class Dialog
 {
     public int dialogNumber;
     public string[] Character;
-    public string talkName;
     public string comment;
     public bool isChoose;
     public string[] linkCondition;

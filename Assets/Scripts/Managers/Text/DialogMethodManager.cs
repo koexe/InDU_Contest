@@ -8,6 +8,9 @@ using UnityEngine;
 public class DialogMethodManager : MonoBehaviour
 {
     public static DialogMethodManager instance;
+    [SerializeField] SOItem item_Berry;
+
+
 
     private void Awake()
     {
@@ -35,5 +38,33 @@ public class DialogMethodManager : MonoBehaviour
         Debug.Log("TEST");
         return;
     }
+    void ShakeScreen()
+    {
+        CameraController.instance.TriggerShake(0.5f);
+    }
+
+    void GetItemBerry()
+    {
+        Debug.Log("∫£∏Æ æ∆¿Ã≈€ »πµÊ");
+        this.item_Berry.GetItem();
+    }
+
+    void BackGroundToBlack()
+    {
+        var UI = UIManager.instance.GetUI("DialogUI");
+        UI.GetComponent<TextUIManager>().BackGroundChange(true);
+    }
+
+    void BackGroundToNomal()
+    {
+        var UI = UIManager.instance.GetUI("DialogUI");
+        UI.GetComponent<TextUIManager>().BackGroundChange(false);
+    }
+    void GetItemAxe()
+    {
+
+    }
+
+
     #endregion
 }
