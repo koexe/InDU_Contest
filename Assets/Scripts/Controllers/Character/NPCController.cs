@@ -27,11 +27,12 @@ public class NPCController : MonoBehaviour
         this.button.action += InteractWait;
         this.interactButton.SetActive(false);
     }
-
+#if UNITY_EDITOR
     public virtual void Start()
     {
         Initialization();
     }
+#endif
     protected virtual void FixedUpdate()
     {
         if (!this.isCanInteract) return;

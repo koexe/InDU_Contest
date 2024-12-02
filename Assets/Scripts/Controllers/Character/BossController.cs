@@ -13,12 +13,15 @@ public class BossController : NPCController
     }
 
     [Header("컴포넌트")]
-    [SerializeField] public Animator animator;
+    [SerializeField] Animator animator;
     [SerializeField] SpriteRenderer spriteRenderer;
 
     [Header("보스 패턴 목록")]
-    [SerializeField] BossPattern[] bossPatterns;
-    [SerializeField] BossPattern[] bossPatternSetting;
+    [SerializeField] List<BossPattern> bossPatterns = new List<BossPattern>();
+
+    [SerializeField] List<BossPattern> bossPatternSetting1 = new List<BossPattern>();
+    [SerializeField] List<BossPattern> bossPatternSetting2 = new List<BossPattern>();
+
 
     [SerializeField] BossPattern BasicBossPattern;
     [SerializeField] BossPattern currentPattern = null;
@@ -36,8 +39,7 @@ public class BossController : NPCController
 
     public bool isCollisionEnabled;
 
-    [SerializeField] public GameObject[] bushs_1;
-    [SerializeField] public GameObject[] bushs_2;
+    [SerializeField] public List<GameObject> bushs;
     [SerializeField] GameObject trapPrefab;
     [SerializeField] GameObject currentTrapObj;
 
@@ -47,32 +49,17 @@ public class BossController : NPCController
 
     [SerializeField] bool currentMoveArrow;
 
-    [SerializeField] public Collider2D coll2d;
-
 
 
 
     public override void Start()
     {
         base.Start();
-        //this.bossPatterns = this.bossPatternSetting1;
-        this.bossPatterns = this.bossPatternSetting;
+        this.bossPatterns = this.bossPatternSetting1;
         this.currentPattern = Instantiate(BasicBossPattern);
         this.currentPattern.Initialization(this);
         this.currentTrapTime = this.spawnTrapTime;
         this.state = BossState.Running;
-
-        Invoke("ShowHunterDialog", 3f);
-    }
-
-    void ShowHunterDialog()
-    {
-        UIManager.instance.ShowUI("DialogUI", -1, "1020");
-    }
-
-    void ShowDieDialog()
-    {
-        UIManager.instance.ShowUI("DialogUI", -1, "1010");
     }
     protected override void FixedUpdate()
     {
@@ -131,7 +118,7 @@ public class BossController : NPCController
     {
         if (_isBasicAttack)
         {
-            int index = Random.Range(0, this.bossPatterns.Length);
+            int index = Random.Range(0, this.bossPatterns.Count);
             this.currentPattern = Instantiate(this.bossPatterns[index]);
             this.currentPattern.Initialization(this);
             return;
@@ -153,8 +140,6 @@ public class BossController : NPCController
         float t_speed = this.speed;
         this.speed = 0f;
         float t_time = 0f;
-        this.animator.SetTrigger("Swing");
-
         yield return new WaitForSeconds(0.2f);
         InGameManager.instance.PlayEffect("Scratch", this.transform.position + (Vector3)this.basicAttackOffset);
 
@@ -188,7 +173,6 @@ public class BossController : NPCController
         {
             this.state = BossState.Stun;
             StartCoroutine(Stun());
-            this.animator.Play("Stun");
             Destroy(currentTrapObj);
         }
         return;
@@ -208,42 +192,19 @@ public class BossController : NPCController
     public override void InteractAction()
     {
         base.InteractAction();
+        this.Hp -= 1;
+        if (this.Hp == 2)
+            this.bossPatterns = this.bossPatternSetting2;
 
-        if(this.state != BossState.Die)
-        {
-            this.animator.Play("Hit");
-            this.Hp -= 1;
-            //if (this.Hp == 2)
-            //    this.bossPatterns = this.bossPatternSetting2;
+        CameraController.instance.TriggerShake(0.5f);
 
-            CameraController.instance.TriggerShake(0.5f);
-
-            if (this.Hp == 0)
-            {
-                this.state = BossState.Die;
-                this.animator.Play("Die");
-            }
-            else
-            {
-                this.isCanInteract = false;
-                Invoke("WaitSec", 1f);
-            }
-            return;
-        }
-        else
-        {
-            ShowDieDialog();
-        }
-    }
-
-    void WaitSec()
-    {
         Destroy(this.currentPattern);
         this.currentPattern = Instantiate(this.BasicBossPattern);
         this.currentPattern.Initialization(this);
         this.state = BossState.Running;
+        this.isCanInteract = false;
+        return;
     }
-
     public void StartHide()
     {
         StartCoroutine(SmoothHide());

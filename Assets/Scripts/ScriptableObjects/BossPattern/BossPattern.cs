@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 //[CreateAssetMenu(menuName ="BossPattern/",fileName ="Bosspattern/")]
@@ -22,9 +23,6 @@ public class BossPattern : ScriptableObject
 
     [SerializeField] protected float lastTimeStamp;
 
-    [SerializeField] protected float maxCooltime;
-    [SerializeField] protected float currentCoolTime;
-
     [SerializeField] public bool isAutoNextPattern;
 
     public virtual void Initialization(BossController _bossController)
@@ -34,6 +32,7 @@ public class BossPattern : ScriptableObject
         this.bossController = _bossController;
         return;
     }
+
 
     public virtual void PatternProcess()
     {
@@ -67,22 +66,11 @@ public class BossPattern : ScriptableObject
         return;
     }
 
-    public virtual bool CheckCondition()
-    {
-        return false;
-    }
+
 
     protected virtual void AttackAction()
     {
 
-    }
-
-    public virtual void ResetPattern()
-    {
-        this.currentPatternTime = 0f;
-        this.currentCoolTime = 0f;
-        this.lastTimeStamp = 0f;
-        this.patternState = PatternState.BeforeAttack;
     }
 }
 

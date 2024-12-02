@@ -11,7 +11,6 @@ public class PlayerCharacterController : MonoBehaviour
     [SerializeField] DynamicGravity gravity;
     [SerializeField] Collider2D coll2D;
     [SerializeField] LineRenderer lineRenderer;
-    [SerializeField] SpriteRenderer lindRendererBg;
     [SerializeField] Animator animator;
     [SerializeField] SpriteRenderer spriteRenderer;
  
@@ -38,10 +37,6 @@ public class PlayerCharacterController : MonoBehaviour
     [Header("인벤토리 프리팹")]
     [SerializeField] GameObject inventoryPrefab;
     const string inventoryUIName = "Inventory";
-
-
-    [Header("피격 소리")]
-    [SerializeField] AudioClip hitAudio;
 
     public void AddNowInteractNPC(NPCController npc)
     {
@@ -242,23 +237,16 @@ public class PlayerCharacterController : MonoBehaviour
         this.currentHP += hp;
         InGameManager.instance.ChangeHP(this.currentHP);
 
-        if(hp < 0)
+        if(hp > 0)
         {
             CameraController.instance.TriggerShake(0.5f);
             InGameManager.instance.ShowRedFilter(0.5f);
-            AudioManager.instance.PlaySE(this.hitAudio);
-            InGameManager.instance.PlayEffect("Hit", this.transform.position, this.transform);
         }
         if (hp > 0)
         {
 
         }
-        if(this.currentHP == 0)
-        {
-            InGameManager.instance.DeadReturn();
-            this.currentHP = 3;
-            InGameManager.instance.ChangeHP(this.currentHP);
-        }
+
 
         this.currentGodTime = this.maxGodTime;
         return;
@@ -282,14 +270,9 @@ public class PlayerCharacterController : MonoBehaviour
     {
         this.currentMaxInteractTime = _maxWaitTime;
         this.isNowInteract = true;
-
-        if (this.currentInteractTime != 0 && this.lindRendererBg.enabled == false)
-            this.lindRendererBg.enabled = true;
-
-        if (this.currentInteractTime != _maxWaitTime)
+        if(this.currentInteractTime != _maxWaitTime)
         {
             this.currentInteractTime = Mathf.MoveTowards(this.currentInteractTime, _maxWaitTime, Time.fixedDeltaTime);
-            
             return false;
         }
         else
@@ -305,15 +288,11 @@ public class PlayerCharacterController : MonoBehaviour
         {
             this.currentInteractTime = Mathf.MoveTowards(this.currentInteractTime,0,Time.fixedDeltaTime);
         }
-        if(this.currentInteractTime == 0 && this.lindRendererBg.enabled == true)
-            this.lindRendererBg.enabled = false;
         this.isNowInteract = false;
     }
 
     void UpdateInteract()
     {
-        if (InGameManager.instance.state != InGameManager.GameState.InProgress) return;
-
         if(this.nowInteractNPC.Count != 0)
         {
             foreach(var npc in this.nowInteractNPC)

@@ -41,14 +41,13 @@ public class SaveGameManager : MonoBehaviour
         }
     }
 #endif
-    public void SavetoFile()
+    void SavetoFile()
     {
         foreach (var item in this.currentSaveData.items)
         {
             this.currentSaveData.itemNames.Add(new SaveItemMinimal(item.GetItemIndex(), item.amount));
         }
         SaveToJsonFile<SaveData>(this.currentSaveData, fileName);
-        this.saveInFile = this.currentSaveData;
     }
 
     void LoadToFile()
@@ -143,26 +142,7 @@ public class SaveGameManager : MonoBehaviour
         }
     }
 
-    public void DeleteItem(int item)
-    {
-        int index = this.currentSaveData.items.FindIndex(x => x.GetItemIndex() == item);
-        if (index == -1)
-            return;
-        else
-        {
-            this.currentSaveData.items.RemoveAt(index);
-        }
-    }
-
-    
-    public void ResetSave()
-    {
-        this.currentSaveData = this.saveInFile;
-    }
 }
-
-
-
 
 [System.Serializable]
 public class SaveData
@@ -171,7 +151,6 @@ public class SaveData
     public List<SaveItem> items;
     public Dictionary<int, bool> chatacterDialogs;
     public List<SaveItemMinimal> itemNames;
-
 
     public Dictionary<string, List<bool>> mapItems;
     public SaveData()

@@ -11,7 +11,7 @@ public class BossTrap : NPCController
     [SerializeField] float notInteractDestoryTime;
     [SerializeField] float autoDestroyTime;
     [SerializeField] float currentInterval;
-    
+
     public override void Initialization()
     {
         base.Initialization();
