@@ -97,10 +97,12 @@ public class SaveGameManager : MonoBehaviour
     {
         foreach (var map in MapPrefab)
         {
+            Debug.Log($"맵 {map.name} 초기화 시작");
             var Items = map.transform.GetComponent<MapOptions>().GetMapItems();
             this.currentSaveData.mapItems.Add(map.name, new List<bool>());
             foreach (var item in Items)
             {
+                Debug.Log($"아이템 이름 {item.name}");
                 this.currentSaveData.mapItems[map.name].Add(item.isGeted);
             }
         }
@@ -154,7 +156,7 @@ public class SaveGameManager : MonoBehaviour
         }
     }
 
-    
+
     public void ResetSave()
     {
         this.currentSaveData = this.saveInFile;

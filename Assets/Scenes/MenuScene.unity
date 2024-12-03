@@ -159,7 +159,7 @@ MonoBehaviour:
   dialogTable: {fileID: 11400000, guid: c72436cd926913c478de5cd891b1d422, type: 2}
   MapPrefab:
   - {fileID: 452884149348485831, guid: 6c3a6cee40da4654eaaf9a7bff4707c8, type: 3}
-  - {fileID: 452884149348485831, guid: 2a8316d3ba4eb9a44996341a5323ffe1, type: 3}
+  - {fileID: 452884149348485831, guid: afff91530ce7f9d479a72909cfeaff4f, type: 3}
   - {fileID: 452884149348485831, guid: 6c50e24fa66788943a43980959c02b54, type: 3}
   - {fileID: 452884149348485831, guid: 63234a5f78bb0854ebb0f34ab9fe513b, type: 3}
   - {fileID: 452884149348485831, guid: 5e3f3a582982bdb41967859661d2eb87, type: 3}
@@ -167,7 +167,7 @@ MonoBehaviour:
   - {fileID: 452884149348485831, guid: 2e15057859fbec54dbf0784253e6efb2, type: 3}
   - {fileID: 452884149348485831, guid: dea6da42b0b0570449515caa9c62f98e, type: 3}
   - {fileID: 452884149348485831, guid: 486a88b81ee5ad04091f1d8156e80cb5, type: 3}
-  - {fileID: 452884149348485831, guid: b9e1462868044ae458f2f848a658c99a, type: 3}
+  - {fileID: 452884149348485831, guid: ae59abaafe33e194b856bb938bd97873, type: 3}
   - {fileID: 452884149348485831, guid: b56b7a2239357ed49aa46b52f87b9888, type: 3}
   - {fileID: 452884149348485831, guid: 122b290401ca79c45be3ab6a9385f5dd, type: 3}
   itemTable: {fileID: 11400000, guid: 9cd71a2d877be4949a73460e73d6910b, type: 2}

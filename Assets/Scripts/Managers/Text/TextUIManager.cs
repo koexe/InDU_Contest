@@ -20,14 +20,9 @@ public class TextUIManager : PopUpUI
     public override void Initialization(string _custom)
     {
         InGameManager.instance.state = InGameManager.GameState.Pause;
-        Debug.Log("ㅁㄴㅇㄹ");
         base.Initialization(_custom);
-        Debug.Log("ㅁㄴㅇㄹ");
-        //DataManager에서 Dialog Dictionary 가져오기
         this.currentDialogDictionary = AssetManager.Instance.GetDialogList();
-        Debug.Log("ㅁㄴㅇㄹ");
         this.currentDialogIndex = int.Parse(_custom);
-        Debug.Log("ㅁㄴㅇㄹ");
 
         this.dialogController.Initialization();
         this.imageController.Initialization();
