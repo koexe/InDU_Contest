@@ -68,6 +68,7 @@ public class UIManager : MonoBehaviour
     public GameObject ShowUI(string _UiPrefabName, int _layerOrder = -1, string _custom = "")
     {
         var _UiPrefab = Resources.Load<GameObject>($"Prefabs/UI/{_UiPrefabName}");
+        Debug.Log(_custom);
 
         string _Name = _UiPrefab.transform.GetComponent<PopUpUI>().GetUiName();
 

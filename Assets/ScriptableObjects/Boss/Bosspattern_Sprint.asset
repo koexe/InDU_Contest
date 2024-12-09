@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beforeAttackTime: 0.5
   attackTime: 0.5
-  afterAttackTime: 1.2
+  afterAttackTime: 0.2
   animationPlayTime: 0
   patternState: 0
   animation: {fileID: 0}

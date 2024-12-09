@@ -2,19 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Progress;
 
-
-public enum MapType
-{
-    TopView,
-    SideView
-}
 
 public class MapOptions : MonoBehaviour
 {
-    [Header("맵 타입")]
-    [SerializeField] MapType type;
     [Header("맵 이름")]
     [SerializeField] string mapName;
     [Header("맵 크기")]
@@ -27,13 +18,14 @@ public class MapOptions : MonoBehaviour
     [SerializeField] Transform mapNPCs;
 
     [Header("맵 이동 포인트")]
-
     [SerializeField] List<MapMovePoint> movePoints;
     public Transform GetMoveTransfrom(int index) => this.movePoints[index].transform;
 
     public Vector2 GetMapSize() => this.mapSize;
     public string GetMapName() => this.mapName;
 
+    [Header("맵 세이브포인트")]
+    [SerializeField] public Transform mapSaveTr;
 
     public MapItem[] GetMapItems()
     {
@@ -89,7 +81,6 @@ public class MapOptions : MonoBehaviour
 public class MapMovePoint
 {
     public Transform transform;
-    public int point;
     public bool isOpen;
     [Header("연결된 맵과 위치")]
     public GameObject linkedMap;
