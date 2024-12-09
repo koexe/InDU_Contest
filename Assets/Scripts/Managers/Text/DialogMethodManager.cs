@@ -9,7 +9,6 @@ public class DialogMethodManager : MonoBehaviour
 {
     public static DialogMethodManager instance;
     [SerializeField] SOItem item_Berry;
-    [SerializeField] SOItem item_Axe;
 
 
 
@@ -48,9 +47,6 @@ public class DialogMethodManager : MonoBehaviour
     {
         Debug.Log("∫£∏Æ æ∆¿Ã≈€ »πµÊ");
         this.item_Berry.GetItem();
-
-        SaveGameManager.instance.DeleteItem(4);
-        
     }
 
     void BackGroundToBlack()
@@ -66,25 +62,9 @@ public class DialogMethodManager : MonoBehaviour
     }
     void GetItemAxe()
     {
-        this.item_Axe.GetItem();
-        SaveGameManager.instance.DeleteItem(5);
 
-        SaveGameManager.instance.DeleteItem(6);
     }
 
-    void DeleteStoryChracter()
-    {
-        var objs = GameObject.FindGameObjectsWithTag("Stroy");
-        foreach (var obj in objs)
-        {
-            Destroy(obj);
-        }
-    }
-
-    void EndGame()
-    {
-        Application.Quit();
-    }
 
     #endregion
 }
