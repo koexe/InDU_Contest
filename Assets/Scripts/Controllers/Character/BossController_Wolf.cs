@@ -62,6 +62,8 @@ public class BossController1 : NPCController
 
     [SerializeField] int bossHP;
 
+    [SerializeField] bool isDie = false;
+
 
     Coroutine crCurrentPattern;
 
@@ -94,7 +96,7 @@ public class BossController1 : NPCController
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        if (this.isStarted)
+        if (this.isStarted && !this.isDie)
         {
             UpdatePatternCooltime();
             if (this.crCurrentPattern == null)
@@ -415,7 +417,7 @@ public class BossController1 : NPCController
         t_MovePoint = InGameManager.instance.GetPlayerController().transform.position;
         Vector3 t_StartPos = this.transform.position;
 
-        this.animator.Play("JumpReady");
+        this.animator.Play("Jump");
         InGameManager.instance.PlayEffect("JumpStart", this.transform.position - new Vector3(0, -1, 0));
 
         float t_JumpTime = 0.6f;
@@ -606,7 +608,13 @@ public class BossController1 : NPCController
     IEnumerator Hit()
     {
         this.state = BossStates.Stun;
+
+
+        this.spriteRenderer.color = Color.red;
+
+
         yield return new WaitForSeconds(this.hitTime);
+        this.spriteRenderer.color = Color.white;
         this.state = BossStates.EndPattern;
 
         this.crCurrentPattern = null;
@@ -616,12 +624,17 @@ public class BossController1 : NPCController
     {
         base.InteractAction();
         this.isCanInteract = false;
+        CameraController.instance.TriggerShake(3f);
         this.bossHP -= 1;
         if (this.bossHP == 2)
             this.isPattern2 = true;
 
         if (this.bossHP == 0)
+        {
             ShowDieDialog();
+            this.isDie = true;
+        }
+
         else
         {
             StopCoroutine(this.crCurrentPattern);

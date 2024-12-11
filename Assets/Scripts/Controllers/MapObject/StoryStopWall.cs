@@ -13,7 +13,8 @@ public class StoryStopWall : MonoBehaviour
         if (collision.tag != "Player") return;
         if (this.dialogIndex == -1)
         {
-            UIManager.instance.ShowUI("DialogUI", -1, this.cantMoveDialogIndex.ToString());
+            if (this.cantMoveDialogIndex != -1)
+                UIManager.instance.ShowUI("DialogUI", -1, this.cantMoveDialogIndex.ToString());
         }
         else if (SaveGameManager.instance.currentSaveData.chatacterDialogs[this.dialogIndex] == true)
         {
