@@ -7,6 +7,7 @@ public class BossTrap : NPCController
 {
     [Space(12)]
     [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] SpriteRenderer effextSprite;
     [SerializeField] Collider2D coll;
     [SerializeField] float notInteractDestoryTime;
     [SerializeField] float autoDestroyTime;
@@ -51,6 +52,7 @@ public class BossTrap : NPCController
         this.spriteRenderer.color = t_color;
         this.coll.enabled = true;
         this.currentInterval = this.autoDestroyTime;
+        this.effextSprite.enabled = false;
 
         this.isCanInteract = false;
     }
