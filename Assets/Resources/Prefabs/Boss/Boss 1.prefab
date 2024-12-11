@@ -184,7 +184,7 @@ Animator:
   m_GameObject: {fileID: 4929525500077783100}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 34187c94d2756454b955e5231fd6d668, type: 2}
+  m_Controller: {fileID: 9100000, guid: 033a624aab74ffd4d8ab4be425a9e90e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -221,21 +221,35 @@ MonoBehaviour:
   coll2d: {fileID: 3762986628565475355}
   spriteRenderer: {fileID: 4805426958223295236}
   animator: {fileID: 1510201958850926823}
-  basicAttackOffset: {x: 0, y: 0, z: 0}
+  crossScratchArea: {x: 3, y: 3, z: 0}
+  basicScratchArea: {x: 3, y: 1.5, z: 0}
+  basicAttackOffset: {x: -1, y: 1, z: 0}
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  isStarted: 0
   isCollisionEnabled: 0
   currentMoveArrow: 0
+  isPattern2: 0
   jumpHeight: 3
   bushMoveSpeed: 3
   chargeSpeed: 5
+  walkSpeed: 1.5
   ambushChargeCount: 3
   bushTransform1: []
   bushTransform2: []
   trapPrefab: {fileID: 1008060560146041993, guid: 316ba7500c27cf44f8469ed2e241c365, type: 3}
   currentTrapObj: {fileID: 0}
   stunTime: 0
+  pattern1Cooltime: 8
+  pattern2Cooltime: 8
+  pattern3Cooltime: 20
+  pattern4Cooltime: 13
+  currentPattern1Cooltime: 0
+  currentPattern2Cooltime: 0
+  currentPattern3Cooltime: 0
+  currentPattern4Cooltime: 0
+  pattern2Distance: 0
 --- !u!1001 &792878271182500407
 PrefabInstance:
   m_ObjectHideFlags: 0

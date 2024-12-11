@@ -87,7 +87,7 @@ public class NPCController : MonoBehaviour
 
 
 
-    private void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(this.transform.position, this.interactArea);

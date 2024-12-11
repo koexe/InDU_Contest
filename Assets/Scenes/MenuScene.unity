@@ -167,6 +167,7 @@ MonoBehaviour:
   - {fileID: 452884149348485831, guid: 2e15057859fbec54dbf0784253e6efb2, type: 3}
   - {fileID: 452884149348485831, guid: dea6da42b0b0570449515caa9c62f98e, type: 3}
   - {fileID: 452884149348485831, guid: 486a88b81ee5ad04091f1d8156e80cb5, type: 3}
+  - {fileID: 452884149348485831, guid: 1aeb69c43c663e940bcbef8293177a9b, type: 3}
   itemTable: {fileID: 11400000, guid: 9cd71a2d877be4949a73460e73d6910b, type: 2}
   isSaveDebug: 1
 --- !u!4 &123825834
