@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ab31bd99094b074b82e303ad10af9c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogIndex: 29
+  dialogIndex: 42
   cantMoveDialogIndex: 1000
 --- !u!61 &6633258082616988766
 BoxCollider2D:

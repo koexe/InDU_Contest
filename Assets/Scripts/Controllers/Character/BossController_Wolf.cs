@@ -60,7 +60,7 @@ public class BossController1 : NPCController
     [SerializeField] float pattern2Distance;
 
 
-    [SerializeField] int bossHP = 6;
+    [SerializeField] int bossHP;
 
 
     Coroutine crCurrentPattern;
@@ -615,15 +615,18 @@ public class BossController1 : NPCController
     public override void InteractAction()
     {
         base.InteractAction();
+        this.isCanInteract = false;
         this.bossHP -= 1;
-        if (this.bossHP == 3)
+        if (this.bossHP == 2)
             this.isPattern2 = true;
 
         if (this.bossHP == 0)
             ShowDieDialog();
-        StopCoroutine(this.crCurrentPattern);
-        this.crCurrentPattern = StartCoroutine(Hit());
-        this.isCanInteract= false;
+        else
+        {
+            StopCoroutine(this.crCurrentPattern);
+            this.crCurrentPattern = StartCoroutine(Hit());
+        }
         return;
     }
 

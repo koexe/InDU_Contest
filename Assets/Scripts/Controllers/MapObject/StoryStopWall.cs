@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
- 
+
 public class StoryStopWall : MonoBehaviour
 {
     [SerializeField] int dialogIndex;
@@ -11,13 +11,18 @@ public class StoryStopWall : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag != "Player") return;
-        if (SaveGameManager.instance.currentSaveData.chatacterDialogs[this.dialogIndex] == true)
+        if (this.dialogIndex == -1)
+        {
+            UIManager.instance.ShowUI("DialogUI", -1, this.cantMoveDialogIndex.ToString());
+        }
+        else if (SaveGameManager.instance.currentSaveData.chatacterDialogs[this.dialogIndex] == true)
         {
             this.gameObject.layer = LayerMask.NameToLayer("Default");
         }
         else
         {
-            UIManager.instance.ShowUI("DialogUI", -1, this.cantMoveDialogIndex.ToString());
+            if (this.cantMoveDialogIndex != -1)
+                UIManager.instance.ShowUI("DialogUI", -1, this.cantMoveDialogIndex.ToString());
         }
     }
 }
