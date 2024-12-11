@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,7 +44,7 @@ public class BossController1 : NPCController
     [SerializeField] GameObject currentTrapObj;
 
     [SerializeField] float stunTime;
-
+    [SerializeField] float hitTime;
 
     [SerializeField] float pattern1Cooltime;
     [SerializeField] float pattern2Cooltime;
@@ -59,7 +60,7 @@ public class BossController1 : NPCController
     [SerializeField] float pattern2Distance;
 
 
-
+    [SerializeField] int bossHP = 6;
 
 
     Coroutine crCurrentPattern;
@@ -70,6 +71,7 @@ public class BossController1 : NPCController
         this.currentPattern2Cooltime = this.pattern2Cooltime;
         this.currentPattern3Cooltime = this.pattern3Cooltime;
         this.currentPattern4Cooltime = this.pattern4Cooltime;
+        Initialization();
     }
 #if UNITY_EDITOR
     private void Update()
@@ -81,6 +83,10 @@ public class BossController1 : NPCController
         if (Input.GetKeyDown(KeyCode.F2))
         {
             this.crCurrentPattern = StartCoroutine(Crossscratch());
+        }
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            this.crCurrentPattern = StartCoroutine(AmbushPhase2());
         }
     }
 #endif
@@ -112,6 +118,8 @@ public class BossController1 : NPCController
                         break;
                     case -1:
                         MoveToPosition(InGameManager.instance.GetPlayerController().transform.position, this.walkSpeed);
+                        this.animator.Play("Walk");
+                        SetWalkArrow();
                         break;
                 }
 
@@ -162,10 +170,12 @@ public class BossController1 : NPCController
                      this.transform.position + this.basicAttackOffset,
                      this.crossScratchArea,
                      this.playerLayerMask);
-            if(t_player != null)
+            if (t_player != null)
             {
-                this.currentPattern1Cooltime = this.pattern1Cooltime;
-                return 1;
+                if (t_player.transform.GetComponent<PlayerCharacterController>() != null)
+                    return 1;
+                else
+                    return -1;
             }
             else
             {
@@ -181,11 +191,14 @@ public class BossController1 : NPCController
                       this.playerLayerMask);
             if (t_player != null)
             {
-                return 0;
+                if (t_player.transform.GetComponent<PlayerCharacterController>() != null)
+                    return 0;
+                else
+                    return -1;
             }
             else
                 return -1;
-  
+
         }
     }
 
@@ -199,9 +212,6 @@ public class BossController1 : NPCController
         return;
     }
 
-
-
-
     IEnumerator Ambush()
     {
         Vector3 t_MovePoint = GetNearestBush();
@@ -210,12 +220,13 @@ public class BossController1 : NPCController
         for (int i = 0; i < this.ambushChargeCount; i++)
         {
             this.animator.Play("Dash");
+            SetWalkArrow(this.transform.position, t_MovePoint);
+
             while (Vector3.Distance(this.transform.position, t_MovePoint) > 0.05f)
             {
                 MoveToPosition(t_MovePoint, this.bushMoveSpeed);
                 yield return new WaitForFixedUpdate();
             }
-
             yield return StartCoroutine(SmoothHide());
 
             if (t_point)
@@ -228,12 +239,17 @@ public class BossController1 : NPCController
                 this.transform.position = this.bushTransform2[Random.Range(0, this.bushTransform2.Length)].position;
                 t_MovePoint = this.bushTransform1[Random.Range(0, this.bushTransform1.Length)].position;
             }
+            SetWalkArrow(this.transform.position, t_MovePoint);
 
             this.spriteRenderer.color = Color.white;
             this.isCollisionEnabled = true;
 
-            yield return new WaitForSeconds(0.5f);
+            Destroy(this.currentTrapObj);
 
+            this.currentTrapObj = Instantiate(this.trapPrefab, t_MovePoint, Quaternion.identity);
+
+            yield return new WaitForSeconds(0.5f);
+            InGameManager.instance.PlayEffect("Sprint", this.transform.position - new Vector3(0, -1, 0));
             while (Vector3.Distance(this.transform.position, t_MovePoint) > 0.05f)
             {
                 ChargeToPosition(t_MovePoint, this.chargeSpeed);
@@ -243,6 +259,8 @@ public class BossController1 : NPCController
             t_MovePoint = GetNearestBush();
             t_point = GetNearestBushPoint();
         }
+
+        ShowHunterDialog();
 
         t_MovePoint = InGameManager.instance.GetPlayerController().transform.position;
         Vector3 t_StartPos = this.transform.position;
@@ -320,9 +338,10 @@ public class BossController1 : NPCController
     IEnumerator Crossscratch()
     {
         yield return new WaitForSeconds(0.1f);
-        this.animator.Play("Swing");
+        this.animator.Play("CrossScratch");
         yield return new WaitForSeconds(0.2f);
         InGameManager.instance.PlayEffect("Scratch", this.transform.position + (Vector3)this.basicAttackOffset);
+
         float elapsedTime = 0.0f;
         while (elapsedTime < 0.4f)
         {
@@ -349,6 +368,10 @@ public class BossController1 : NPCController
         Vector3 t_MovePoint = InGameManager.instance.GetPlayerController().transform.position;
 
         yield return new WaitForSeconds(0.3f);
+
+        this.animator.Play("Dash");
+        InGameManager.instance.PlayEffect("Sprint", this.transform.position - new Vector3(0, -1, 0));
+
         this.isCollisionEnabled = true;
         while (Vector3.Distance(this.transform.position, t_MovePoint) > 0.05f)
         {
@@ -515,7 +538,7 @@ public class BossController1 : NPCController
             {
                 this.currentMoveArrow = false;
                 this.spriteRenderer.flipX = false;
-                this.basicAttackOffset = -this.basicAttackOffset;
+                this.basicAttackOffset.x = -this.basicAttackOffset.x;
             }
         }
         else
@@ -524,7 +547,29 @@ public class BossController1 : NPCController
             {
                 this.currentMoveArrow = true;
                 this.spriteRenderer.flipX = true;
-                this.basicAttackOffset = -this.basicAttackOffset;
+                this.basicAttackOffset.x = -this.basicAttackOffset.x;
+            }
+        }
+    }
+
+    public void SetWalkArrow(Vector3 pos1, Vector3 pos2)
+    {
+        if (pos1.x > pos2.x)
+        {
+            if (this.currentMoveArrow)
+            {
+                this.currentMoveArrow = false;
+                this.spriteRenderer.flipX = false;
+                this.basicAttackOffset.x = -this.basicAttackOffset.x;
+            }
+        }
+        else
+        {
+            if (!this.currentMoveArrow)
+            {
+                this.currentMoveArrow = true;
+                this.spriteRenderer.flipX = true;
+                this.basicAttackOffset.x = -this.basicAttackOffset.x;
             }
         }
     }
@@ -539,6 +584,7 @@ public class BossController1 : NPCController
         if (collision.tag == "BossTrap")
         {
             this.state = BossStates.Stun;
+            StopCoroutine(this.crCurrentPattern);
             this.crCurrentPattern = StartCoroutine(Stun());
             this.animator.Play("Stun");
             Destroy(currentTrapObj);
@@ -549,12 +595,47 @@ public class BossController1 : NPCController
     {
         this.state = BossStates.Stun;
         this.isCanInteract = true;
+        this.isCollisionEnabled = false;
 
         yield return new WaitForSeconds(this.stunTime);
+
         this.state = BossStates.EndPattern;
         this.isCanInteract = false;
+        this.crCurrentPattern = null;
+    }
+    IEnumerator Hit()
+    {
+        this.state = BossStates.Stun;
+        yield return new WaitForSeconds(this.hitTime);
+        this.state = BossStates.EndPattern;
+
+        this.crCurrentPattern = null;
     }
 
+    public override void InteractAction()
+    {
+        base.InteractAction();
+        this.bossHP -= 1;
+        if (this.bossHP == 3)
+            this.isPattern2 = true;
+
+        if (this.bossHP == 0)
+            ShowDieDialog();
+        StopCoroutine(this.crCurrentPattern);
+        this.crCurrentPattern = StartCoroutine(Hit());
+        this.isCanInteract= false;
+        return;
+    }
+
+    void ShowHunterDialog()
+    {
+        UIManager.instance.ShowUI("DialogUI", -1, "1020");
+    }
+
+    void ShowDieDialog()
+    {
+        UIManager.instance.ShowUI("DialogUI", -1, "1010");
+    }
 
     protected override void OnDrawGizmos()
     {
