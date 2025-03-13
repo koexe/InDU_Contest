@@ -30,17 +30,11 @@ public class InGameManager : MonoBehaviour
 
     [SerializeField] GameObject Map;
 
-    [SerializeField] GameObject redFilter;
-
-    [SerializeField] GameObject[] Hp;
-
-    [SerializeField] AudioClip bgm;
 
     private void Awake()
     {
         instance = this;
         Initialization();
-        AudioManager.instance.PlayBGM(bgm);
         return;
     }
 
@@ -78,38 +72,7 @@ public class InGameManager : MonoBehaviour
         {
             this.currentPlayer.transform.position = this.currentMapObject.GetMoveTransfrom(_index).position;
         }
-
         CameraController.instance.SetMapBoundary(this.currentMapObject.GetMapSize());
-
-
-    }
-
-
-    public void ShowRedFilter(float _duration)
-    {
-        StopAllCoroutines();
-        StartCoroutine(Blink(_duration));
-    }
-    // 깜빡거림 Coroutine
-    IEnumerator Blink(float _duration)
-    {
-        float elapsedTime = 0f;
-
-        // blinkDuration 동안 반복
-        while (elapsedTime < _duration)
-        {
-            // 타겟 오브젝트의 활성화 상태를 반전시킴
-            redFilter.SetActive(!redFilter.activeSelf);
-
-            // 경과 시간 업데이트
-            elapsedTime += 0.5f;
-
-            // blinkInterval(0.3초) 대기
-            yield return new WaitForSeconds(0.5f);
-        }
-
-        // 깜빡거림이 끝나면 오브젝트를 활성 상태로 복구 (필요에 따라 수정 가능)
-        redFilter.SetActive(false);
     }
 
 
@@ -131,18 +94,6 @@ public class InGameManager : MonoBehaviour
         {
             Debug.Log("Obj Not Found");
         }
-    }
-
-    public void ChangeHP(int _index)
-    {
-        if (_index == 3)
-            _index--;
-        this.Hp[_index].SetActive(true);
-        foreach (var Hp in this.Hp)
-            Hp.SetActive(false);
-        for (int i = 0; i < _index; i++)
-            this.Hp[i].SetActive(true);
-
     }
 
     public void DeadReturn()

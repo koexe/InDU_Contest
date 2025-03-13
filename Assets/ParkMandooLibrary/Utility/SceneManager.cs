@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -29,19 +29,19 @@ public class SceneLoadManager : MonoBehaviour
         UIManager.instance.ShowUI(_LoadingUI, loadSceneName, -1);
         while (!t_asyncOper.isDone)
         {
-            // ·ÎµùÀÌ °ÅÀÇ ¿Ï·áµÇ¾ú´ÂÁö È®ÀÎ (progress´Â 0.0f ~ 0.9f »çÀÌ)
+            // ë¡œë”©ì´ ê±°ì˜ ì™„ë£Œë˜ì—ˆëŠ”ì§€ í™•ì¸ (progressëŠ” 0.0f ~ 0.9f ì‚¬ì´)
             if (t_asyncOper.progress >= 0.9f)
             {
-                // Ãß°¡ÀûÀÎ ·Îµù UI¸¦ Ã³¸®ÇÒ ¼ö ÀÖÀ½ (ÇÊ¿ä½Ã)
-                // »ç¿ëÀÚ°¡ Æ¯Á¤ ¹öÆ°À» ´©¸£°Å³ª, Æ¯Á¤ Á¶°ÇÀÌ ÃæÁ·µÉ ¶§ ¾ÀÀ» È°¼ºÈ­ÇÒ ¼ö ÀÖÀ½
+                // ì¶”ê°€ì ì¸ ë¡œë”© UIë¥¼ ì²˜ë¦¬í•  ìˆ˜ ìžˆìŒ (í•„ìš”ì‹œ)
+                // ì‚¬ìš©ìžê°€ íŠ¹ì • ë²„íŠ¼ì„ ëˆ„ë¥´ê±°ë‚˜, íŠ¹ì • ì¡°ê±´ì´ ì¶©ì¡±ë  ë•Œ ì”¬ì„ í™œì„±í™”í•  ìˆ˜ ìžˆìŒ
 
-                // ¿©±â¿¡ ´ë±â ½Ã°£À» Ãß°¡ÇØµµ µÊ
+                // ì—¬ê¸°ì— ëŒ€ê¸° ì‹œê°„ì„ ì¶”ê°€í•´ë„ ë¨
                 yield return new WaitForSeconds(1.5f);
 
-                // allowSceneActivationÀ» true·Î ¼³Á¤ÇÏ¿© ¾À È°¼ºÈ­
+                // allowSceneActivationì„ trueë¡œ ì„¤ì •í•˜ì—¬ ì”¬ í™œì„±í™”
                 t_asyncOper.allowSceneActivation = true;
             }
-            yield return null; // ¸Å ÇÁ·¹ÀÓ¸¶´Ù ´ë±â
+            yield return null; // ë§¤ í”„ë ˆìž„ë§ˆë‹¤ ëŒ€ê¸°
         }
         UIManager.instance.DeleteUI(loadSceneName);
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,15 +12,25 @@ public enum InteractType
 
 public class NPCController : MonoBehaviour
 {
-    [Header("��ȣ�ۿ� �ɼǵ�")]
-    [SerializeField] NPCInteractButton button;
-    [SerializeField] Vector2 interactArea;
-    [SerializeField] InteractType interactType;
-    [SerializeField] protected bool isNowInInteractArea;
-    [SerializeField] protected bool isCanInteract;
-    [SerializeField] LayerMask interactLayerMask;
+    [Header("상호작용 옵션들")]
+    [Header("상호작용 버튼")]
     [SerializeField] GameObject interactButton;
+    [SerializeField] NPCInteractButton button;
+    [Header("상호작용 범위")]
+    [SerializeField] Vector2 interactArea;
+    [Header("상호작용 방식(클릭, 홀드)")]
+    [SerializeField] InteractType interactType;
+    [Header("현재 상호작용 중인지")]
+    [SerializeField] protected bool isNowInInteractArea;
+    [Header("현재 상호작용 가능한지")]
+    [SerializeField] protected bool isCanInteract;
+    [Header("상호작용 확인할 레이어")]
+    [SerializeField] LayerMask interactLayerMask;
+    [Header("상호작용 대기 시간(홀드)")]
     [SerializeField] float interactTime;
+
+    [Header("현재 상호작용 중인 컴포넌트")]
+    [SerializeField] InteractModule interactModule;
 
     public virtual void Initialization()
     {
@@ -37,9 +48,9 @@ public class NPCController : MonoBehaviour
         if (!this.isCanInteract) return;
         CheckInteractPlayer();
         if (this.isNowInInteractArea)
-            interactButton.SetActive(true);
+            this.interactButton.SetActive(true);
         else
-            interactButton.SetActive(false);
+            this.interactButton.SetActive(false);
     }
 
     void CheckInteractPlayer()
@@ -49,26 +60,39 @@ public class NPCController : MonoBehaviour
         if (t_colls.Length == 0)
         {
             this.isNowInInteractArea = false;
-            InGameManager.instance.GetPlayerController().RemoveNotInteractNPC(this);
+            if (this.interactModule != null)
+            {
+                this.interactModule.RemoveNotInteractNPC(this);
+                this.interactModule = null;
+            }
+            else
+                return;
         }
         else
         {
             this.isNowInInteractArea = true;
-            InGameManager.instance.GetPlayerController().AddNowInteractNPC(this);
+            foreach(var col in t_colls)
+            {
+                if(TryGetComponent<InteractModule>(out var t_module))
+                {
+                    this.interactModule = t_module;
+                    this.interactModule.AddNowInteractNPC(this);
+                }
+            }
         }
 
     }
 
     public virtual void InteractWait()
     {
-        if (!this.isCanInteract) return;
+        if (!this.isCanInteract || this.interactModule == null) return;
         if (this.interactType == InteractType.Tap)
         {
             InteractAction();
         }
         else if (this.interactType == InteractType.Hold)
         {
-            if (InGameManager.instance.GetPlayerController().HoldInteract(this.interactTime))
+            if (this.interactModule.HoldInteract(this.interactTime))
             {
                 InteractAction();
             }
@@ -81,7 +105,7 @@ public class NPCController : MonoBehaviour
 
     public virtual void InteractAction()
     {
-        Debug.Log($"��ȣ�ۿ� ������Ʈ �̸�:{this.name}");
+        Debug.Log($"상호작용 오브젝트 이름:{this.name}");
         this.interactButton.SetActive(false);
     }
 

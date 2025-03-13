@@ -12,6 +12,5 @@ public class Item_Heal : SOItem
         Debug.Log("¤±¤¤¤·¤©");
 
 
-        InGameManager.instance.GetPlayerController().AddHp(1);
     }
 }
