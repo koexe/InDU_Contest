@@ -12,19 +12,19 @@ public class InGameManager : MonoBehaviour
 
     }
     /// <summary>
-    /// »ý¼ºÇÏ±â Àü¿¡ »ç¿ëÇÒ¼ö ÀÖ´Â static º¯¼ö¿¡´Ù°¡ ÇÏ³ª¸¸ ¸¸µé Å¬·ÐÀ» Áý¾î³Ê³õ´Â´Ù. ÀÌ°Ô ½Ì±ÛÅÏÀÓ.
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½ ï¿½Ö´ï¿½ static ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù°ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ê³ï¿½ï¿½Â´ï¿½. ï¿½Ì°ï¿½ ï¿½Ì±ï¿½ï¿½ï¿½ï¿½ï¿½.
     /// </summary>
     public static InGameManager instance;
 
     public GameState state;
-    [Header("ÇöÀç ¸Ê")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½")]
     [SerializeField] string currentMapName;
     [SerializeField] MapOptions currentMapObject;
     [SerializeField] Transform mapParent;
     public MapOptions GetMapOptions() => this.currentMapObject;
     public string GetCurrentMapName() => this.currentMapName;
 
-    [Header("ÇÃ·¹ÀÌ¾î")]
+    [Header("ï¿½Ã·ï¿½ï¿½Ì¾ï¿½")]
     [SerializeField] PlayerCharacterController currentPlayer;
     public PlayerCharacterController GetPlayerController() => this.currentPlayer;
 

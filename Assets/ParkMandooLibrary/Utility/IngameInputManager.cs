@@ -22,9 +22,9 @@ public class IngameInputManager : MonoBehaviour
 
     private void Update()
     {
-        foreach(var t_Action in KeyBoardActions_Down)
+        foreach (var t_Action in KeyBoardActions_Down)
         {
-            if(Input.GetKeyDown(t_Action.Key))
+            if (Input.GetKeyDown(t_Action.Key))
             {
                 t_Action.Value.Invoke();
             }
@@ -55,7 +55,7 @@ public class IngameInputManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("ÀÌ¹Ì Ãß°¡µÈ Å°ÄÚµåÀÔ´Ï´Ù. Å° ¾×¼±À» Ãß°¡ÇÕ´Ï´Ù.");
+            Debug.Log($"Already Added KeyCode {_Key}  Add Key Action.");
             this.KeyBoardActions_Down[_Key] += _Action;
             return;
         }
@@ -70,9 +70,34 @@ public class IngameInputManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("ÀÌ¹Ì Ãß°¡µÈ Å°ÄÚµåÀÔ´Ï´Ù. Å° ¾×¼±À» Ãß°¡ÇÕ´Ï´Ù.");
+            Debug.Log($"Already Added KeyCode {_Key}  Add Key Action.");
             this.KeyBoardActions_Up[_Key] += _Action;
             return;
+        }
+    }
+
+    public void AddKeyboardAction_UpDown(KeyCode _Key, KeyAction _UpAction, KeyAction _DownAction)
+    {
+
+        if (!this.KeyBoardActions_Up.ContainsKey(_Key))
+        {
+            this.KeyBoardActions_Up.Add(_Key, _UpAction);
+
+        }
+        else
+        {
+            Debug.Log($"Already Added KeyCode {_Key}  Add Key Action.");
+            this.KeyBoardActions_Up[_Key] += _UpAction;
+        }
+
+        if (!this.KeyBoardActions_Down.ContainsKey(_Key))
+        {
+            this.KeyBoardActions_Down.Add(_Key, _DownAction);
+        }
+        else
+        {
+            Debug.Log($"Already Added KeyCode {_Key}  Add Key Action.");
+            this.KeyBoardActions_Down[_Key] += _DownAction;
         }
     }
 
@@ -86,7 +111,7 @@ public class IngameInputManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("ÀÌ¹Ì Ãß°¡µÈ Å°ÄÚµåÀÔ´Ï´Ù. Å° ¾×¼±À» Ãß°¡ÇÕ´Ï´Ù.");
+            Debug.Log("ï¿½Ì¹ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ Å°ï¿½Úµï¿½ï¿½Ô´Ï´ï¿½. Å° ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Õ´Ï´ï¿½.");
             this.KeyBoardActions[_Key] += _Action;
             return;
         }

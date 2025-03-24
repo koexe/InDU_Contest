@@ -7,13 +7,14 @@ public class MoveModule : MonoBehaviour
     List<KeyCode> inputListX = new List<KeyCode>();
     List<KeyCode> inputListY = new List<KeyCode>();
 
+    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float jumpPower = 10f;
+
+
     [Header("컴포넌트")]
-    [SerializeField] DynamicGravity gravity;
+    [SerializeField] GravityModule gravityModule;
     [SerializeField] Collider2D coll2D;
 
-
-    [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] Animator animator;
 
     private void Start()
     {
@@ -28,15 +29,12 @@ public class MoveModule : MonoBehaviour
     #region 이동 설정
     void SettingKeyboard()
     {
-        IngameInputManager.instance.AddKeyboardAction(KeyCode.W, () => AddKeyY(KeyCode.W));
-        IngameInputManager.instance.AddKeyboardAction(KeyCode.A, () => AddKeyX(KeyCode.A));
-        IngameInputManager.instance.AddKeyboardAction(KeyCode.S, () => AddKeyY(KeyCode.S));
-        IngameInputManager.instance.AddKeyboardAction(KeyCode.D, () => AddKeyX(KeyCode.D));
 
-        IngameInputManager.instance.AddKeyboardAction_Up(KeyCode.W, () => RemoveKeyY(KeyCode.W));
-        IngameInputManager.instance.AddKeyboardAction_Up(KeyCode.S, () => RemoveKeyY(KeyCode.S));
-        IngameInputManager.instance.AddKeyboardAction_Up(KeyCode.A, () => RemoveKeyX(KeyCode.A));
-        IngameInputManager.instance.AddKeyboardAction_Up(KeyCode.D, () => RemoveKeyX(KeyCode.D));
+        IngameInputManager.instance.AddKeyboardAction_UpDown(KeyCode.A, () => RemoveKeyX(KeyCode.A), () => AddKeyX(KeyCode.A));
+
+        IngameInputManager.instance.AddKeyboardAction_UpDown(KeyCode.D, () => RemoveKeyX(KeyCode.D), () => AddKeyX(KeyCode.D));
+
+        IngameInputManager.instance.AddKeyboardAction_Down(KeyCode.Space, () => Jump());
 
         return;
     }
@@ -88,21 +86,27 @@ public class MoveModule : MonoBehaviour
     }
     private Vector3 Move(Vector3 direction)
     {
-        if (InGameManager.instance.state != InGameManager.GameState.InProgress) return Vector3.zero;
-
         Vector3 t_moveValue = Vector3.zero;
         // direction에 따라 캐릭터 이동 처리
         if (direction != Vector3.zero)
         {
-            t_moveValue += direction * Time.fixedDeltaTime * 5f;
+            t_moveValue += direction * Time.fixedDeltaTime * moveSpeed;
         }
 
-        Vector3 t_push = this.gravity.UpdateCheckWall(t_moveValue);
+        if (this.gravityModule != null)
+        {
+            this.gravityModule.AddMovement(t_moveValue);
+        }
 
-        t_moveValue -= t_push;
 
         return t_moveValue;
     }
+
+    void Jump()
+    {
+        this.gravityModule.AddJump(this.jumpPower);
+    }
+
     void UpdateMove()
     {
         Vector3 moveValue = Vector3.zero;
@@ -119,26 +123,8 @@ public class MoveModule : MonoBehaviour
 
         }
         moveValue += Move(moveDir);
-        if (InGameManager.instance.state != InGameManager.GameState.InProgress)
-            moveDir = Vector3.zero;
 
 
-        if (moveDir == Vector3.zero)
-            this.animator.SetBool("IsWalk", false);
-        else
-            this.animator.SetBool("IsWalk", true);
-        // 충돌 체크 후 먼저 밀림 처리
-
-        if (moveDir.x > 0)
-        {
-            this.spriteRenderer.flipX = true;
-        }
-        else if (moveDir.x < 0)
-        {
-            this.spriteRenderer.flipX = false;
-        }
-
-        this.transform.position += moveValue;
         return;
     }
     #endregion
