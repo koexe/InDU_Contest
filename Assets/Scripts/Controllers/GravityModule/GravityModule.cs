@@ -21,6 +21,7 @@ public class GravityModule : MonoBehaviour
     Collider2D[] currentAttachColliders;
 
     [SerializeField] Vector2 currentMovementInput;
+
     [SerializeField] float currentJumpPower;
 
     [Space(10)]
@@ -172,12 +173,12 @@ public class GravityModule : MonoBehaviour
 
         if (_overlapSize.y < -0.01f)
         {
-            _overlapSize.y += groundPushOffset;
+            _overlapSize.y -= groundPushOffset;
 
         }
         else if (_overlapSize.y > 0.01f)
         {
-            _overlapSize.y -= groundPushOffset;
+            _overlapSize.y += groundPushOffset;
         }
         else
         {
@@ -189,11 +190,11 @@ public class GravityModule : MonoBehaviour
 
         if (_overlapSize.x < -0.01f)
         {
-            _overlapSize.x += groundPushOffset;
+            _overlapSize.x -= groundPushOffset;
         }
         else if (_overlapSize.x > 0.01f)
         {
-            _overlapSize.x -= groundPushOffset;
+            _overlapSize.x += groundPushOffset;
         }
         else
         {
