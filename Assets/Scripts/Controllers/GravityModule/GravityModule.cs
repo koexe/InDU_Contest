@@ -101,6 +101,8 @@ public class GravityModule : MonoBehaviour
         Vector2 _returnVector = _currentPosition;
         Collider2D[] t_attachedColliders = Physics2D.OverlapBoxAll(_returnVector, this.colliderComponent.bounds.size + new Vector3(0.15f, 0.15f), 0f, this.groundLayer);
         this.currentAttachColliders = t_attachedColliders;
+        bool t_isColliderBottom = false;
+
         if (t_attachedColliders.Length > 0)
         {
             foreach (var t_collider in t_attachedColliders)
@@ -115,8 +117,12 @@ public class GravityModule : MonoBehaviour
 
                 Vector2 t_overlap = CalculateOveralp(t_playerRect, t_overlapRect);
                 //this.currentOverlap = t_overlap;
+                if (Mathf.Abs(t_overlap.y) > 0f)
+                    t_isColliderBottom = true;
                 _returnVector = ApplayGroundPush(_returnVector, t_overlap);
             }
+            if (t_isColliderBottom)
+                OnEnterGround();
         }
         else
         {
@@ -172,7 +178,6 @@ public class GravityModule : MonoBehaviour
         else if (_overlapSize.y > 0.01f)
         {
             _overlapSize.y -= groundPushOffset;
-            OnEnterGround();
         }
         else
         {
@@ -194,6 +199,8 @@ public class GravityModule : MonoBehaviour
         {
             _overlapSize.x = 0.0f;
         }
+
+
 
         _result += _overlapSize;
         return _result;
@@ -226,15 +233,29 @@ public class GravityModule : MonoBehaviour
 
     public void AddJump(float _jumpPower)
     {
-        this.currentJumpPower = _jumpPower * Time.fixedDeltaTime;
+        if (this.isGrounded)
+            this.currentJumpPower = _jumpPower * Time.fixedDeltaTime;
     }
     #endregion
 
     void OnEnterGround()
     {
-        this.isGrounded = true;
-        this.currentGravitySpeed = 0f;
-        this.currentJumpPower = 0f;
+        if (this.currentJumpPower == 0)
+        {
+            this.isGrounded = true;
+            this.currentGravitySpeed = 0f;
+            this.currentJumpPower = 0f;
+        }
+        else
+        {
+            if (this.currentJumpPower <= this.currentGravitySpeed)
+            {
+                this.isGrounded = true;
+                this.currentGravitySpeed = 0f;
+                this.currentJumpPower = 0f;
+            }
+        }
+
     }
 
     void OnExitGround()

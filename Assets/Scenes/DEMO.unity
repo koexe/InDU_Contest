@@ -265,7 +265,7 @@ MonoBehaviour:
   gravityForce: 9.8
   jumpForce: 10
   maxGravitySpeed: 50
-  groundPushOffset: 0.1
+  groundPushOffset: 0.05
 --- !u!4 &611970880
 Transform:
   m_ObjectHideFlags: 0
