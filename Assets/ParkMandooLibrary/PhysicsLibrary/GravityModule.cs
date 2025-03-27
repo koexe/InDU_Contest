@@ -178,7 +178,7 @@ public class GravityModule : MonoBehaviour
         }
         else if (_overlapSize.y > 0.01f)
         {
-            _overlapSize.y += groundPushOffset;
+ 
         }
         else
         {

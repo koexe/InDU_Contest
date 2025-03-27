@@ -9,7 +9,7 @@ public class IngameInputManager : MonoBehaviour
     Dictionary<KeyCode, KeyAction> KeyBoardActions_Down;
     Dictionary<KeyCode, KeyAction> KeyBoardActions;
     Dictionary<KeyCode, KeyAction> KeyBoardActions_Up;
-
+    
 
     private void Awake()
     {
@@ -75,6 +75,7 @@ public class IngameInputManager : MonoBehaviour
             return;
         }
     }
+
 
     public void AddKeyboardAction_UpDown(KeyCode _Key, KeyAction _UpAction, KeyAction _DownAction)
     {
