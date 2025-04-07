@@ -27,7 +27,6 @@ public class DialogTextController : MonoBehaviour
         this.textUIManager.DialogClickAction += OnDialogTextDown;
         this.currentDialogDictionary = this.textUIManager.currentDialogDictionary;
 
-
         return;
     }
     #region 텍스트 변경 기능

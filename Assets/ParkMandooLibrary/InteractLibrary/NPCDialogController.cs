@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NPCDialogController : NPCController
 {
-    [Header("´ëÈ­ ¿É¼Çµé")]
+    [Header("ï¿½ï¿½È­ ï¿½É¼Çµï¿½")]
     [SerializeField] string npcName;
     [SerializeField] Dialog currentDialog;
     [SerializeField] int currentDialogIndex;

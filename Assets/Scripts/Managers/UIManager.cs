@@ -10,29 +10,77 @@ using Unity.VisualScripting;
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
-    Dictionary<string, GameObject> currentUIObjects;
-    // Á÷·ÄÈ­ -> ±²ÀåÈ÷ ¾î·Á¿î °³³äÀÌ´Ù. 
-    // ±×·¡¼­ Á÷·ÄÈ­°¡ ¹¹ÀÓ?
-    // ¿¡µðÅÍ»ó¿¡¼­ ¿ì¸®°¡ ¼öÁ¤Àº ÇÏ´Âµ¥, ½ÇÁ¦ ½ºÅ©¸³Æ®¿¡¼­´Â ¼û±â°í½Í´Ù.
+    Dictionary<string, UIBase> currentUIObjects;
+    Dictionary<string, GameObject> UIPrefabs;
 
     [SerializeField] Canvas canvas;
 
+    static Dictionary<Type, string> staticKeys = new Dictionary<Type, string>
+{
+    { typeof(UIBase), "InventoryKey" },
+};
 
     private void Awake()
     {
         instance = this;
-        this.currentUIObjects = new Dictionary<string, GameObject>();   
+        this.currentUIObjects = new Dictionary<string, UIBase>();
         DontDestroyOnLoad(this);
-        if(this.canvas == null)
+        if (this.canvas == null)
         {
-            this.canvas =this.transform.GetComponent<Canvas>();
+            this.canvas = this.transform.GetComponent<Canvas>();
         }
         return;
     }
 
-    public GameObject ShowUI (GameObject _UiPrefab, string _Name, int _layerOrder = -1, string _custom = "")
+    public void HideUI(string _identifier)
     {
-        if(this.currentUIObjects.ContainsKey(_Name))
+        if (this.currentUIObjects.ContainsKey(_identifier))
+        {
+            this.currentUIObjects[_identifier].Hide();
+        }
+        else
+        {
+            Debug.Log("No Such Name UI");
+        }
+    }
+
+
+    public UIBase ShowUI<T>(UIData _data) where T : UIBase
+    {
+        if (this.currentUIObjects.ContainsKey(_data.identifier) && !_data.isAllowMultifle)
+        {
+            Debug.Log("Same UI Already Added In Screen");
+            this.currentUIObjects[_data.identifier].Hide();
+
+            return this.currentUIObjects[_data.identifier];
+        }
+
+        UIBase t_UIObject = GameObject.Instantiate(UIPrefabs[staticKeys[typeof(T)]]).GetComponent<UIBase>();
+        t_UIObject.transform.SetParent(this.canvas.transform, false);
+        t_UIObject.sortingGroup.sortingLayerName = "UIElements";
+        if (_data.order == -1)
+        {
+            int t_MinOrder = 9999;
+            foreach (var obj in this.canvas.transform.GetComponentsInChildren<SortingGroup>())
+            {
+                if (obj.sortingOrder < t_MinOrder)
+                    t_MinOrder = obj.sortingOrder;
+            }
+            t_UIObject.sortingGroup.sortingOrder = t_MinOrder;
+        }
+        else
+        {
+            t_UIObject.sortingGroup.sortingOrder = _data.order;
+        }
+        this.currentUIObjects.Add(_data.identifier, t_UIObject);
+        t_UIObject.Initialization(_data);
+        return t_UIObject;
+    }
+
+    #region Lagacy
+    public UIBase ShowUI(GameObject _UiPrefab, string _Name, int _layerOrder = -1, string _custom = "")
+    {
+        if (this.currentUIObjects.ContainsKey(_Name))
         {
             Debug.Log("Same UI Already Added In Screen");
             Destroy(this.currentUIObjects[_Name].gameObject);
@@ -40,24 +88,24 @@ public class UIManager : MonoBehaviour
             return null;
         }
 
-        var t_UIObject = GameObject.Instantiate( _UiPrefab);
+        UIBase t_UIObject = GameObject.Instantiate(_UiPrefab).GetComponent<UIBase>();
         t_UIObject.transform.SetParent(this.canvas.transform, false);
         var t_Ui = t_UIObject.transform.GetComponent<PopUpUI>();
         t_Ui.sortingGroup.sortingLayerName = "UIElements";
-        //¸Ç ¾Õ¿¡ µÎ±â
-        if (_layerOrder == -1 )
+        //ï¿½ï¿½ ï¿½Õ¿ï¿½ ï¿½Î±ï¿½
+        if (_layerOrder == -1)
         {
             int t_MinOrder = 9999;
             foreach (var obj in this.canvas.transform.GetComponentsInChildren<SortingGroup>())
             {
-                if(obj.sortingOrder < t_MinOrder)
+                if (obj.sortingOrder < t_MinOrder)
                     t_MinOrder = obj.sortingOrder;
             }
             t_Ui.sortingGroup.sortingOrder = t_MinOrder;
         }
         else
         {
-            //ÁöÁ¤ÇÑ ¿À´õ¿¡ µÎ±â
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½
             t_Ui.sortingGroup.sortingOrder = _layerOrder;
         }
         this.currentUIObjects.Add(_Name, t_UIObject);
@@ -65,7 +113,7 @@ public class UIManager : MonoBehaviour
         return t_UIObject;
     }
 
-    public GameObject ShowUI(string _UiPrefabName, int _layerOrder = -1, string _custom = "")
+    public UIBase ShowUI(string _UiPrefabName, int _layerOrder = -1, string _custom = "")
     {
         var _UiPrefab = Resources.Load<GameObject>($"Prefabs/UI/{_UiPrefabName}");
         Debug.Log(_custom);
@@ -79,11 +127,11 @@ public class UIManager : MonoBehaviour
             this.currentUIObjects.Remove(_Name);
             return null;
         }
-        var t_UIObject = GameObject.Instantiate(_UiPrefab);
+        UIBase t_UIObject = GameObject.Instantiate(_UiPrefab).GetComponent<UIBase>();
         t_UIObject.transform.SetParent(this.canvas.transform, false);
         var t_Ui = t_UIObject.transform.GetComponent<PopUpUI>();
         t_Ui.sortingGroup.sortingLayerName = "UIElements";
-        //¸Ç ¾Õ¿¡ µÎ±â
+
         if (_layerOrder == -1)
         {
             int t_MinOrder = 9999;
@@ -96,7 +144,6 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            //ÁöÁ¤ÇÑ ¿À´õ¿¡ µÎ±â
             t_Ui.sortingGroup.sortingOrder = _layerOrder;
         }
         this.currentUIObjects.Add(_Name, t_UIObject);
@@ -104,7 +151,7 @@ public class UIManager : MonoBehaviour
         return t_UIObject;
     }
 
-    public GameObject GetUI(string name)
+    public UIBase GetUI(string name)
     {
         if (this.currentUIObjects.ContainsKey(name))
         {
@@ -116,6 +163,7 @@ public class UIManager : MonoBehaviour
             return null;
         }
     }
+
 
     public void DeleteUI(string name)
     {
@@ -141,4 +189,6 @@ public class UIManager : MonoBehaviour
         this.currentUIObjects.Clear();
         return;
     }
+#endregion
 }
+

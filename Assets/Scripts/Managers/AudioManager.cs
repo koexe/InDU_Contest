@@ -4,20 +4,17 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    // ½Ì±ÛÅÏ ÀÎ½ºÅÏ½º
     public static AudioManager instance;
 
-    // BGM°ú SE ¿ë ¿Àµð¿À ¼Ò½º
     public AudioSource bgmSource;
     public AudioSource seSource;
 
     private void Awake()
     {
-        // ½Ì±ÛÅÏ ÆÐÅÏ ±¸Çö
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // ¾À ÀüÈ¯ ½Ã ÆÄ±«µÇÁö ¾Êµµ·Ï ¼³Á¤
+            DontDestroyOnLoad(gameObject); 
         }
         else
         {
@@ -25,26 +22,25 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // BGM Àç»ý ÇÔ¼ö
+    // BGM ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
     public void PlayBGM(AudioClip bgmClip, float volume = 1f)
     {
-        // ½ÇÇà ÁßÀÎ BGMÀÌ ÀÖ´Ù¸é Á¤Áö
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ BGMï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (bgmSource.isPlaying)
         {
             bgmSource.Stop();
         }
 
-        // »õ BGMÀ» Àç»ý
+        // ï¿½ï¿½ BGMï¿½ï¿½ ï¿½ï¿½ï¿½
         if (bgmSource != null && bgmClip != null)
         {
             bgmSource.clip = bgmClip;
             bgmSource.volume = volume;
-            bgmSource.loop = true; // BGMÀº ¹Ýº¹ Àç»ý ¼³Á¤
+            bgmSource.loop = true; 
             bgmSource.Play();
         }
     }
 
-    // BGM Á¤Áö ÇÔ¼ö
     public void StopBGM()
     {
         if (bgmSource != null && bgmSource.isPlaying)
@@ -53,23 +49,21 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // SE Àç»ý ÇÔ¼ö
     public void PlaySE(AudioClip seClip, float volume = 1f)
     {
-        // ½ÇÇà ÁßÀÎ SE°¡ ÀÖ´Ù¸é Á¤Áö
         if (seSource.isPlaying)
         {
             seSource.Stop();
         }
 
-        // »õ SE¸¦ Àç»ý
+        // ï¿½ï¿½ SEï¿½ï¿½ ï¿½ï¿½ï¿½
         if (seSource != null && seClip != null)
         {
-            seSource.PlayOneShot(seClip, volume); // PlayOneShotÀº ÁßÃ¸ °¡´É
+            seSource.PlayOneShot(seClip, volume); 
         }
     }
 
-    // SE Á¤Áö ÇÔ¼ö
+    // SE ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
     public void StopSE()
     {
         if (seSource != null && seSource.isPlaying)
@@ -80,7 +74,6 @@ public class AudioManager : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        // BGM°ú SEÀÇ º¼·ýÀ» ½½¶óÀÌ´õ °ªÀ¸·Î ¼³Á¤
         if (bgmSource != null)
         {
             bgmSource.volume = volume;
