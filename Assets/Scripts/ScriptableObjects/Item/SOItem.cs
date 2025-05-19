@@ -6,7 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Item_",menuName ="Item/item")]
 public class SOItem : ScriptableObject
 {
-    [Header("아이템 정보")]
     [SerializeField] protected int itemIndex;
     [SerializeField] protected string itemName;
     [SerializeField] protected string itemDescription;
@@ -16,7 +15,6 @@ public class SOItem : ScriptableObject
 
     public virtual void UseItem()
     {
-        Debug.Log("사용");
         CheckItemAmount();
         return;
     }

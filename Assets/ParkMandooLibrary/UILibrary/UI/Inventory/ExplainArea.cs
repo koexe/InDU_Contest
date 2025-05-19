@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ExplainArea : MonoBehaviour
 {
     // Start is called before the first frame update
-    [Header("이미지와 텍스트들")]
+    [Header("Components")]
     [SerializeField] Image image;
     [SerializeField] TextMeshProUGUI descriptionText;
     [SerializeField] TextMeshProUGUI nameText;

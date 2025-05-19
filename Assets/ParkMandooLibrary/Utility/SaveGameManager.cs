@@ -8,9 +8,7 @@ public class SaveGameManager : MonoBehaviour
     public static SaveGameManager instance;
     const string fileName = "SaveData";
 
-    [Header("ÀúÀåµÇ¾îÀÖ´ø ¼¼ÀÌºê")]
     SaveData saveInFile;
-    [Header("ÇöÀç ¼¼ÀÌºê")]
     public SaveData currentSaveData;
     public SaveData GetCurrentSaveData() => this.currentSaveData;
     public void SetCurrentSaveData(SaveData _data) => this.currentSaveData = _data;
@@ -29,7 +27,7 @@ public class SaveGameManager : MonoBehaviour
         instance = this;
         this.Initialization();
         DontDestroyOnLoad(this);
-        Debug.Log("¼¼ÀÌºê ÃÊ±âÈ­ ¿Ï·á");
+        Debug.Log("ï¿½ï¿½ï¿½Ìºï¿½ ï¿½Ê±ï¿½È­ ï¿½Ï·ï¿½");
         return;
     }
 #if UNITY_EDITOR
@@ -88,7 +86,7 @@ public class SaveGameManager : MonoBehaviour
             //this.currentSaveData = this.saveInFile;
 
         }
-        //ÀÌÈÄ ÀÛ¾÷ ¿¹Á¤
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ ï¿½ï¿½ï¿½ï¿½
 
         return;
     }
@@ -97,12 +95,12 @@ public class SaveGameManager : MonoBehaviour
     {
         foreach (var map in MapPrefab)
         {
-            Debug.Log($"¸Ê {map.name} ÃÊ±âÈ­ ½ÃÀÛ");
+            Debug.Log($"ï¿½ï¿½ {map.name} ï¿½Ê±ï¿½È­ ï¿½ï¿½ï¿½ï¿½");
             var Items = map.transform.GetComponent<MapOptions>().GetMapItems();
             this.currentSaveData.mapItems.Add(map.name, new List<bool>());
             foreach (var item in Items)
             {
-                Debug.Log($"¾ÆÀÌÅÛ ÀÌ¸§ {item.name}");
+                Debug.Log($"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ {item.name}");
                 this.currentSaveData.mapItems[map.name].Add(item.isGeted);
             }
         }
@@ -113,14 +111,11 @@ public class SaveGameManager : MonoBehaviour
 
     public void SaveToJsonFile<T>(T data, string fileName)
     {
-
-        // Å¬·¡½º °´Ã¼¸¦ JSON ¹®ÀÚ¿­·Î º¯È¯
         string json = JsonConvert.SerializeObject(data, Formatting.Indented);
 
-        // ÆÄÀÏ °æ·Î »ý¼º (À¯´ÏÆ¼ ÇÁ·ÎÁ§Æ® ³»)
         string path = Path.Combine(Application.persistentDataPath, fileName);
 
-        // JSON ¹®ÀÚ¿­À» ÆÄÀÏ¿¡ ¾¸
+        // JSON ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½
         File.WriteAllText(path, json);
 
         Debug.Log($"Data saved to {path}");
@@ -204,7 +199,7 @@ public class SaveItem
         this.item = _item;
         this.amount = _amount;
         if (_item == null)
-            Debug.Log("¾ÆÀÌÅÛ ³Î");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½");
     }
 
 
