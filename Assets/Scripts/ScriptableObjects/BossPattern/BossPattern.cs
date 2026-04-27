@@ -69,7 +69,7 @@ public class BossPattern : ScriptableObject
 
     protected virtual void AttackAction()
     {
-
+        //자식 스크립트에 구현
     }
 }
 
